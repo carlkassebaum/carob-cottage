@@ -12,5 +12,5 @@ Feature: Login in an adminstrator
     Given I am on the administrator login page
     When I fill in "email_address" with "bob@outlook.com"
     And I fill in "password" with "foo_bar"
-    And I follow "Sign In"
+    And I press "Sign in"
     Then I should be redirected to the administrator home page
