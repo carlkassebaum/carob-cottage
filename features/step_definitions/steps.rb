@@ -9,6 +9,8 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^the administrator login page$/
+      '/administration/login'
     else
       begin
         page_name =~ /^the (.*) page$/
@@ -48,3 +50,4 @@ end
 Then(/^I should be redirected to the administrator home page$/) do
   current_path.should == administrator_path
 end
+

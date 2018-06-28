@@ -9,7 +9,7 @@ Feature: Login in an adminstrator
       | bob  | bob@outllok.com | foo_bar  | foo_bar               |
   
   Scenario:
-    Given I am on the "adminstrator login" page
+    Given I am on the administrator login page
     When I fill in "email_address" with "bob@outlook.com"
     And I fill in "password" with "foo_bar"
     And I follow "Sign In"
