@@ -14,3 +14,24 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+//If the given field has the same type as the original type, hide it and replace it with the next type. 
+var hide_content = function(field, original_type, new_type, colour) 
+{
+  if (field.type === original_type) 
+  {
+    field.type = new_type;
+    field.value = '';
+    field.style.color = colour
+  }
+};
+
+var restore_default = function(field, original_type, original_content, colour)
+{
+    if(field.value === '')
+    {
+        field.type = original_type
+        field.value = original_content
+        field.style.color = colour
+    }
+}

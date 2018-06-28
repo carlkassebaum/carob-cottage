@@ -34,4 +34,40 @@
     -webkit-box-shadow: 0 0 20px black;
     box-shadow: 0 0 20px black;
     float: right;
+    text-align: center;
+}
+
+#login_details
+{
+    text-align: center;
+    margin-top: 60px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.login_form_element
+{
+    color: #262626;
+}
+
+.login_field
+{
+    margin-top: 10px;
+    margin-left: 20px;
+    color: #7f7f7f;
+    width: 360px;
+}
+
+#login_title
+{
+    font-size: 35px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+#login_subtitle
+{
+    font-size: 18px;
+    margin-bottom: 50px;
+    color: #333333;
 }

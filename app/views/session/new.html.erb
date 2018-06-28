@@ -8,10 +8,10 @@
         </div>
         <%= form_for(:session, url: administration_login_path) do |f| %>
             <div class: 'login_form_element'>
-                <%= f.text_field :email, class: 'login_field w3-input', id: 'email_address', value: 'Email Address', onfocus: 'hide_content(this, "text", "email", "#262626")', onblur: 'restore_default(this, "text", "Email Address", "#686868")'%>                    
+                <%= f.text_field :email, class: 'login_field w3-input', id: 'email_address', value: 'Email Address', onfocus: 'hide_content(this, "text", "email", "#262626")', onblur: 'restore_default(this, "text", "Email Address", "#7f7f7f")'%>                    
             </div>
             <div class: 'login_form_element'>
-                <%= f.text_field :password, class: 'login_field w3-input', id: 'password', value: 'Password', onfocus: 'hide_content(this, "text", "password", "#262626")', onblur: 'restore_default(this, "text", "Password", "#686868")'%>
+                <%= f.text_field :password, class: 'login_field w3-input', id: 'password', value: 'Password', onfocus: 'hide_content(this, "text", "password", "#262626")', onblur: 'restore_default(this, "text", "Password", "#7f7f7f")'%>
             </div>
             <br/>
             <div>
