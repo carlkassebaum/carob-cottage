@@ -23,6 +23,8 @@ end
 World(NavigationHelpers)
 
 
-Given("the following administrators exist:") do |table|
-  FactoryBot.create(:administrator, name: "bob")
+Given("the following administrators exist:") do |administrators|
+  administrators.hashes.each do | current_admin |
+    FactoryBot.create(:administrator, current_admin)
+  end      
 end
