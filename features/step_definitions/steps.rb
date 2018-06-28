@@ -23,6 +23,6 @@ end
 World(NavigationHelpers)
 
 
-Given("administrators with the following attributes exists:") do |table|
+Given("the following administrators exist:") do |table|
   FactoryGirl.create(:administrator, name: "bob")
 end
