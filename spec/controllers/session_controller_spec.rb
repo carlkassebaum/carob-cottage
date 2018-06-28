@@ -16,7 +16,7 @@ RSpec.describe SessionController, type: :controller do
             
             it "redirects to the administrator home page with correct login details" do
                 post :create, session: {:email_address => @valid_email_address, :password => @valid_password}
-                expect(response).to redirect_to(administrator_path)
+                expect(response).to redirect_to(administration_path)
             end
         end        
     end
