@@ -5,7 +5,7 @@
 # files.
 
 require 'cucumber/rails'
-require 'factory_girl'
+require 'factory_bot_rails'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -34,7 +34,7 @@ def load_fixture(filename)
 end
 
 ActionController::Base.allow_rescue = false
-World(FactoryGirl::Syntax::Methods)
+World(FactoryBot::Syntax::Methods)
 World(Rails.application.routes.url_helpers)
 
 # Remove/comment out the lines below if your app doesn't have a database.

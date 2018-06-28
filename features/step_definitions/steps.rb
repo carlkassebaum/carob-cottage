@@ -1,7 +1,7 @@
 require 'cucumber/rails'
 require 'uri'
 require 'cgi'
-require 'factory_girl'
+require 'factory_bot_rails'
 
 module NavigationHelpers
   def path_to(page_name)
@@ -24,5 +24,5 @@ World(NavigationHelpers)
 
 
 Given("the following administrators exist:") do |table|
-  FactoryGirl.create(:administrator, name: "bob")
+  FactoryBot.create(:administrator, name: "bob")
 end
