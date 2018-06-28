@@ -8,7 +8,7 @@ Feature: Login in an adminstrator
       | name | email_address   | password | password_confirmation |
       | bob  | bob@outllok.com | foo_bar  | foo_bar               |
   
-  Scenario:
+  Scenario: Standard Login procedure
     Given I am on the administrator login page
     When I fill in "email_address" with "bob@outlook.com"
     And I fill in "password" with "foo_bar"
