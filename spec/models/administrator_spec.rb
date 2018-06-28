@@ -14,4 +14,16 @@ RSpec.describe Administrator, type: :model do
       expect(FactoryBot.build(:administrator, name: "name", email_address: "address@email.com")).to respond_to(:password_digest)        
     end
   end
+  
+  describe "secure password" do
+    it "allows users to set a password and a confirmation" do
+      test_user = FactoryBot.create(:administrator, 
+                                    name: "name", 
+                                    email_address: "address@email.com", 
+                                    password: "mypassword", 
+                                    password_confirmation: "mypassword"
+                                    )
+      expect(test_user).not_to eq(false)
+    end
+  end
 end
