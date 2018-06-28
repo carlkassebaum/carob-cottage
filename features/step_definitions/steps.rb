@@ -28,3 +28,23 @@ Given("the following administrators exist:") do |administrators|
     FactoryBot.create(:administrator, current_admin)
   end      
 end
+
+Given(/^(?:|I )am on (.+)$/) do |page_name|
+  visit path_to(page_name)
+end
+
+When(/^(?:|I )fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+  if field.match('Search for a course:') || field.match('requests_search_id')
+    find("input[id$='field1']").set value
+  else
+    fill_in(field, with: value)
+  end
+end
+
+When(/^(?:|I )follow "([^"]*)"$/) do |link|
+  click_link(link)
+end
+
+Then(/^I should be redirected to the administrator home page$/) do
+  current_path.should == administrator_path
+end

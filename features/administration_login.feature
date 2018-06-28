@@ -10,7 +10,7 @@ Feature: Login in an adminstrator
   
   Scenario:
     Given I am on the "adminstrator login" page
-    When I enter "bob@outlook.com" into the "email_address" field
-    And I enter "password" into the "password" field
-    And I press "Sign In"
-    Then I should be on the "adminstrator home" page
+    When I fill in "email_address" with "bob@outlook.com"
+    And I fill in "password" with "foo_bar"
+    And I follow "Sign In"
+    Then I should be redirected to the administrator home page
