@@ -12,4 +12,10 @@ class SessionController < ApplicationController
             redirect_to administration_login_path
         end
     end
+    
+    def destroy
+        session[:user_id] = nil
+        flash[:notification] = "Sign out successful"
+        redirect_to administration_login_path
+    end
 end

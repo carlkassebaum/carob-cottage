@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   get '/administration/login' => "session#new"
   post '/administration/login' => "session#create"
   
+  delete 'administration/logout' => "session#destroy"
+  
   get '/administration' => "administrator#index"
 end

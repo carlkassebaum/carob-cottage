@@ -1,9 +1,21 @@
 <div id="login_pane">
-    <% if !flash[:alert].nil? %>
-        <div id="flash_alert_login">
-            <%= flash[:alert] %>
-        </div>    
-    <% end %>
+    <div id="flash">
+        <% if !flash[:alert].nil? %>
+            <div class="flash_alert flash_login">
+                <%= flash[:alert] %>
+            </div>
+        <% end %>
+        
+        <% if !flash[:notification].nil? %>
+            <div class="flash_notification flash_login">
+                <%= flash[:notification] %>
+            </div> 
+        <% end %>
+        <script>
+            fade_flash_notifications_out()
+        </script>
+    </div> 
+
     <div id="login_details">
         <div id="login_title">
             Carob Cottage
@@ -20,7 +32,7 @@
             </div>
             <br/>
             <div>
-                <%= f.submit "Sign in", class: "button" %>
+                <%= f.submit "Sign in", class: "button form_button" %>
             </div>
         <% end %>
     </div>

@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery 
+//= require jquery_ujs
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
@@ -35,3 +37,9 @@ var restore_default = function(field, original_type, original_content, colour)
         field.style.color = colour
     }
 }
+
+var fade_flash_notifications_out = function()
+{
+  $("#flash").delay(3000).fadeOut(2000);
+}
+

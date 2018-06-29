@@ -79,7 +79,7 @@ RSpec.describe SessionController, type: :controller do
                                                        password: valid_password,
                                                        password_confirmation: valid_password)
                 #log in user
-                post :create, params: {session: {email_address: "invalid_email@outlook.com", password: @valid_password}}
+                post :create, params: {session: {email_address: valid_email_address, password: valid_password}}
             end
             
             it "destroys the current user system session" do
@@ -90,6 +90,11 @@ RSpec.describe SessionController, type: :controller do
             it "redirects to the login page" do
                 delete :destroy
                 expect(response).to redirect_to(administration_login_path)
+            end
+            
+            it "Displays a success notification" do
+                delete :destroy
+                expect(flash[:notification]).to eq("Sign out successful")
             end
         end
         
