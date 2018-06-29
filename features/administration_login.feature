@@ -22,7 +22,7 @@ Feature: Login in an adminstrator
     And I press "Sign in"
     Then I should see "Invalid email address or password given"
     
-  Scenario: Invalid email address
+  Scenario: Invalid password
     Given I am on the administrator login page
     When I fill in "email_address" with "bob@outlook.com"
     And I fill in "password" with "invalid"
