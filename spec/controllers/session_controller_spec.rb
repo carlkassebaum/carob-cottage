@@ -39,17 +39,17 @@ RSpec.describe SessionController, type: :controller do
             describe "error message" do
                 it "shows an error message when an invalid email address is given" do
                     post :create, params: {session: {email_address: "invalid_email@outlook.com", password: @valid_password}}
-                    expect(flash[:alert]).to match(/Invalid email address or password given/)
+                    expect(flash[:alert]).to match(/Unkown email address or invalid password given/)
                 end
                 
                 it "shows an error messgae when an invalid password is given" do
                     post :create, params: {session: {email_address: "invalid_email@outlook.com", password: @valid_password}}   
-                    expect(flash[:alert]).to match(/Invalid email address or password given/)
+                    expect(flash[:alert]).to match(/Unkown email address or invalid password given/)
                 end
                 
                 it "shows an error message when an invalid email address and password is given" do
                     post :create, params: {session: {email_address: "invalid_email@outlook.com", password: @valid_password}}
-                    expect(flash[:alert]).to match(/Invalid email address or password given/)
+                    expect(flash[:alert]).to match(/Unkown email address or invalid password given/)
                 end
             end
         end

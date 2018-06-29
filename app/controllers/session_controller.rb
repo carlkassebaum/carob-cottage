@@ -8,7 +8,7 @@ class SessionController < ApplicationController
             session[:user_id] = admin.id
             redirect_to administration_path
         else
-            flash[:alert] = "Invalid email address or password given"
+            flash[:alert] = "Unkown email address or invalid password given"
             redirect_to administration_login_path
         end
     end

@@ -1,4 +1,9 @@
 <div id="login_pane">
+    <% if !flash[:alert].nil? %>
+        <div id="flash_alert_login">
+            <%= flash[:alert] %>
+        </div>    
+    <% end %>
     <div id="login_details">
         <div id="login_title">
             Carob Cottage
