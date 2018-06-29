@@ -12,4 +12,14 @@ class SessionController < ApplicationController
             redirect_to administration_login_path
         end
     end
+    
+    def destroy
+        if(!session[:user_id].nil?)
+            session[:user_id] = nil
+            flash[:notification] = "Sign out successful"            
+        else
+            flash[:alert] = "There was no administrator logged in"
+        end
+        redirect_to administration_login_path
+    end
 end

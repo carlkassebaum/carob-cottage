@@ -1,9 +1,6 @@
 <div id="login_pane">
-    <% if !flash[:alert].nil? %>
-        <div id="flash_alert_login">
-            <%= flash[:alert] %>
-        </div>    
-    <% end %>
+    <%= render partial: "layouts/flash" %>
+
     <div id="login_details">
         <div id="login_title">
             Carob Cottage
@@ -20,7 +17,7 @@
             </div>
             <br/>
             <div>
-                <%= f.submit "Sign in", class: "button" %>
+                <%= f.submit "Sign in", class: "button form_button" %>
             </div>
         <% end %>
     </div>

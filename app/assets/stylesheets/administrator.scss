@@ -1,3 +1,33 @@
 // Place all the styles related to the administrator controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#admin_nav_bar
+{
+    background-color: #008CBA;
+    width: 100%;
+    height: 35px;
+}
+
+.admin_nav_bar_button
+{
+    background-color: #008CBA;
+    border: none;
+    color: white;      
+    padding: 5px 20px;
+    text-align: center;
+    height: 35px;
+}
+
+.admin_nav_bar_button:hover 
+{
+    background-color: #119DCB;
+    color: white;
+}
+
+#sign_out_button
+{
+    margin-right: 20px;
+    float: right;
+}
+

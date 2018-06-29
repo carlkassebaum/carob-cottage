@@ -8,4 +8,8 @@ RSpec.describe SessionController, type: :routing do
     it 'routes post /administration/login to session#create' do
         expect(post: "/administration/login").to route_to( controller: "session", action: "create")               
     end
+    
+    it 'routes delete /administration/logout to session#destroy' do
+        expect(delete: "/administration/logout").to route_to( controller: "session", action: "destroy")         
+    end
 end
