@@ -1,20 +1,6 @@
 <div id="login_pane">
-    <div id="flash">
-        <% if !flash[:alert].nil? %>
-            <div class="flash_alert flash_login">
-                <%= flash[:alert] %>
-            </div>
-        <% end %>
-        
-        <% if !flash[:notification].nil? %>
-            <div class="flash_notification flash_login">
-                <%= flash[:notification] %>
-            </div> 
-        <% end %>
-        <script>
-            fade_flash_notifications_out()
-        </script>
-    </div> 
+    
+    <%= render partial: "layouts/flash" %>
 
     <div id="login_details">
         <div id="login_title">
