@@ -66,6 +66,7 @@ GEM
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    chronic (0.10.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -227,6 +228,7 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    timecop (0.9.1)
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -254,6 +256,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
+  chronic
   coffee-rails (~> 4.2)
   cucumber-rails
   database_cleaner
@@ -269,6 +272,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  timecop
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
