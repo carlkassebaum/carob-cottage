@@ -20,4 +20,11 @@ Feature: Login in an adminstrator
     When I fill in "email_address" with "invalid@outlook.com"
     And I fill in "password" with "foo_bar"
     And I press "Sign in"
-    Then I should see "Invalid email address/password"
+    Then I should see "Invalid email address or password given"
+    
+  Scenario: Invalid email address
+    Given I am on the administrator login page
+    When I fill in "email_address" with "bob@outlook.com"
+    And I fill in "password" with "invalid"
+    And I press "Sign in"
+    Then I should see "Invalid email address or password given"    
