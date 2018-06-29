@@ -35,12 +35,15 @@ Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
 end
 
+Given("I log in as an administrator with {string} and {string}") do |email_address, password|
+  visit path_to("the administrator login page")
+  fill_in("email_address", with: email_address)
+  fill_in("password", with: password)
+  click_button("Sign in")
+end
+
 When(/^(?:|I )fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
-  if field.match('Search for a course:') || field.match('requests_search_id')
-    find("input[id$='field1']").set value
-  else
     fill_in(field, with: value)
-  end
 end
 
 When(/^(?:|I )follow "([^"]*)"$/) do |link|
@@ -61,5 +64,9 @@ Then(/^(?:|I )should see "([^"]*)"$/) do |text|
   else
     assert page.has_content?(text)
   end
+end
+
+Then(/^(?:|I )should be on (.+)$/) do |page_name|
+  expect(current_path).to eq path_to(page_name)
 end
 
