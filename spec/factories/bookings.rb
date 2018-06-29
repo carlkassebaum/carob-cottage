@@ -6,7 +6,7 @@ FactoryBot.define do
     contact_number "contact_number"
     email_address "email@email.com"
     number_of_people "number_of_people"
-    eta "eta"
+    estimated_arrival_time "eta"
     preferred_payment_method "preferred_payment_method"
     arrival_date "arrival_date"
     departure_date "departure_date"
