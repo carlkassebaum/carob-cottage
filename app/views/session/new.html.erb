@@ -1,0 +1,31 @@
+<div id="login_pane">
+    <% if !flash[:alert].nil? %>
+        <div id="flash_alert_login">
+            <%= flash[:alert] %>
+        </div>    
+    <% end %>
+    <div id="login_details">
+        <div id="login_title">
+            Carob Cottage
+        </div>
+        <div id="login_subtitle">
+            Administration Login
+        </div>
+        <%= form_for(:session, url: administration_login_path) do |f| %>
+            <div class: 'login_form_element'>
+                <%= f.text_field :email_address, class: 'login_field w3-input', id: 'email_address', value: 'Email Address', onfocus: 'hide_content(this, "text", "email", "#262626")', onblur: 'restore_default(this, "text", "Email Address", "#7f7f7f")'%>                    
+            </div>
+            <div class: 'login_form_element'>
+                <%= f.text_field :password, class: 'login_field w3-input', id: 'password', value: 'Password', onfocus: 'hide_content(this, "text", "password", "#262626")', onblur: 'restore_default(this, "text", "Password", "#7f7f7f")'%>
+            </div>
+            <br/>
+            <div>
+                <%= f.submit "Sign in", class: "button" %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<div id="login_photo_div">
+    <img id="login_photo" src="/assets/carob_cottage_scenary/grange_glass.jpg"/>
+</div>
