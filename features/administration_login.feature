@@ -6,7 +6,7 @@ Feature: Login in an adminstrator
   Background:
     Given the following administrators exist:
       | name | email_address   | password | password_confirmation |
-      | bob  | bob@outllok.com | foo_bar  | foo_bar               |
+      | bob  | bob@outlook.com | foo_bar  | foo_bar               |
   
   Scenario: Standard Login procedure
     Given I am on the administrator login page

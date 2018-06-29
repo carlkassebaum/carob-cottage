@@ -52,6 +52,6 @@ When(/^(?:|I )press "([^"]*)"$/) do |button|
 end
 
 Then(/^I should be redirected to the administrator home page$/) do
-  current_path.should == administrator_path
+  current_path.should == administration_path
 end
 
