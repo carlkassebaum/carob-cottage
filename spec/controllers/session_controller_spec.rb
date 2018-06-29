@@ -100,9 +100,13 @@ RSpec.describe SessionController, type: :controller do
         
         describe "no user logged in" do
             it "displays an appropriate error message" do
+                delete :destroy
+                expect(flash[:alert]).to eq("There was no administrator logged in")                
             end
             
             it "redirects to the login page" do
+                delete :destroy
+                expect(response).to redirect_to(administration_login_path)                
             end
         end
     end

@@ -14,3 +14,10 @@ Feature: Log out as an administrator
     When I press "Sign out"
     Then I should see "Sign out successful"
     And I should be on the administration login page
+    
+  Scenario: Invalid logout attempt
+    #Attempting to logout without being logged in
+    Given I am on the administration login page
+    And I attempt to logout as an administrator
+    Then I should be on the administration login page 
+    

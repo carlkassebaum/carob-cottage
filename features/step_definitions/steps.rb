@@ -70,3 +70,6 @@ Then(/^(?:|I )should be on (.+)$/) do |page_name|
   expect(current_path).to eq path_to(page_name)
 end
 
+Given("I attempt to logout as an administrator") do
+  delete '/administration/logout'
+end
