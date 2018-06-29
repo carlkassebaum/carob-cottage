@@ -14,3 +14,10 @@ Feature: Login in an adminstrator
     And I fill in "password" with "foo_bar"
     And I press "Sign in"
     Then I should be redirected to the administrator home page
+    
+  Scenario: Invalid email address
+    Given I am on the administrator login page
+    When I fill in "email_address" with "invalid@outlook.com"
+    And I fill in "password" with "foo_bar"
+    And I press "Sign in"
+    Then I should see "Invalid email address/password"
