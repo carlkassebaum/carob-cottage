@@ -31,6 +31,12 @@ Given("the following administrators exist:") do |administrators|
   end      
 end
 
+Given("the following bookings exist:") do |bookings|
+  bookings.hashes.each do | booking |
+    FactoryBot.create(:booking, booking)
+  end      
+end
+
 Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
 end
