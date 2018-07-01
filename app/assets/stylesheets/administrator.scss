@@ -11,12 +11,20 @@
 
 .admin_nav_bar_button
 {
+    float: left;
     background-color: #008CBA;
     border: none;
     color: white;      
     padding: 5px 20px;
     text-align: center;
     height: 35px;
+}
+
+#admin_nav_bar_spacer
+{
+    width:  20px;
+    height: 100%;
+    float: left;
 }
 
 .admin_nav_bar_button:hover 

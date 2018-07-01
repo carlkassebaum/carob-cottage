@@ -18,8 +18,9 @@ Feature: Booking summary calendar
   
   Scenario: View yearly summary
     Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
+    And it is currently June 29, 2018    
     When I am on the administration page
-    And it is currently June 29, 2018
+    And I press "Booking Manager"
     Then I should see a full year calendar containing the following bookings:
       | name   | postcode | country   | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost |
       | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 20-1-2018    | 25-1-2018      | 123  |
