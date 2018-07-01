@@ -1,5 +1,5 @@
-<div class="simple-calendar">
-  <% if display_links %>
+<div>
+  <% if !@calendar.nil? && @calendar[:display_links] == true %>
     <div class="calendar-heading">
       <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
       <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
@@ -7,25 +7,21 @@
     </div>  
   <% end %>
 
-  <table class="table table-striped">
-    <thead>
+  <table class="month_calendar">
+    <tr>
+      <% date_range.slice(0, 7).each do |day| %>
+        <th class=<%= (@calendar_options.nil? || @calendar_options[:header_class].nil?) ? "" : @calendar_options[:header_class] %>>
+          <%= t('date.abbr_day_names')[day.wday] %>
+        </th>
+      <% end %>
+    </tr>
+    
+    <% date_range.each_slice(7) do |week| %>
       <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% week.each do |day| %>
+          <% block.call day, sorted_events.fetch(day, []) %>
         <% end %>
       </tr>
-    </thead>
-
-    <tbody>
-      <% date_range.each_slice(7) do |week| %>
-        <tr>
-          <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) - ["day"] do %>
-              <%= day %>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
+    <% end %>
   </table>
 </div>

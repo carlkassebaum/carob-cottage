@@ -1,4 +1,7 @@
 <%= render partial: "administrator/navigation_bar" %>
 <div>
-    
+    <div id="booking_summary_title">
+        Bookings for the <%= @calendar_year %> calendar year
+    </div>
+    <%= render partial: "reservation/full_year_calendar" %>
 </div>

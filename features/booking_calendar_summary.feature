@@ -21,7 +21,7 @@ Feature: Booking summary calendar
     And it is currently June 29, 2018    
     When I am on the administration page
     And I press "Booking Manager"
-    Then I should see "2018"
+    Then I should see "Bookings for the 2018 calendar year"
     And I should see a full year calendar containing the following bookings:
       | name   | postcode | country   | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost |
       | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 20-1-2018    | 25-1-2018      | 123  |

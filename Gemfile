@@ -33,6 +33,8 @@ gem 'timecop'
 
 gem 'chronic'
 
+gem 'rails-controller-testing'
+
 gem "simple_calendar", "~> 2.0"
 
 # Use ActiveStorage variant
