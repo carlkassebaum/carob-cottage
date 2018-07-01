@@ -44,6 +44,10 @@ RSpec.describe Booking, type: :model do
     
     it "has a cost attribute" do
       expect(FactoryBot.build(:booking)).to respond_to(:cost)        
-    end    
-  end    
+    end
+    
+    it "has a status attribute" do
+      expect(FactoryBot.build(:booking)).to respond_to(:status)      
+    end
+  end 
 end
