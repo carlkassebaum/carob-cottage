@@ -24,6 +24,23 @@ module NavigationHelpers
 end
 World(NavigationHelpers)
 
+module ReservationHelpers
+  def search_for_booking_date(date_range, booking_status)
+    date_range.each_with_index do | date, index |
+      if index == 0
+        found = page.find("##{booking_status}-arrive-#{date}")
+        expect(found).to eq(1)
+      elsif index == date_range.length - 1
+        found = page.find("##{booking_status}-stay-#{date}")
+        expect(found).to eq(1)      
+      else
+        found = page.find("##{booking_status}-leave-#{date}")
+        expect(found).to eq(1)          
+      end  
+    end    
+  end
+end
+World(ReservationHelpers)
 
 Given("the following administrators exist:") do |administrators|
   administrators.hashes.each do | current_admin |
@@ -78,4 +95,12 @@ end
 
 Given("I attempt to logout as an administrator") do
   delete '/administration/logout'
+end
+
+Then("I should see a full year calendar containing the following bookings:") do |bookings|
+  bookings.hashes.each do | booking |
+    start_date = Date.parse(booking[:arrival_date])
+    end_date   = Date.parse(booking[:departure_date])
+    search_for_booking_date((start_date..end_date).map(&:to_s), booking[:status])
+  end
 end
