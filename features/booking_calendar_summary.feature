@@ -33,8 +33,19 @@ Feature: Booking summary calendar
     Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
     And it is currently June 29, 2018
     When I am on the administration booking manager page
-    And I press "Previous Year"
+    And I follow "previous_year"
     Then I should see "Bookings for the 2017 calendar year"
     And I should see a full year calendar containing the following bookings:
       | name   | postcode | country | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost | status |    
       | test_3 |          | Austria | 0043-1-893 42 02 | test@foreign.at | 1                | 9pm                    | cash                     | 15-5-2017    | 25-5-2017      | 800  | booked |
+
+
+  Scenario: View next years bookings
+    Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
+    And it is currently June 29, 2018
+    When I am on the administration booking manager page
+    And I follow "next_year"
+    Then I should see "Bookings for the 2019 calendar year"
+    And I should see a full year calendar containing the following bookings:
+      | name   | postcode | country   | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost | status   |    
+      | test_5 | 3142     | Australia | +61567890123     | test@for.com    | 3                | 1am                    | direct_debit             | 1-8-2019     | 2-10-2019      | 5000 | reserved |
