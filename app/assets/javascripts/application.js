@@ -43,3 +43,7 @@ var fade_flash_notifications_out = function()
   $("#flash").delay(3000).fadeOut(2000);
 }
 
+var change_image = function(element, new_src)
+{
+  element.src = new_src;
+}

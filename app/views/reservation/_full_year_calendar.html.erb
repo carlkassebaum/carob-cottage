@@ -1,0 +1,27 @@
+<table id="full_reservation_calendar">
+    <% (1..12).each do | month | %>
+        <% if (month-1) % 4 == 0 %>
+            <tr>
+        <% end %>
+        <% current_month = Date::MONTHNAMES[month] %>
+        <td class="month_in_year" id=<%= current_month %>>
+            <div class="month_title"><%= current_month %></div>
+            <%= month_calendar start_date: "1-#{current_month}-#{@calendar_year}" do |date| %>
+                <td class="day">
+                    <% if date.mon == month %>
+                        <% if !@year_reservations[current_month].nil? && !@year_reservations[current_month][date.mday].nil? %>
+                            <% date_details = @year_reservations[current_month][date.mday] %>
+                            <%= content_tag(:div, "", class: ["reservation", "full_cal_arrive_#{date_details["arrive"][:status]}"]) unless date_details["arrive"].nil? %>
+                            <%= content_tag(:div, "", class: ["reservation", "full_cal_stay_#{date_details["stay"][:status]}"    ]) unless date_details["stay"].nil?   %>
+                            <%= content_tag(:div, "", class: ["reservation", "full_cal_depart_#{date_details["depart"][:status]}"]) unless date_details["depart"].nil? %>                            
+                        <% end %>
+                        <%= date.mday %>
+                    <% end %>
+                </td>
+            <% end %>     
+        </td>
+        <% if (month) % 4 == 0 %>
+            </tr>
+        <% end %>        
+    <% end %>
+</table>

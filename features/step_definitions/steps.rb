@@ -24,10 +24,50 @@ module NavigationHelpers
 end
 World(NavigationHelpers)
 
+module SearchHelpers
+  def get_elements_by_xpath(xpath)
+    page.all(:xpath, xpath)
+  end
+end
+World(SearchHelpers)
+
+module ReservationHelpers
+  
+  #return logical key words for arrivals, departures and stays for testing
+  def reservation_keywords(index, date_range_len)
+    return "arrive" if index == 0
+    return "depart" if index == date_range_len - 1
+    return "stay"
+  end
+  
+  def search_for_booking_date(date_range, booking_status)
+    Capybara.default_selector = :xpath
+    len = date_range.length
+    date_range.each_with_index do | date, index |
+      current_date = Date.parse(date)
+      #Get corresponding month calendar
+      result = get_elements_by_xpath("//td[@id='#{Date::MONTHNAMES[current_date.mon]}']/div/table/tr/td") 
+      result.each do | element |
+        if element.text.to_i == current_date.day
+          #Should appear as reserved or booked
+          expect(element.all(:xpath,".//div[contains(@class, 'full_cal_#{booking_status}_#{reservation_keywords(index, len)}')").length).to eq(1)
+          puts "passed"
+        end
+      end
+    end
+  end
+end
+World(ReservationHelpers)
 
 Given("the following administrators exist:") do |administrators|
   administrators.hashes.each do | current_admin |
     FactoryBot.create(:administrator, current_admin)
+  end      
+end
+
+Given("the following bookings exist:") do |bookings|
+  bookings.hashes.each do | booking |
+    FactoryBot.create(:booking, booking)
   end      
 end
 
@@ -72,4 +112,12 @@ end
 
 Given("I attempt to logout as an administrator") do
   delete '/administration/logout'
+end
+
+Then("I should see a full year calendar containing the following bookings:") do |bookings|
+  bookings.hashes.each do | booking |
+    start_date = Date.parse(booking[:arrival_date])
+    end_date   = Date.parse(booking[:departure_date])
+    search_for_booking_date((start_date..end_date).map(&:to_s), booking[:status])
+  end
 end

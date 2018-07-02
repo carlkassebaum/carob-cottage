@@ -29,6 +29,14 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
 
+gem 'timecop'
+
+gem 'chronic'
+
+gem 'rails-controller-testing'
+
+gem "simple_calendar", "~> 2.0"
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
