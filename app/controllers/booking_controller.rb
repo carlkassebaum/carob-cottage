@@ -1,7 +1,11 @@
 class BookingController < ApplicationController
     def index
         @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
-        @calendar_year = Date.today.year
+        unless /^\d{4}$/.match(params[:year]).nil?
+            @calendar_year = params[:year].to_i
+        else
+            @calendar_year = Date.today.year            
+        end
         
         date_range = Date.new(@calendar_year,1,1)..Date.new(@calendar_year,12,31)
         bookings   = Booking.bookings_within(date_range)

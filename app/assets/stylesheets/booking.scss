@@ -114,4 +114,8 @@ $booked_end_colour          : #af50a6;
     background: linear-gradient(to left, white, white , $reserved_colour, $reserved_colour);
 }
 
-
+table.center 
+{
+    margin-left:auto; 
+    margin-right:auto;
+}

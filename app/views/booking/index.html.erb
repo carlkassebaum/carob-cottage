@@ -1,7 +1,32 @@
 <%= render partial: "administrator/navigation_bar" %>
-<div>
-    <div id="booking_summary_title">
-        Bookings for the <%= @calendar_year %> calendar year
-    </div>
-    <%= render partial: "reservation/full_year_calendar" %>
+<div id="booking_header_wrapper">
+    <table class="center">
+        <tr>
+            <td>
+                <%= link_to administration_booking_manager_path(year: @calendar_year-1), id: "previous_year" do %>
+                    <img class="navigation_arrow" 
+                    src="/assets/navigation_arrows/arrow_left.png" 
+                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_left_highlight.png')"
+                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_left.png')" 
+                    />                
+                <% end %>
+            </td>
+            <td>
+                <div id="booking_summary_title">
+                    Bookings for the <%= @calendar_year %> calendar year
+                </div>                
+            </td>
+            <td>
+                <%= link_to administration_booking_manager_path(year: @calendar_year+1), id: "next_year" do %>                
+                    <img class="navigation_arrow" 
+                    src="/assets/navigation_arrows/arrow_right.png" 
+                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_right_highlight.png')"
+                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_right.png')" 
+                    /> 
+                <% end %>
+            </td>            
+        </tr>
+    </table>
 </div>
+
+<%= render partial: "reservation/full_year_calendar" %>
