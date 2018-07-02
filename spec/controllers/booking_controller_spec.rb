@@ -13,5 +13,61 @@ RSpec.describe BookingController, type: :controller do
             get :index
             expect(assigns(:calendar_year)).to eq(2010)             
         end
+        
+        describe "retrieves and transforms booking data" do
+            before(:each) do
+                @booking_1 = FactoryBot.create(:booking, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018")#DONE
+                @booking_2 = FactoryBot.create(:booking, name: "test_2", arrival_date: "31-12-2017", departure_date: "5-1-2018" )#DONE
+                @booking_3 = FactoryBot.create(:booking, name: "test_3", arrival_date: "22-5-2017",  departure_date: "25-5-2017")
+                @booking_4 = FactoryBot.create(:booking, name: "test_4", arrival_date: "30-5-2018",  departure_date: "1-6-2018" )
+                @booking_5 = FactoryBot.create(:booking, name: "test_5", arrival_date: "1-8-2019",   departure_date: "2-10-2019")
+                @booking_6 = FactoryBot.create(:booking, name: "test_6", arrival_date: "5-3-2018",   departure_date: "8-3-2018")                
+            end
+            
+            it "sets @year_reservations to a transformed version of the bookings" do
+                Timecop.travel(Time.local(2018, 5, 15, 10, 0, 0))                
+                januray_dates = 
+                {
+                    Date.parse("2018-1-1")  => {id: @booking_2, type: "arrive"},
+                    Date.parse("2018-1-2")  => {id: @booking_2, type: "stay"  },
+                    Date.parse("2018-1-3")  => {id: @booking_2, type: "stay"  },
+                    Date.parse("2018-1-4")  => {id: @booking_2, type: "stay"  },
+                    Date.parse("2018-1-5")  => {id: @booking_2, type: "depart"},
+                    Date.parse("2018-1-20") => {id: @booking_1, type: "arrive"},
+                    Date.parse("2018-1-21") => {id: @booking_1, type: "stay"  },
+                    Date.parse("2018-1-22") => {id: @booking_1, type: "stay"  },
+                    Date.parse("2018-1-23") => {id: @booking_1, type: "stay"  },
+                    Date.parse("2018-1-24") => {id: @booking_1, type: "stay"  },
+                    Date.parse("2018-1-25") => {id: @booking_1, type: "depart"}                    
+                }
+                march_dates = 
+                {
+                    Date.parse("2018-3-5")  => {id: @booking_6, type: "arrive"},
+                    Date.parse("2018-3-6")  => {id: @booking_6, type: "stay"  },
+                    Date.parse("2018-3-7")  => {id: @booking_6, type: "stay"  },
+                    Date.parse("2018-3-8")  => {id: @booking_6, type: "depart"},                    
+                }
+                may_dates = 
+                {
+                    Date.parse("2018-5-30") => {id: @booking_4, type: "arrive"},
+                    Date.parse("2018-5-31") => {id: @booking_4, type: "stay"  }
+                }
+                june_dates = 
+                {
+                    Date.parse("2018-6-1")  => {id: @booking_4, type: "depart"}
+                }
+                
+                expected_value = 
+                {
+                    "January" => januray_dates,
+                    "March"   => march_dates, 
+                    "May"     => may_dates,
+                    "June"    => june_dates
+                }
+                
+                get :index
+                expect(assigns(:year_reservations)).to eq(expected_value)
+            end
+        end
     end
 end

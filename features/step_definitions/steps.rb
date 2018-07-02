@@ -24,19 +24,35 @@ module NavigationHelpers
 end
 World(NavigationHelpers)
 
+module SearchHelpers
+  def get_elements_by_xpath(xpath)
+    page.all(:xpath, xpath)
+  end
+end
+World(SearchHelpers)
+
 module ReservationHelpers
+  
+  #return logical key words for arrivals, departures and stays for testing
+  def reservation_keywords(index, date_range_len)
+    return "arrive" if index == 0
+    return "depart" if index == date_range_len - 1
+    return "stay"
+  end
+  
   def search_for_booking_date(date_range, booking_status)
+    Capybara.default_selector = :xpath
+    len = date_range.length
     date_range.each_with_index do | date, index |
-      if index == 0
-        found = page.find("##{booking_status}-arrive-#{date}")
-        expect(found).to eq(1)
-      elsif index == date_range.length - 1
-        found = page.find("##{booking_status}-stay-#{date}")
-        expect(found).to eq(1)      
-      else
-        found = page.find("##{booking_status}-leave-#{date}")
-        expect(found).to eq(1)          
-      end  
+      current_date = Date.parse(date)
+      #Get corresponding month calendar
+      result = get_elements_by_xpath("//td[@id='#{Date::MONTHNAMES[current_date.mon]}']/div/table/tr/td") 
+      result.each do | element |
+        if element.text.to_i == current_date.day
+          #Should appear as reserved or booked
+          expect(element.all(:xpath,".//div[contains(@class, 'ful_cal_#{reservation_keywords(index, len)}') and contains(@class, 'full_cal_#{booking_status}')]").length).to eq(1)
+        end
+      end
     end    
   end
 end
