@@ -8,10 +8,30 @@ RSpec.describe BookingController, type: :controller do
             expect(assigns(:calendar_options)).to eq(options)
         end
         
-        it "sets @calendar_year to the current year" do
-            Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
-            get :index
-            expect(assigns(:calendar_year)).to eq(2010)             
+        describe "@calenday_year" do
+            it "sets @calendar_year to the current year if params[:year] is not given" do
+                Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
+                get :index
+                expect(assigns(:calendar_year)).to eq(2010)             
+            end
+            
+            it "sets @calendar_year to params[:year] if it is given" do
+                Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
+                get :index, params: {year: "2012"}
+                expect(assigns(:calendar_year)).to eq(2012)
+            end
+            
+            it "does not set @calendar_year to params[:year] if the year given is invalid" do
+                Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
+                get :index, params: {year: "AF2012"}
+                expect(assigns(:calendar_year)).to eq(2010)                
+            end
+            
+            it "does not set @calendar_year to params[:year] if the year given is negative" do
+                Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
+                get :index, params: {year: "-0001"}
+                expect(assigns(:calendar_year)).to eq(2010)                
+            end            
         end
         
         describe "retrieves and transforms booking data" do

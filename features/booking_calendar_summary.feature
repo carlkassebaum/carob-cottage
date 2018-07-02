@@ -28,3 +28,13 @@ Feature: Booking summary calendar
       | test_2 |          | Indonesia | +62 21 6539-0605 | test@foreign.id | 5                | 2pm                    | direct_debit             | 25-1-2018    | 2-2-2018       | 1000 | reserved |
       | test_4 | 2158     | Australia | +61098765432     | test@dom.com.au | 2                | 4pm                    | cash                     | 29-5-2018    | 3-6-2018       | 132  | reserved |
       | test_6 | 2119     | Australia | 0478901234       | wealth@rich.com | 4                | 3pm                    | cash                     | 5-3-2018     | 10-3-2018      | 430  | booked   |
+
+  Scenario: View last years bookings
+    Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
+    And it is currently June 29, 2018
+    When I am on the administration booking manager page
+    And I press "Previous Year"
+    Then I should see "Bookings for the 2017 calendar year"
+    And I should see a full year calendar containing the following bookings:
+      | name   | postcode | country | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost | status |    
+      | test_3 |          | Austria | 0043-1-893 42 02 | test@foreign.at | 1                | 9pm                    | cash                     | 15-5-2017    | 25-5-2017      | 800  | booked |
