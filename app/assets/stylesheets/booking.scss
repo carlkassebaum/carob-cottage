@@ -2,7 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$full_calendar_border_colour: #e5e5e5; 
+$full_calendar_border_colour: #e5e5e5;
+$reserved_colour            : #ffddaa;
+$booked_colour              : #d162c6;
+$reserved_end_colour        : #dbdbdb;
+$booked_end_colour          : #af50a6;
 
 .full_reservation_calendar_headers
 {
@@ -48,6 +52,66 @@ $full_calendar_border_colour: #e5e5e5;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 18px;
-    
 }
+
+.reservation
+{
+    margin-top: 2px;
+    height: 20px;
+    position: absolute;
+    z-index: -1;    
+}
+
+.full_cal_arrive_reserved, .full_cal_arrive_booked
+{
+    margin-left: 18px;
+    width: 18px;
+}
+
+.full_cal_stay_reserved, .full_cal_stay_booked
+{
+    width: 36px;
+}
+
+.full_cal_depart_reserved, .full_cal_depart_booked
+{
+    width: 18px;
+}
+
+.full_cal_stay_booked
+{
+    background-color: $booked_colour;
+    z-index: -2;
+}
+
+.full_cal_arrive_booked
+{
+    border-right: 1px solid $booked_end_colour;      
+    background: linear-gradient(to right, white, white , $booked_colour);
+}
+
+.full_cal_depart_booked
+{
+    border-left: 1px solid $booked_end_colour;    
+    background: linear-gradient(to left, white, white , $booked_colour);
+}
+
+.full_cal_stay_reserved
+{
+    background-color: $reserved_colour;
+    z-index: -2;
+}
+
+.full_cal_arrive_reserved
+{
+    border-right: 2px solid $reserved_end_colour;    
+    background: linear-gradient(to right, white, white , $reserved_colour);
+}
+
+.full_cal_depart_reserved
+{
+    border-left: 2px solid $reserved_end_colour;
+    background: linear-gradient(to left, white, white , $reserved_colour, $reserved_colour);
+}
+
 

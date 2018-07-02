@@ -50,10 +50,11 @@ module ReservationHelpers
       result.each do | element |
         if element.text.to_i == current_date.day
           #Should appear as reserved or booked
-          expect(element.all(:xpath,".//div[contains(@class, 'ful_cal_#{reservation_keywords(index, len)}') and contains(@class, 'full_cal_#{booking_status}')]").length).to eq(1)
+          expect(element.all(:xpath,".//div[contains(@class, 'full_cal_#{booking_status}_#{reservation_keywords(index, len)}')").length).to eq(1)
+          puts "passed"
         end
       end
-    end    
+    end
   end
 end
 World(ReservationHelpers)

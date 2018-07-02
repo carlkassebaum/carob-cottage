@@ -16,12 +16,14 @@
       <% end %>
     </tr>
     
-    <% date_range.each_slice(7) do |week| %>
-      <tr>
-        <% week.each do |day| %>
-          <% block.call day, sorted_events.fetch(day, []) %>
-        <% end %>
-      </tr>
-    <% end %>
+    <tbody class=<%= @calendar_options[:body_class] unless @calendar_options.nil? || @calendar_options[:body_class].nil? %>>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <% block.call day, sorted_events.fetch(day, []) %>
+          <% end %>
+        </tr>
+      <% end %>      
+    </tbody>
   </table>
 </div>

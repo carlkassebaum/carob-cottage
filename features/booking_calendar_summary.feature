@@ -18,7 +18,7 @@ Feature: Booking summary calendar
   
   Scenario: View yearly summary
     Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
-    And it is currently June 29, 2018    
+    And it is currently June 29, 2018
     When I am on the administration page
     And I press "Booking Manager"
     Then I should see "Bookings for the 2018 calendar year"

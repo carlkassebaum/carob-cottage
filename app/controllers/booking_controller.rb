@@ -1,6 +1,6 @@
 class BookingController < ApplicationController
     def index
-        @calendar_options={header_class: "full_reservation_calendar_headers"}
+        @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
         @calendar_year = Date.today.year
         
         date_range = Date.new(@calendar_year,1,1)..Date.new(@calendar_year,12,31)
@@ -22,7 +22,8 @@ class BookingController < ApplicationController
                 else
                     type = "stay"
                 end
-                @year_reservations[current_month][date.mday] = {id: booking, type: type}
+                @year_reservations[current_month][date.mday] = {} if @year_reservations[current_month][date.mday].nil?
+                @year_reservations[current_month][date.mday][type] = {id: booking, status: booking.status}
             end
         end
     end
