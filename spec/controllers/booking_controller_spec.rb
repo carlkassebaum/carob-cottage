@@ -28,33 +28,33 @@ RSpec.describe BookingController, type: :controller do
                 Timecop.travel(Time.local(2018, 5, 15, 10, 0, 0))                
                 januray_dates = 
                 {
-                    Date.parse("2018-1-1")  => {id: @booking_2, type: "arrive"},
-                    Date.parse("2018-1-2")  => {id: @booking_2, type: "stay"  },
-                    Date.parse("2018-1-3")  => {id: @booking_2, type: "stay"  },
-                    Date.parse("2018-1-4")  => {id: @booking_2, type: "stay"  },
-                    Date.parse("2018-1-5")  => {id: @booking_2, type: "depart"},
-                    Date.parse("2018-1-20") => {id: @booking_1, type: "arrive"},
-                    Date.parse("2018-1-21") => {id: @booking_1, type: "stay"  },
-                    Date.parse("2018-1-22") => {id: @booking_1, type: "stay"  },
-                    Date.parse("2018-1-23") => {id: @booking_1, type: "stay"  },
-                    Date.parse("2018-1-24") => {id: @booking_1, type: "stay"  },
-                    Date.parse("2018-1-25") => {id: @booking_1, type: "depart"}                    
+                    20 => {id: @booking_1, type: "arrive"},
+                    21 => {id: @booking_1, type: "stay"  },
+                    22 => {id: @booking_1, type: "stay"  },
+                    23 => {id: @booking_1, type: "stay"  },
+                    24 => {id: @booking_1, type: "stay"  },
+                    25 => {id: @booking_1, type: "depart"},
+                    1  => {id: @booking_2, type: "stay"},
+                    2  => {id: @booking_2, type: "stay"  },
+                    3  => {id: @booking_2, type: "stay"  },
+                    4  => {id: @booking_2, type: "stay"  },
+                    5  => {id: @booking_2, type: "depart"}                    
                 }
                 march_dates = 
                 {
-                    Date.parse("2018-3-5")  => {id: @booking_6, type: "arrive"},
-                    Date.parse("2018-3-6")  => {id: @booking_6, type: "stay"  },
-                    Date.parse("2018-3-7")  => {id: @booking_6, type: "stay"  },
-                    Date.parse("2018-3-8")  => {id: @booking_6, type: "depart"},                    
+                    5 => {id: @booking_6, type: "arrive"},
+                    6 => {id: @booking_6, type: "stay"  },
+                    7 => {id: @booking_6, type: "stay"  },
+                    8 => {id: @booking_6, type: "depart"},                    
                 }
                 may_dates = 
                 {
-                    Date.parse("2018-5-30") => {id: @booking_4, type: "arrive"},
-                    Date.parse("2018-5-31") => {id: @booking_4, type: "stay"  }
+                    30 => {id: @booking_4, type: "arrive"},
+                    31 => {id: @booking_4, type: "stay"  }
                 }
                 june_dates = 
                 {
-                    Date.parse("2018-6-1")  => {id: @booking_4, type: "depart"}
+                    1 => {id: @booking_4, type: "depart"}
                 }
                 
                 expected_value = 
