@@ -1,1 +1,3 @@
-$("#individual_booking").html("<%= escape_javascript(render partial: 'show') %>");
+document.getElementById("individual_booking_place_holder").style.width = document.getElementById("full_reservation_calendar").offsetWidth.toString() + "px";
+document.getElementById("individual_booking_place_holder").style.height = "auto"
+$("#individual_booking_place_holder").html("<%= escape_javascript(render partial: 'show') %>");
