@@ -25,15 +25,6 @@ Feature: Booking View
     Then I should see the following: 
       | Name   | Postcode | Country   | Contact Number   | Email Address   | Number Of Guests | Estimated Arrival Time | Preferred Payment Method | Arrival Date  | Departure Date  | Cost  | Status   |
       | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 2018-01-20    | 2018-01-25      | $123  | Booked   |
-    
-  
-  @javascript
-  Scenario: Close an open booking
-    Given I am on the administration booking manager page
-    And I click on the "Booking" for the dates "29-5-2018" to "3-6-2018"
-    And I click "Close"
-    Then I should not see the following:
-      | Name   | Postcode | Country   | Contact Number   | Email Address   | Number Of Guests | Estimated Arrival Time | Preferred Payment Method | Arrival Date  | Departure Date | Cost | Status   |      
-      | test_4 | 2158     | Australia | +61098765432     | test@dom.com.au | 2                | 4pm                    | cash                     | 29-5-2018     | 3-6-2018       | 132  | reserved |
+
 
     

@@ -138,6 +138,14 @@ Given("I attempt to logout as an administrator") do
   delete '/administration/logout'
 end
 
+Given("I press on the {string} image") do | object_id |
+  puts "sleep..."
+  sleep(15)
+  puts "awake"
+  
+  find("//div[@id=individual_booking_place_holder]/img").click  
+end
+
 Then("I should see a full year calendar containing the following bookings:") do |bookings|
   bookings.hashes.each do | booking |
     start_date = Date.parse(booking[:arrival_date])
@@ -165,7 +173,7 @@ Then("I should see the following:") do |table|
   end
 end
 
-Then("I should see the following:") do |table|
+Then("I should not see the following:") do |table|
   table.hashes.each do | expected_content |
     expected_content.values.each do | content |
       if page.respond_to? :should
@@ -176,3 +184,5 @@ Then("I should see the following:") do |table|
     end
   end
 end
+
+

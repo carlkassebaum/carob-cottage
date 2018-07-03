@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'factory_bot_rails'
+require 'capybara'
 
 require "selenium/webdriver"
 
