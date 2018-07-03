@@ -1,7 +1,7 @@
 Feature: Booking View
   As an administrator,
   So that I can view and check the details of a booking,
-  I want to be able to view and edit all details of a booking.
+  I want to be able to view all details of a booking.
   
   Background:
     Given the following bookings exist:
