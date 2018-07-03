@@ -145,3 +145,16 @@ Then("I should see a full year calendar containing the following bookings:") do 
     end
   end
 end
+
+Then("I should see the following:") do |table|
+
+  table.hashes.each do | expected_content |
+    expected_content.values.each do | content |
+      if page.respond_to? :should
+        page.should have_content(content)
+      else
+        assert page.has_content?(content)
+      end
+    end
+  end
+end
