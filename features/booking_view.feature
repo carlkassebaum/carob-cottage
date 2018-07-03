@@ -16,7 +16,7 @@ Feature: Booking View
       | name | email_address   | password | password_confirmation |
       | bob  | bob@outlook.com | foo_bar  | foo_bar               |  
   
-  @javascript
+  @culerity
   Scenario: Click on and view booking
     Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
     And it is currently June 29, 2018
