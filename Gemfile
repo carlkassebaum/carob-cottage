@@ -73,7 +73,15 @@ group :test, :development do
   gem 'database_cleaner'
   
   gem 'factory_bot_rails'
+  
+  gem 'culerity'
+  
+  gem 'selenium-webdriver' 
+  
+  gem 'chromedriver-helper'  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+

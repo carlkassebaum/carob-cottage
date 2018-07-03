@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   
   get '/administration/booking_manager' => "booking#index"
   
-  get '/administration/booking_manager/booking/:id' => "booking#show"
+  resources :booking, only: [:show]
 end

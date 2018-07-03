@@ -31,4 +31,14 @@ class BookingController < ApplicationController
             end
         end
     end
+    
+    def show
+        id = params[:id]
+        @booking = Booking.find_by(id: id)
+        
+        #Respond with javascript
+        respond_to do |format|
+            format.js
+        end        
+    end
 end

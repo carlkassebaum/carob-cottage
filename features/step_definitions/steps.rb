@@ -103,8 +103,6 @@ When(/^(?:|I )press "([^"]*)"$/) do |button|
 end
 
 When("I click on the {string} for the dates {string} to {string}") do | type, arrival_date, departure_date|
-  puts "----------------"
-  
   raise "Invalid type" unless (type == "Booking" || type == "Reservation")  
   type = "booked" if type == "Booking"
   type = "reserved" if type == "Reservation"
