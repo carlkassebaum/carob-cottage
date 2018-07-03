@@ -164,3 +164,15 @@ Then("I should see the following:") do |table|
     end
   end
 end
+
+Then("I should see the following:") do |table|
+  table.hashes.each do | expected_content |
+    expected_content.values.each do | content |
+      if page.respond_to? :should
+        page.should have_no_content(content)
+      else
+        assert !page.has_content?(content)
+      end
+    end
+  end
+end

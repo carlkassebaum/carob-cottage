@@ -47,3 +47,10 @@ var change_image = function(element, new_src)
 {
   element.src = new_src;
 }
+
+var delete_parent_contents = function(child_id)
+{
+  parent = document.getElementById(child_id).parentElement
+  parent.innerHTML = ''
+  parent.style.width = "0px"
+}

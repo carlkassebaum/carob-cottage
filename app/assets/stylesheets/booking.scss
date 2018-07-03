@@ -202,3 +202,17 @@ table.center
     border-right: 1px solid $full_calendar_border_colour;
 }
 
+#close_button
+{
+    display: inline-block;
+    text-align: right;
+    float: right;
+    position: relative;
+    width: 22px;
+    height: auto;
+}
+
+#close_button:hover
+{
+ cursor: pointer;
+}
