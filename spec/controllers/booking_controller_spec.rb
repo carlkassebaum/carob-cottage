@@ -96,11 +96,18 @@ RSpec.describe BookingController, type: :controller do
     end
     
     describe "show" do
+        before (:each) do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
         
         it "sets @booking to the booking corresponding to the id given" do
-            booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
             get :show, xhr: true , params: {id: 1}
-            expect(assigns(:booking)).to eq(booking_1)
+            expect(assigns(:booking)).to eq(@booking_1)
+        end
+        
+        it "sets flash[:alert] if there is no booking with a matching id" do
+            get :show, xhr: true, params: {id: 2}
+            expect(flash[:alert]).to eq("There is no matching booking with an id of 2.")
         end
     end
 end

@@ -1,12 +1,12 @@
 <div id="individual_booking_title">Booking ID: <%=@booking.id%></div>
 <table id="individual_booking">
     <tr>
-        <td class="booking_attribute">Name:          </td><td class="gray_border_right"><%= @booking.name %></td>
-        <td class="booking_attribute">Total Price:   </td><td> <%= @booking.cost %> </td>
+        <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= @booking.name %></td>
+        <td class="booking_attribute">Total Price:</td><td>$<%= @booking.cost %> </td>
     </tr>
     <tr>
-        <td class="booking_attribute">Status:       </td><td class="gray_border_right"><%= @booking.status.capitalize %></td>
-        <td class="booking_attribute">Email Address: </td><td><%= @booking.email_address    %></td>        
+        <td class="booking_attribute">Status:</td><td class="gray_border_right"><%= @booking.status.capitalize %></td>
+        <td class="booking_attribute">Email Address: </td><td><%= @booking.email_address%></td>        
     </tr>
     <tr>
         <td class="booking_attribute">Contact Number:   </td><td class="gray_border_right"> <%= @booking.contact_number %></td>
@@ -21,7 +21,7 @@
         <td class="booking_attribute">Departure Date: </td><td> <%= @booking.departure_date %> </td>
     </tr>
     <tr>
-        <td class="booking_attribute">Postcode: </td><td class="gray_border_right">$<%= @booking.postcode %></td>
+        <td class="booking_attribute">Postcode: </td><td class="gray_border_right"><%= @booking.postcode %></td>
         <td class="booking_attribute">Country:  </td><td> <%= @booking.country %></td>
     </tr> 
 </table>

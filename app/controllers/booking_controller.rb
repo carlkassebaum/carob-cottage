@@ -36,6 +36,10 @@ class BookingController < ApplicationController
         id = params[:id]
         @booking = Booking.find_by(id: id)
         
+        if(@booking.nil?)
+            flash[:alert] = "There is no matching booking with an id of #{id}."
+        end
+        
         #Respond with javascript
         respond_to do |format|
             format.js

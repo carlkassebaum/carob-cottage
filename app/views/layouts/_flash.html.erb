@@ -1,14 +1,10 @@
 <div id="flash">
-    <% if !flash[:alert].nil? %>
-        <div class="flash_alert flash_login">
-            <%= flash[:alert] %>
-        </div>
+    <% unless flash[:alert].nil? %>
+        <%= content_tag(:div, "#{flash[:alert]}", class: "flash_alert #{flash_class}") %> 
     <% end %>
     
-    <% if !flash[:notification].nil? %>
-        <div class="flash_notification flash_login">
-            <%= flash[:notification] %>
-        </div> 
+    <% unless flash[:notification].nil? %>
+        <%= content_tag(:div, "#{flash[:notification]}", class: "flash_notification #{flash_class}") %>
     <% end %>
     <script>
         fade_flash_notifications_out()

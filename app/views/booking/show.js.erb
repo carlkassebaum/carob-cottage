@@ -1,3 +1,5 @@
 document.getElementById("individual_booking_place_holder").style.width = document.getElementById("full_reservation_calendar").offsetWidth.toString() + "px";
 document.getElementById("individual_booking_place_holder").style.height = "auto"
-$("#individual_booking_place_holder").html("<%= escape_javascript(render partial: 'show') %>");
+$("#individual_booking_place_holder").html("<%= escape_javascript(render partial: 'show') unless @booking.nil? %>");
+$("#flash_wrapper").html("<%= escape_javascript(render partial: 'layouts/flash', locals: {flash_class: ""}) unless flash[:alert].nil? %>");
+window.scrollTo(0,document.body.scrollHeight);

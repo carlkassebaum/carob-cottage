@@ -87,13 +87,13 @@ $light_blue                 : #aedfef;
 .full_cal_arrive_booked
 {
     border-right: 1px solid $booked_end_colour;      
-    background: linear-gradient(to right, white, white , $booked_colour);
+    background: linear-gradient(to right, white, white , $booked_colour, $booked_colour);
 }
 
 .full_cal_depart_booked
 {
     border-left: 1px solid $booked_end_colour;    
-    background: linear-gradient(to left, white, white , $booked_colour);
+    background: linear-gradient(to left, white, white , $booked_colour, $booked_colour);
 }
 
 .full_cal_stay_reserved
@@ -104,7 +104,7 @@ $light_blue                 : #aedfef;
 .full_cal_arrive_reserved
 {
     border-right: 2px solid $reserved_end_colour;    
-    background: linear-gradient(to right, white, white , $reserved_colour);
+    background: linear-gradient(to right, white, white , $reserved_colour, $reserved_colour);
 }
 
 .full_cal_depart_reserved
