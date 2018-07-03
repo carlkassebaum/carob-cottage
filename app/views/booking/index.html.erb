@@ -1,4 +1,8 @@
 <%= render partial: "administrator/navigation_bar" %>
+<div id="flash_wrapper">
+    <%= render partial: "layouts/flash", locals: {flash_class: ""} %>    
+</div>
+
 <div id="booking_header_wrapper">
     <table class="center">
         <tr>
@@ -30,3 +34,7 @@
 </div>
 
 <%= render partial: "reservation/full_year_calendar" %>
+
+<div id="individual_booking_wrapper">
+    <div id="individual_booking_place_holder"></div>    
+</div>

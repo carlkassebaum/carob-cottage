@@ -40,20 +40,28 @@ module ReservationHelpers
     return "stay"
   end
   
-  def search_for_booking_date(date_range, booking_status)
+  def search_for_booking_date(date_range)
     Capybara.default_selector = :xpath
     len = date_range.length
     date_range.each_with_index do | date, index |
       current_date = Date.parse(date)
       #Get corresponding month calendar
-      result = get_elements_by_xpath("//td[@id='#{Date::MONTHNAMES[current_date.mon]}']/div/table/tr/td") 
+      result = get_elements_by_xpath("//td[@id='#{Date::MONTHNAMES[current_date.mon]}']/div/table/tbody[@class='full_reservation_calendar_body']/tr/td") 
+      
+      #becomes true when the day is found 
+      found = false
+      
       result.each do | element |
         if element.text.to_i == current_date.day
+          yield element, index
           #Should appear as reserved or booked
-          expect(element.all(:xpath,".//div[contains(@class, 'full_cal_#{booking_status}_#{reservation_keywords(index, len)}')").length).to eq(1)
-          puts "passed"
+          found = true
+          break
         end
       end
+      
+      raise "Day not found" unless found
+      
     end
   end
 end
@@ -94,6 +102,22 @@ When(/^(?:|I )press "([^"]*)"$/) do |button|
   click_button(button)
 end
 
+When("I click on the {string} for the dates {string} to {string}") do | type, arrival_date, departure_date|
+  raise "Invalid type" unless (type == "Booking" || type == "Reservation")  
+  type = "booked" if type == "Booking"
+  type = "reserved" if type == "Reservation"
+  
+  date_range = (arrival_date..departure_date).map(&:to_s)
+  len = date_range.length
+  
+  search_for_booking_date(date_range) do | element, index |
+    navigation_elements = element.all(:xpath,".//div[contains(@class, 'booking_link_wrapper')]")      
+    expect(navigation_elements.length).to eq(1)  
+    navigation_elements[0].click_link
+    break
+  end
+end
+
 Then(/^I should be redirected to the administrator home page$/) do
   current_path.should == administration_path
 end
@@ -118,6 +142,39 @@ Then("I should see a full year calendar containing the following bookings:") do 
   bookings.hashes.each do | booking |
     start_date = Date.parse(booking[:arrival_date])
     end_date   = Date.parse(booking[:departure_date])
-    search_for_booking_date((start_date..end_date).map(&:to_s), booking[:status])
+    date_range = (start_date..end_date).map(&:to_s)
+    len        = date_range.length
+    
+    search_for_booking_date(date_range) do | element, index |
+      highlight_elements = element.all(:xpath,".//div[contains(@class, 'full_cal_#{reservation_keywords(index, len)}_#{booking[:status]}')]")      
+      expect(highlight_elements.length).to eq(1)      
+    end
   end
 end
+
+Then("I should see the following:") do |table|
+
+  table.hashes.each do | expected_content |
+    expected_content.values.each do | content |
+      if page.respond_to? :should
+        page.should have_content(content)
+      else
+        assert page.has_content?(content)
+      end
+    end
+  end
+end
+
+Then("I should not see the following:") do |table|
+  table.hashes.each do | expected_content |
+    expected_content.values.each do | content |
+      if page.respond_to? :should
+        page.should have_no_content(content)
+      else
+        assert !page.has_content?(content)
+      end
+    end
+  end
+end
+
+

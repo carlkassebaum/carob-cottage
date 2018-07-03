@@ -14,7 +14,14 @@ RSpec.describe Booking, type: :model do
     it "returns bookings with-in the given date range but ignores those beyond the date range" do
       date_range  = Date.new(2018,1,1)..Date.new(2018,12,31)
       test_result = Booking.bookings_within(date_range)
-      expect(test_result).to eq([@booking_1, @booking_4, @booking_6, @booking_2])
+      
+      expect(test_result.include? @booking_1).to eq(true)
+      expect(test_result.include? @booking_2).to eq(true)
+      expect(test_result.include? @booking_4).to eq(true)
+      expect(test_result.include? @booking_6).to eq(true)      
+      expect(test_result.include? @booking_3).to eq(false)
+      expect(test_result.include? @booking_5).to eq(false)
+      expect(test_result.length).to eq(4)
     end
   end
   

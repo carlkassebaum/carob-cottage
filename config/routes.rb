@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get '/administration' => "administrator#index"
   
   get '/administration/booking_manager' => "booking#index"
+  
+  resources :booking, only: [:show]
 end

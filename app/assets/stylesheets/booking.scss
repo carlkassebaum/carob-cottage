@@ -7,6 +7,7 @@ $reserved_colour            : #ffddaa;
 $booked_colour              : #d162c6;
 $reserved_end_colour        : #dbdbdb;
 $booked_end_colour          : #af50a6;
+$light_blue                 : #aedfef;
 
 .full_reservation_calendar_headers
 {
@@ -42,7 +43,7 @@ $booked_end_colour          : #af50a6;
     height:           32px;
     padding-top:      5px;
     width:            275px;
-    background-color: #aedfef;
+    background-color: $light_blue;
     font-weight:      600;
 }
 
@@ -81,31 +82,29 @@ $booked_end_colour          : #af50a6;
 .full_cal_stay_booked
 {
     background-color: $booked_colour;
-    z-index: -2;
 }
 
 .full_cal_arrive_booked
 {
     border-right: 1px solid $booked_end_colour;      
-    background: linear-gradient(to right, white, white , $booked_colour);
+    background: linear-gradient(to right, white, white , $booked_colour, $booked_colour);
 }
 
 .full_cal_depart_booked
 {
     border-left: 1px solid $booked_end_colour;    
-    background: linear-gradient(to left, white, white , $booked_colour);
+    background: linear-gradient(to left, white, white , $booked_colour, $booked_colour);
 }
 
 .full_cal_stay_reserved
 {
     background-color: $reserved_colour;
-    z-index: -2;
 }
 
 .full_cal_arrive_reserved
 {
     border-right: 2px solid $reserved_end_colour;    
-    background: linear-gradient(to right, white, white , $reserved_colour);
+    background: linear-gradient(to right, white, white , $reserved_colour, $reserved_colour);
 }
 
 .full_cal_depart_reserved
@@ -118,4 +117,102 @@ table.center
 {
     margin-left:auto; 
     margin-right:auto;
+}
+
+.booking_link
+{
+    position: absolute;
+    height: 20px;
+    margin-top: 2px;
+    z-index: 20;
+}
+
+.booking_link_arrive
+{
+    width: 18px;
+    margin-left: 18px;
+}
+
+.booking_link_stay
+{
+    width: 36px;    
+}
+
+.booking_link_depart
+{
+    width: 18px;
+}
+
+.booking_link_wrapper
+{
+    text-align: left;
+}
+
+#individual_booking_wrapper
+{
+    width: 100%;
+    text-align: center;
+}
+
+#individual_booking_place_holder
+{
+    text-align: center;
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid $full_calendar_border_colour;
+    margin-bottom: 20px;
+    background-color: #e5e5e5;    
+}
+
+#individual_booking
+{
+    background-color: white;
+    margin-left:auto; 
+    margin-right:auto;
+    border-left: 1px solid $full_calendar_border_colour;
+    border-right: 1px solid $full_calendar_border_colour; 
+}
+
+#individual_booking td
+{
+    text-align: left;
+    margin-top: 5px;
+    width: 210px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+#individual_booking_title
+{
+    width: 100%;
+    border-bottom: 1px solid $full_calendar_border_colour;
+    font-weight: 600;
+    background-color: $light_blue;
+}
+
+.booking_attribute
+{
+    font-weight: 500;
+}
+
+.gray_border_right
+{
+    border-right: 1px solid $full_calendar_border_colour;
+}
+
+#close_button
+{
+    display: inline-block;
+    text-align: right;
+    float: right;
+    position: relative;
+    width: 22px;
+    height: auto;
+}
+
+#close_button:hover
+{
+ cursor: pointer;
 }

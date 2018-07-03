@@ -47,13 +47,17 @@ body, html
 .flash_alert
 {
     background-color: #c40000;
-    color: white;
 }
 
 .flash_notification
 {
     background-color: #38c469;
+}
+
+.flash_notification, .flash_alert
+{
     color: white;
+    text-align: center;
 }
 
 .navigation_arrow

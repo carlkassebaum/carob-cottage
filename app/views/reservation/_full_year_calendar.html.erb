@@ -11,11 +11,11 @@
                     <% if date.mon == month %>
                         <% if !@year_reservations[current_month].nil? && !@year_reservations[current_month][date.mday].nil? %>
                             <% date_details = @year_reservations[current_month][date.mday] %>
-                            <%= content_tag(:div, "", class: ["reservation", "full_cal_arrive_#{date_details["arrive"][:status]}"]) unless date_details["arrive"].nil? %>
-                            <%= content_tag(:div, "", class: ["reservation", "full_cal_stay_#{date_details["stay"][:status]}"    ]) unless date_details["stay"].nil?   %>
-                            <%= content_tag(:div, "", class: ["reservation", "full_cal_depart_#{date_details["depart"][:status]}"]) unless date_details["depart"].nil? %>                            
+                            <%= render partial: 'reservation/booking_link', locals: {date_type: "arrive", date_details: date_details} unless date_details["arrive"].nil? %>
+                            <%= render partial: 'reservation/booking_link', locals: {date_type: "stay",   date_details: date_details} unless date_details["stay"].nil?   %>
+                            <%= render partial: 'reservation/booking_link', locals: {date_type: "depart", date_details: date_details} unless date_details["depart"].nil? %>                            
                         <% end %>
-                        <%= date.mday %>
+                        <%= date.mday %>                            
                     <% end %>
                 </td>
             <% end %>     
