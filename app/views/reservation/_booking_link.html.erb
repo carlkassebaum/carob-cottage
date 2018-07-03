@@ -1,0 +1,4 @@
+<%= content_tag(:div, "", class: ["reservation", "full_cal_#{date_type}_#{date_details[date_type][:status]}"]) %>
+<div class="booking_link_wrapper">
+    <%= link_to("", administration_path, class: "booking_link booking_link_#{date_type}") %>
+</div>

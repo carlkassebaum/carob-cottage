@@ -40,7 +40,7 @@ module ReservationHelpers
     return "stay"
   end
   
-  def search_for_booking_date(date_range, booking_status)
+  def search_for_booking_date(date_range)
     Capybara.default_selector = :xpath
     len = date_range.length
     date_range.each_with_index do | date, index |
@@ -53,7 +53,7 @@ module ReservationHelpers
       
       result.each do | element |
         if element.text.to_i == current_date.day
-          yield element.all(:xpath,".//div[contains(@class, 'full_cal_#{reservation_keywords(index, len)}_#{booking_status}')]")
+          yield element, index
           #Should appear as reserved or booked
           found = true
           break
@@ -109,9 +109,13 @@ When("I click on the {string} for the dates {string} to {string}") do | type, ar
   type = "booked" if type == "Booking"
   type = "reserved" if type == "Reservation"
   
-  search_for_booking_date((arrival_date..departure_date).map(&:to_s), type) do | date_element |
-    expect(date_element.length).to eq(1)  
-    date_element[0].click
+  date_range = (arrival_date..departure_date).map(&:to_s)
+  len = date_range.length
+  
+  search_for_booking_date(date_range) do | element, index |
+    navigation_elements = element.all(:xpath,".//div[contains(@class, 'booking_link_wrapper')]")      
+    expect(navigation_elements.length).to eq(1)  
+    navigation_elements[0].click_link
     break
   end
 end
@@ -140,8 +144,12 @@ Then("I should see a full year calendar containing the following bookings:") do 
   bookings.hashes.each do | booking |
     start_date = Date.parse(booking[:arrival_date])
     end_date   = Date.parse(booking[:departure_date])
-    search_for_booking_date((start_date..end_date).map(&:to_s), booking[:status]) do | date_element |
-      expect(date_element.length).to eq(1)      
+    date_range = (start_date..end_date).map(&:to_s)
+    len        = date_range.length
+    
+    search_for_booking_date(date_range) do | element, index |
+      highlight_elements = element.all(:xpath,".//div[contains(@class, 'full_cal_#{reservation_keywords(index, len)}_#{booking[:status]}')]")      
+      expect(highlight_elements.length).to eq(1)      
     end
   end
 end

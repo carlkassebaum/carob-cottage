@@ -81,7 +81,6 @@ $booked_end_colour          : #af50a6;
 .full_cal_stay_booked
 {
     background-color: $booked_colour;
-    z-index: -2;
 }
 
 .full_cal_arrive_booked
@@ -99,7 +98,6 @@ $booked_end_colour          : #af50a6;
 .full_cal_stay_reserved
 {
     background-color: $reserved_colour;
-    z-index: -2;
 }
 
 .full_cal_arrive_reserved
@@ -118,4 +116,34 @@ table.center
 {
     margin-left:auto; 
     margin-right:auto;
+}
+
+.booking_link
+{
+    position: absolute;
+    background-color: black;
+    height: 20px;
+    margin-top: 2px;
+    z-index: 20;
+}
+
+.booking_link_arrive
+{
+    width: 18px;
+    margin-left: 18px;
+}
+
+.booking_link_stay
+{
+    width: 36px;    
+}
+
+.booking_link_depart
+{
+    width: 18px;
+}
+
+.booking_link_wrapper
+{
+    text-align: left;
 }
