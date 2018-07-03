@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get '/administration' => "administrator#index"
   
   get '/administration/booking_manager' => "booking#index"
+  
+  get '/administration/booking_manager/booking/:id' => "booking#show"
 end
