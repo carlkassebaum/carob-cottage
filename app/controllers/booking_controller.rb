@@ -77,6 +77,18 @@ class BookingController < ApplicationController
         redirect_to(administration_booking_manager_path)
     end
     
+    def destroy
+        begin
+            booking = Booking.find(params[:id])
+            booking.destroy
+            flash[:notification] = "Booking successfully deleted"
+        rescue ActiveRecord::RecordNotFound
+            flash[:alert] = "Booking with id \"#{params[:id]}\" not found!" unless params[:id].empty?
+            flash[:alert] = "No Booking id given!" if params[:id].empty?
+        end
+        redirect_to(administration_booking_manager_path)
+    end
+    
     private
     
     def assign_booking_with_alert_ajax(id)

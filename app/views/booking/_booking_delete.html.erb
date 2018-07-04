@@ -1,0 +1,13 @@
+<div id="delete_wrapper">
+    Are you sure?
+    <table class="center">
+        <tr>
+            <td>
+                <%= button_to "Yes", booking_path(id: @booking.id), method: :delete, id: "delete_booking_yes_button", class: "button booking_button" %>
+            </td>
+            <td>
+                <button class="button booking_button" id="delete_booking_no_button" onclick="change_visibility('delete_wrapper','hidden')">No</button>                  
+            </td>
+        </tr>
+    </table>
+</div>
