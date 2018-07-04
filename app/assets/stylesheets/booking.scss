@@ -231,6 +231,16 @@ table.center
     height: 22px;    
 }
 
+#edit_booking_button
+{
+    z-index: 100;
+}
+
+#delete_booking_button
+{
+    z-index: 99;
+}
+
 #delete_wrapper
 {
     width: 100%;
@@ -260,5 +270,17 @@ table.center
 {
     width: 100%;
     text-align: center;
+}
+
+#delete_booking_yes_button
+{
+    position: relative;
+    z-index: 1;    
+}
+
+#delete_booking_no_button
+{
+    position: relative; 
+    z-index: 10;
 }
 

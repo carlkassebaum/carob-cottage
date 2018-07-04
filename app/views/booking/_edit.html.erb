@@ -1,14 +1,8 @@
 <%= form_for @booking, url: {action: action}, remote: true, id: "edit_booking_form" do |f| %>
     <img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking_inner_wrapper'); set_width('individual_booking_place_holder','0px')"></div>    
     <%= f.submit "Save", class: "button booking_button", id: "edit_booking_button" %>
-    <% unless @booking.id.nil? %>
-        <button id="delete_booking_button" class="booking_button button" onclick="change_visibility('delete_wrapper','visible')">Delete</button>    
-    <% end %>
     <div id="individual_booking_title"><%= title %></div>
     <div id="individual_booking_inner_wrapper">
-        <% unless @booking.id.nil? %>        
-            <%= render partial: "booking_delete" %>
-        <% end %>
         <table id="individual_booking">
             <tr>
                 <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= f.text_field :name, class: "booking_form_element w3-input", value: "#{@booking.name}"%></td>

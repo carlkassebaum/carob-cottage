@@ -23,7 +23,7 @@ Feature: As an administrator,
         And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"
         And I press "Delete"
         Then I should see "Are you sure?"
-        And I press "Yes"
+        And I follow "Yes"
         Then I should see "Booking successfully deleted"
     
     @javascript
