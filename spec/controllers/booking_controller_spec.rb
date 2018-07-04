@@ -110,4 +110,150 @@ RSpec.describe BookingController, type: :controller do
             expect(flash[:alert]).to eq("There is no matching booking with an id of 2.")
         end
     end
+    
+    describe "edit" do
+        before (:each) do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
+        
+        it "sets @booking to the booking corresponding to the id given" do
+            get :edit, xhr: true , params: {id: 1}
+            expect(assigns(:booking)).to eq(@booking_1)
+        end
+        
+        it "sets flash[:alert] if there is no booking with a matching id" do
+            get :edit, xhr: true, params: {id: 2}
+            expect(flash[:alert]).to eq("There is no matching booking with an id of 2.")
+        end        
+    end
+    
+    describe "update" do
+        before :each do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
+        
+        describe "valid params" do
+            it "updates an existing booking with the new parameters" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}
+                put :update, params: {id: 1, booking: new_values}
+                booking = Booking.find_by(id: 1)
+                expect(booking.name).to eq(new_values[:name])
+                expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))  
+                expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
+                expect(booking.status).to eq(new_values[:status])
+            end
+            
+            it "leaves other values untouched" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                booking = Booking.find_by(id: @booking_1.id)
+                expect(booking.name).to eq(new_values[:name])
+                expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))  
+                expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
+                expect(booking.status).to eq(@booking_1.status)            
+            end 
+            
+            it "redirects to the booking manager page" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(response).to redirect_to(administration_booking_manager_path)
+            end
+            
+            it "assigns flash[:notification] to reflect a successful update" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:notification]).to eq("Booking #{@booking_1.id} sucessfully updated")
+            end
+        end
+        
+        describe "invalid dates" do
+            it "sets flash[:alert] and redirects when an invalid arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "junk", departure_date: "24-1-2018", status: "reserved"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:alert]).to eq("No changes made. Invalid arrival date given.")
+                expect(response).to redirect_to(administration_booking_manager_path)
+            end
+            
+            it "sets flash[:alert] and redirects when an invalid arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "24-1-2018", departure_date: "junk", status: "reserved"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:alert]).to eq("No changes made. Invalid departure date given.")
+                expect(response).to redirect_to(administration_booking_manager_path)                
+            end
+            
+            it "sets flash[:alert] and redirects when no arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "", departure_date: "24-1-2018", status: "reserved"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:alert]).to eq("No changes made. Invalid arrival date given.")
+                expect(response).to redirect_to(administration_booking_manager_path)                
+            end
+            
+            it "sets flash[:alert] and redirects when the departure dates is earlier than the arrival date" do
+                new_values = {name: "test_7", arrival_date: "26-1-2018", departure_date: "24-1-2018", status: "reserved"}  
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:alert]).to eq("No changes made. Invalid departure date given.")
+                expect(response).to redirect_to(administration_booking_manager_path)                
+            end
+        end        
+    end
+    
+    describe "new" do
+        it "assigns @booking to an empty booking" do
+            get :new, xhr: true
+            expect(assigns(:booking).to_json).to eq(FactoryBot.build(:booking, {}).to_json)
+        end
+    end
+    
+    describe "create" do
+        describe "valid details" do
+            it "assigns @booking to the corresponding parameters" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}
+                booking = Booking.find_by(name: "test_7")
+                expect(booking).not_to eq(nil)
+                expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))
+                expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
+                expect(booking.status).to eq(new_values[:status])
+            end
+            
+            it "redirects to the administration_booking_manager_path page" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}   
+                expect(response).to redirect_to(administration_booking_manager_path)
+            end
+            
+            it "assigns flash[:notification] to a corresponding message" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}
+                expect(flash[:notification]).to eq("New Booking succesfully created")
+                expect(response).to redirect_to(administration_booking_manager_path)
+            end
+        end
+        
+        describe "invalid dates" do
+            it "sets flash[:alert] when an invalid arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "junk", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}
+                expect(flash[:alert]).to eq("Booking not created. Invalid arrival date given.")
+            end
+            
+            it "sets flash[:alert] and redirects when an invalid arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "24-1-2018", departure_date: "junk", status: "reserved"}
+                post :create, params: {booking: new_values}
+                expect(flash[:alert]).to eq("Booking not created. Invalid departure date given.")          
+            end
+            
+            it "sets flash[:alert] and redirects when no arrival date is given" do
+                new_values = {name: "test_7", arrival_date: "", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}
+                expect(flash[:alert]).to eq("Booking not created. Invalid arrival date given.")           
+            end
+            
+            it "sets flash[:alert] and redirects when the departure dates is earlier than the arrival date" do
+                new_values = {name: "test_7", arrival_date: "26-1-2018", departure_date: "24-1-2018", status: "reserved"}  
+                post :create, params: {booking: new_values}
+                expect(flash[:alert]).to eq("Booking not created. Invalid departure date given.")            
+            end
+        end        
+    end
 end

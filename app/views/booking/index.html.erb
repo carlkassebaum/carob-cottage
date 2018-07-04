@@ -34,6 +34,9 @@
 </div>
 
 <%= render partial: "reservation/full_year_calendar" %>
+<div id="add_booking_button_wrapper">
+    <%= button_to "Add", new_booking_path, method: :get, id: "add_booking_button",  class: "button form_button", remote: true %>
+</div>
 
 <div id="individual_booking_wrapper">
     <div id="individual_booking_place_holder"></div>    

@@ -216,3 +216,54 @@ table.center
 {
  cursor: pointer;
 }
+
+
+#edit_booking_button
+{
+    position: relative;
+    font-size: 12px;
+    float: right;
+    background-color: #008CBA;
+    border: none;
+    color: white;      
+    padding: -10px 10px;
+    text-align: center;
+    height: 22px;
+}
+
+#edit_booking_button:hover 
+{
+    background-color: #119DCB;
+    color: white;
+}
+
+.booking_form_element
+{
+    height: 25px;
+}
+
+#cost_field
+{
+    position: relative;
+    float: right;
+    width: 95%;
+}
+
+#add_booking_button_wrapper
+{
+    width: 100%;
+    text-align: center;
+}
+
+#add_booking_button
+{
+    // position: relative;
+    // font-size: 12px;
+    // float: center;
+    // background-color: #008CBA;
+    // border: none;
+    // color: white;      
+    // padding: -10px 10px;
+    // text-align: center;
+    // height: 22px;    
+}

@@ -67,6 +67,25 @@ module ReservationHelpers
 end
 World(ReservationHelpers)
 
+module WaitForAjax
+  
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+  
+  def reload_page   
+    page.evaluate_script("window.location.reload()")
+  end
+  
+end
+World(WaitForAjax)
+
 Given("the following administrators exist:") do |administrators|
   administrators.hashes.each do | current_admin |
     FactoryBot.create(:administrator, current_admin)
@@ -100,6 +119,10 @@ end
 
 When(/^(?:|I )press "([^"]*)"$/) do |button|
   click_button(button)
+end
+
+Given("I press on the close booking button") do
+  find(:xpath, "//div[@id='individual_booking_place_holder']/img").click  
 end
 
 When("I click on the {string} for the dates {string} to {string}") do | type, arrival_date, departure_date|
@@ -153,7 +176,6 @@ Then("I should see a full year calendar containing the following bookings:") do 
 end
 
 Then("I should see the following:") do |table|
-
   table.hashes.each do | expected_content |
     expected_content.values.each do | content |
       if page.respond_to? :should
@@ -177,4 +199,14 @@ Then("I should not see the following:") do |table|
   end
 end
 
+Given("I enter the following values into the corresponding fields:") do |field_values|
+  field_values.hashes.each do | entry |
+    entry.each do | field, value |
+      fill_in(field, with: value)      
+    end
+  end
+end
 
+When(/^(?:|I )choose "([^"]*)"$/) do |field|
+  choose(field)
+end
