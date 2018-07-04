@@ -1,7 +1,7 @@
-<%= form_for @booking, url: {action: "update"}, remote: true, id: "edit_booking_form" do |f| %>
+<%= form_for @booking, url: {action: action}, remote: true, id: "edit_booking_form" do |f| %>
     <img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking'); set_width('individual_booking_place_holder','0px')"></div>    
     <%= f.submit "Save", class: "button", id: "edit_booking_button" %>
-    <div id="individual_booking_title">Booking ID: <%=@booking.id%></div>
+    <div id="individual_booking_title"><%= title %></div>
     <table id="individual_booking">
         <tr>
             <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= f.text_field :name, class: "booking_form_element w3-input", value: "#{@booking.name}"%></td>

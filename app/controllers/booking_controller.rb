@@ -1,4 +1,7 @@
 class BookingController < ApplicationController
+    include DateValidation
+   
+   
     def index
         @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
         unless /^\d{4}$/.match(params[:year]).nil?
@@ -42,11 +45,36 @@ class BookingController < ApplicationController
     
     def update
         booking = Booking.find_by(id: params[:id])
-        
-        if !booking.nil? && booking.update(booking_params)
+        error_attributes = check_for_date_errors
+
+        if !booking.nil? && error_attributes.length == 0 && booking.update(booking_params)
             flash[:notification] = "Booking #{booking.id} sucessfully updated"
-            redirect_to administration_booking_manager_path
+        else
+            flash[:alert] = "No changes made."
+            flash[:alert] += " Invalid arrival date given." if error_attributes.include? :arrival_date
+            flash[:alert] += " Invalid departure date given." if error_attributes.include? :departure_date            
         end
+        
+        redirect_to administration_booking_manager_path        
+    end
+    
+    def new
+        @booking = Booking.new
+    end
+    
+    def create
+        @booking = Booking.new(booking_params)
+        error_attributes = check_for_date_errors
+        
+        if error_attributes.length == 0 && @booking.save
+            flash[:notification] = "New Booking succesfully created"
+        else
+            flash[:alert] = "Booking not created."
+            flash[:alert] += " Invalid arrival date given." if error_attributes.include? :arrival_date
+            flash[:alert] += " Invalid departure date given." if error_attributes.include? :departure_date            
+        end
+        
+        redirect_to(administration_booking_manager_path)
     end
     
     private
@@ -67,5 +95,18 @@ class BookingController < ApplicationController
     def booking_params
         params.require(:booking).permit(:name, :cost, :status, :email_address, :contact_number, :number_of_people, :estimated_arrival_time, 
         :preferred_payment_method, :arrival_date, :departure_date, :postcode, :country)
+    end
+    
+    def check_for_date_errors
+        error_attributes = []
+        
+        error_attributes << :arrival_date unless valid_date?(booking_params[:arrival_date])
+        error_attributes << :departure_date unless valid_date?(booking_params[:departure_date])
+        
+        unless error_attributes.include?(:arrival_date) || error_attributes.include?(:departure_date)
+            error_attributes << :departure_date unless date_less_than?(booking_params[:arrival_date], booking_params[:departure_date])
+        end
+        
+        return error_attributes
     end
 end

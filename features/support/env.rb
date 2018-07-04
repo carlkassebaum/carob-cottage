@@ -18,7 +18,7 @@ Capybara.register_driver :firefox_headless do |app|
 end
 
 Capybara.javascript_driver = :firefox_headless
-Capybara.default_wait_time = 120
+Capybara.default_max_wait_time = 120
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

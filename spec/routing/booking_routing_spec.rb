@@ -16,4 +16,12 @@ RSpec.describe BookingController, type: :routing do
     it "routes put '/booking/:id' to booking#update" do 
         expect(put: "/booking/1").to route_to( controller: "booking", action: "update", id: "1")          
     end
+    
+    it "routes get '/booking/new' to booking#new" do
+        expect(get: "/booking/new").to route_to( controller: "booking", action: "new")            
+    end
+    
+    it "routes post '/booking' to booking#create" do
+        expect(post: "/booking").to route_to( controller: "booking", action: "create")         
+    end
 end

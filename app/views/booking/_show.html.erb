@@ -1,6 +1,6 @@
 <img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking')"></div>
 <%= button_to "Edit", edit_booking_path(id: @booking.id), method: :get, id: "edit_booking_button",  class: "button", remote: true %>
-<div id="individual_booking_title">Booking ID: <%=@booking.id%></div>
+<div id="individual_booking_title"><%= title %></div>
 <table id="individual_booking">
     <tr>
         <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= @booking.name %></td>
