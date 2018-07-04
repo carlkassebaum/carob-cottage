@@ -5,7 +5,7 @@
     <table id="individual_booking">
         <tr>
             <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= f.text_field :name, class: "booking_form_element w3-input", value: "#{@booking.name}"%></td>
-            <td class="booking_attribute">Total Price:</td><td><%= f.text_field :cost, class: "booking_form_element w3-input", value: "#{@booking.cost}" %></td>
+            <td class="booking_attribute">Total Price:</td><td>$<%= f.text_field :cost, class: "booking_form_element w3-input", id: "cost_field", value: "#{@booking.cost}" %></td>
         </tr>
         <tr>
             <td class="booking_attribute">Status:</td><td class="gray_border_right">

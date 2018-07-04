@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-#Booking.create(name: "test_1", arrival_date: "20-1-2018", departure_date: "26-1-2018", status: "reserved")
-#Booking.create(name: "test_2", arrival_date: "26-1-2018", departure_date: "2-2-2018",  status: "reserved")
+Booking.create(name: "test_1", arrival_date: "20-1-2018", departure_date: "26-1-2018", status: "reserved")
+Booking.create(name: "test_2", arrival_date: "26-1-2018", departure_date: "2-2-2018",  status: "reserved")
 Booking.create(name: "test_3", arrival_date: "2-2-2018",  departure_date: "8-2-2018",  status: "booked")
