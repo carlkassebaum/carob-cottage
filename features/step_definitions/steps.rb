@@ -118,10 +118,11 @@ When(/^(?:|I )follow "([^"]*)"$/) do |link|
 end
 
 When(/^(?:|I )press "([^"]*)"$/) do |button|
-  puts "-------------"
-  puts page.body
-  puts "-------------"
   click_button(button)
+end
+
+Given("I press on the close booking button") do
+  find(:xpath, "//div[@id='individual_booking_place_holder']/img").click  
 end
 
 When("I click on the {string} for the dates {string} to {string}") do | type, arrival_date, departure_date|
