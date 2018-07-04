@@ -44,9 +44,9 @@ class BookingController < ApplicationController
         booking = Booking.find_by(id: params[:id])
         
         if !booking.nil? && booking.update(booking_params)
+            flash[:notification] = "Booking #{booking.id} sucessfully updated"
             redirect_to administration_booking_manager_path
         end
-        
     end
     
     private

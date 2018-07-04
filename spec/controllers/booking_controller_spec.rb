@@ -158,6 +158,12 @@ RSpec.describe BookingController, type: :controller do
                 put :update, params: {id: @booking_1.id, booking: new_values}
                 expect(response).to redirect_to(administration_booking_manager_path)
             end
+            
+            it "assigns flash[:notification] to reflect a successful update" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(flash[:notification]).to eq("Booking #{@booking_1.id} sucessfully updated")
+            end
         end
     end
 end
