@@ -217,21 +217,38 @@ table.center
  cursor: pointer;
 }
 
-
-#edit_booking_button
+.booking_button
 {
     position: relative;
-    font-size: 12px;
-    float: right;
     background-color: #008CBA;
     border: none;
     color: white;      
     padding: -10px 10px;
     text-align: center;
     height: 22px;
+    font-size: 12px;    
+    float: left;
+    height: 22px;    
 }
 
-#edit_booking_button:hover 
+#edit_booking_button
+{
+    z-index: 100;
+}
+
+#delete_booking_button
+{
+    z-index: 99;
+}
+
+#delete_wrapper
+{
+    width: 100%;
+    visibility: hidden;
+    height: 0px;
+}
+
+.booking_button:hover
 {
     background-color: #119DCB;
     color: white;
@@ -255,15 +272,15 @@ table.center
     text-align: center;
 }
 
-#add_booking_button
+#delete_booking_yes_button
 {
-    // position: relative;
-    // font-size: 12px;
-    // float: center;
-    // background-color: #008CBA;
-    // border: none;
-    // color: white;      
-    // padding: -10px 10px;
-    // text-align: center;
-    // height: 22px;    
+    position: relative;
+    z-index: 1;    
 }
+
+#delete_booking_no_button
+{
+    position: relative; 
+    z-index: 10;
+}
+

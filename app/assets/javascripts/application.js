@@ -59,3 +59,17 @@ var set_width = function(id,width)
 {
   document.getElementById(id).style.width = width;
 }
+
+var change_visibility = function(id, visibility)
+{
+  var element = document.getElementById(id)
+  element.style.visibility = visibility
+  if(visibility != "hidden")
+  {
+    element.style.height = "auto";
+  }
+  else
+  {
+    element.style.height = "0px";
+  }
+}

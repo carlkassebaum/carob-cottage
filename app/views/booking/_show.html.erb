@@ -1,30 +1,35 @@
-<img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking')"></div>
-<%= button_to "Edit", edit_booking_path(id: @booking.id), method: :get, id: "edit_booking_button",  class: "button", remote: true %>
+<img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking_inner_wrapper')"/>
+<%= button_to "Edit", edit_booking_path(id: @booking.id), method: :get, id: "edit_booking_button",  class: "booking_button button ", remote: true %>
+<button id="delete_booking_button" class="booking_button button" onclick="change_visibility('delete_wrapper','visible')">Delete</button>
 <div id="individual_booking_title"><%= title %></div>
-<table id="individual_booking">
-    <tr>
-        <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= @booking.name %></td>
-        <td class="booking_attribute">Total Price:</td><td>$<%= @booking.cost %> </td>
-    </tr>
-    <tr>
-        <td class="booking_attribute">Status:</td><td class="gray_border_right"><%= @booking.status.capitalize %></td>
-        <td class="booking_attribute">Email Address: </td><td><%= @booking.email_address%></td>        
-    </tr>
-    <tr>
-        <td class="booking_attribute">Contact Number:   </td><td class="gray_border_right"> <%= @booking.contact_number %></td>
-        <td class="booking_attribute">Number of Guests: </td><td> <%= @booking.number_of_people %> </td>        
-    </tr>
-    <tr>
-        <td class="booking_attribute">Estimated Arrival Time:    </td><td class="gray_border_right"> <%= @booking.estimated_arrival_time %></td>
-        <td class="booking_attribute">Preferred Payment Method: </td><td> <%= @booking.preferred_payment_method %> </td>
-    </tr>
-    <tr>
-        <td class="booking_attribute">Arrival Date:   </td><td class="gray_border_right"> <%= @booking.arrival_date   %></td>
-        <td class="booking_attribute">Departure Date: </td><td> <%= @booking.departure_date %> </td>
-    </tr>
-    <tr>
-        <td class="booking_attribute">Postcode: </td><td class="gray_border_right"><%= @booking.postcode %></td>
-        <td class="booking_attribute">Country:  </td><td> <%= @booking.country %></td>
-    </tr> 
-</table>
-
+<div id="individual_booking_inner_wrapper">
+    <div>
+        <%= render partial: "booking_delete" %>
+    </div>
+    <table id="individual_booking">
+        <tr>
+            <td class="booking_attribute">Name:</td><td class="gray_border_right"><%= @booking.name %></td>
+            <td class="booking_attribute">Total Price:</td><td>$<%= @booking.cost %> </td>
+        </tr>
+        <tr>
+            <td class="booking_attribute">Status:</td><td class="gray_border_right"><%= @booking.status.capitalize %></td>
+            <td class="booking_attribute">Email Address: </td><td><%= @booking.email_address%></td>        
+        </tr>
+        <tr>
+            <td class="booking_attribute">Contact Number:   </td><td class="gray_border_right"> <%= @booking.contact_number %></td>
+            <td class="booking_attribute">Number of Guests: </td><td> <%= @booking.number_of_people %> </td>        
+        </tr>
+        <tr>
+            <td class="booking_attribute">Estimated Arrival Time:    </td><td class="gray_border_right"> <%= @booking.estimated_arrival_time %></td>
+            <td class="booking_attribute">Preferred Payment Method: </td><td> <%= @booking.preferred_payment_method %> </td>
+        </tr>
+        <tr>
+            <td class="booking_attribute">Arrival Date:   </td><td class="gray_border_right"> <%= @booking.arrival_date   %></td>
+            <td class="booking_attribute">Departure Date: </td><td> <%= @booking.departure_date %> </td>
+        </tr>
+        <tr>
+            <td class="booking_attribute">Postcode: </td><td class="gray_border_right"><%= @booking.postcode %></td>
+            <td class="booking_attribute">Country:  </td><td> <%= @booking.country %></td>
+        </tr> 
+    </table>
+</div>
