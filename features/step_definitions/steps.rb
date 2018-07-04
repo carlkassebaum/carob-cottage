@@ -199,4 +199,14 @@ Then("I should not see the following:") do |table|
   end
 end
 
+Given("I enter the following values into the corresponding fields:") do |field_values|
+  field_values.hashes.each do | entry |
+    entry.each do | field, value |
+      fill_in(field, with: value)      
+    end
+  end
+end
 
+When(/^(?:|I )choose "([^"]*)"$/) do |field|
+  choose(field)
+end

@@ -221,7 +221,7 @@ table.center
 #edit_booking_button
 {
     position: relative;
-    font-size: 4px;
+    font-size: 12px;
     float: right;
     background-color: #008CBA;
     border: none;
@@ -235,4 +235,9 @@ table.center
 {
     background-color: #119DCB;
     color: white;
+}
+
+.booking_form_element
+{
+    height: 25px;
 }

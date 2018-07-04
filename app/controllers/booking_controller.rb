@@ -33,7 +33,25 @@ class BookingController < ApplicationController
     end
     
     def show
-        id = params[:id]
+        assign_booking_with_alert_ajax(params[:id])      
+    end
+    
+    def edit
+        assign_booking_with_alert_ajax(params[:id])           
+    end
+    
+    def update
+        booking = Booking.find_by(id: params[:id])
+        
+        if !booking.nil? && booking.update(booking_params)
+            redirect_to administration_booking_manager_path
+        end
+        
+    end
+    
+    private
+    
+    def assign_booking_with_alert_ajax(id)
         @booking = Booking.find_by(id: id)
         
         if(@booking.nil?)
@@ -43,6 +61,11 @@ class BookingController < ApplicationController
         #Respond with javascript
         respond_to do |format|
             format.js
-        end        
+        end          
+    end
+    
+    def booking_params
+        params.require(:booking).permit(:name, :cost, :status, :email_address, :contact_number, :number_of_people, :estimated_arrival_time, 
+        :preferred_payment_method, :arrival_date, :departure_date, :postcode, :country)
     end
 end

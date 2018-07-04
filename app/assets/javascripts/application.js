@@ -54,3 +54,8 @@ var delete_parent_contents = function(child_id)
   parent.innerHTML = ''
   parent.style.width = "0px"
 }
+
+var set_width = function(id,width)
+{
+  document.getElementById(id).style.width = width;
+}

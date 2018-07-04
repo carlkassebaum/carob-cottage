@@ -110,4 +110,54 @@ RSpec.describe BookingController, type: :controller do
             expect(flash[:alert]).to eq("There is no matching booking with an id of 2.")
         end
     end
+    
+    describe "edit" do
+        before (:each) do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
+        
+        it "sets @booking to the booking corresponding to the id given" do
+            get :edit, xhr: true , params: {id: 1}
+            expect(assigns(:booking)).to eq(@booking_1)
+        end
+        
+        it "sets flash[:alert] if there is no booking with a matching id" do
+            get :edit, xhr: true, params: {id: 2}
+            expect(flash[:alert]).to eq("There is no matching booking with an id of 2.")
+        end        
+    end
+    
+    describe "update" do
+        before :each do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
+        
+        describe "valid params" do
+            it "updates an existing booking with the new parameters" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}
+                put :update, params: {id: 1, booking: new_values}
+                booking = Booking.find_by(id: 1)
+                expect(booking.name).to eq(new_values[:name])
+                expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))  
+                expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
+                expect(booking.status).to eq(new_values[:status])
+            end
+            
+            it "leaves other values untouched" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                booking = Booking.find_by(id: @booking_1.id)
+                expect(booking.name).to eq(new_values[:name])
+                expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))  
+                expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
+                expect(booking.status).to eq(@booking_1.status)            
+            end 
+            
+            it "redirects to the booking manager page" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
+                put :update, params: {id: @booking_1.id, booking: new_values}
+                expect(response).to redirect_to(administration_booking_manager_path)
+            end
+        end
+    end
 end

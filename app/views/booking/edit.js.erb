@@ -1,0 +1,3 @@
+$("#individual_booking_place_holder").html("<%= escape_javascript(render partial: 'edit') unless @booking.nil? %>");
+$("#flash_wrapper").html("<%= escape_javascript(render partial: 'layouts/flash', locals: {flash_class: ""}) unless flash[:alert].nil? %>");
+window.scrollTo(0,document.body.scrollHeight);

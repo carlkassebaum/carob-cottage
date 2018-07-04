@@ -18,13 +18,13 @@ Feature: Booking View
     And it is currently June 29, 2018
     And I log in as an administrator with "bob@outlook.com" and "foo_bar"
   
-  # @javascript
-  # Scenario: Click on and view booking
-  #   Given I am on the administration booking manager page
-  #   And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"
-  #   Then I should see the following: 
-  #     | Name   | Postcode | Country   | Contact Number   | Email Address   | Number Of Guests | Estimated Arrival Time | Preferred Payment Method | Arrival Date  | Departure Date  | Cost  | Status   |
-  #     | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 2018-01-20    | 2018-01-25      | $123  | Booked   |
+  @javascript
+  Scenario: Click on and view booking
+    Given I am on the administration booking manager page
+    And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"
+    Then I should see the following: 
+      | Name   | Postcode | Country   | Contact Number   | Email Address   | Number Of Guests | Estimated Arrival Time | Preferred Payment Method | Arrival Date  | Departure Date  | Cost  | Status   |
+      | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 2018-01-20    | 2018-01-25      | $123  | Booked   |
 
 
   @javascript
