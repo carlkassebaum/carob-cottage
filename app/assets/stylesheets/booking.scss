@@ -216,3 +216,23 @@ table.center
 {
  cursor: pointer;
 }
+
+
+#edit_booking_button
+{
+    position: relative;
+    font-size: 4px;
+    float: right;
+    background-color: #008CBA;
+    border: none;
+    color: white;      
+    padding: -10px 10px;
+    text-align: center;
+    height: 22px;
+}
+
+#edit_booking_button:hover 
+{
+    background-color: #119DCB;
+    color: white;
+}

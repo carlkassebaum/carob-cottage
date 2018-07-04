@@ -1,7 +1,7 @@
-Feature: Booking View
+Feature: Edit and Create bookings
   As an administrator,
-  So that I can view and check the details of a booking,
-  I want to be able to view all details of a booking.
+  So that I can correct and add external bookings,
+  I want to be able to edit existing and create new bookings.
   
   Background:
     Given the following bookings exist:
@@ -16,15 +16,13 @@ Feature: Booking View
       | name | email_address   | password | password_confirmation |
       | bob  | bob@outlook.com | foo_bar  | foo_bar               |
     And it is currently June 29, 2018
-    And I log in as an administrator with "bob@outlook.com" and "foo_bar"
+    And I log in as an administrator with "bob@outlook.com" and "foo_bar"  
   
   @javascript
   Scenario: Click on and view booking
     Given I am on the administration booking manager page
     And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"
-    Then I should see the following: 
-      | Name   | Postcode | Country   | Contact Number   | Email Address   | Number Of Guests | Estimated Arrival Time | Preferred Payment Method | Arrival Date  | Departure Date  | Cost  | Status   |
-      | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 2018-01-20    | 2018-01-25      | $123  | Booked   |
-
-
-    
+    And I press "Edit"
+    Then I should see form fields for the following containing the corresponding values:
+      | name   | postcode | country   | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost | status |
+      | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 2018-01-20   | 2018-01-25     | $123 | Booked |

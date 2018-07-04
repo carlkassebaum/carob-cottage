@@ -1,4 +1,5 @@
 <img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking')"></div>
+<%= button_to "Edit", edit_booking_path(id: @booking.id), method: :get, id: "edit_booking_button",  class: "button" %>
 <div id="individual_booking_title">Booking ID: <%=@booking.id%></div>
 <table id="individual_booking">
     <tr>
