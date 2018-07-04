@@ -132,6 +132,10 @@ RSpec.describe BookingController, type: :controller do
             @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
         end
         
+        after :each do
+            expect(:response).to redirect_to(administration_booking_manager_path)
+        end           
+        
         describe "valid params" do
             it "updates an existing booking with the new parameters" do
                 new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}
@@ -152,12 +156,6 @@ RSpec.describe BookingController, type: :controller do
                 expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
                 expect(booking.status).to eq(@booking_1.status)            
             end 
-            
-            it "redirects to the booking manager page" do
-                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
-                put :update, params: {id: @booking_1.id, booking: new_values}
-                expect(response).to redirect_to(administration_booking_manager_path)
-            end
             
             it "assigns flash[:notification] to reflect a successful update" do
                 new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018"}
@@ -204,7 +202,46 @@ RSpec.describe BookingController, type: :controller do
         end
     end
     
+    describe "destroy" do
+        before :each do
+            @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")            
+        end
+        
+        after(:each) do
+            expect(:response).to redirect_to(administration_booking_manager_path)
+        end        
+        
+        describe "valid delete" do
+            it "removes the given booking from the database" do
+                delete :destroy, params: {id: @booking_1.id}
+                expect(Booking.all.length).to eq(0) 
+            end
+            
+            it "sets flash[:notification] to a success message" do
+                delete :destroy, params: {id: @booking_1.id}
+                expect(flash[:notification]).to eq("Booking successfully deleted")
+            end
+        end
+        
+        describe "invalid delete" do
+            it "sets flash[:alert] to a warning message when an invalid id is given" do
+                delete :destroy, params: {id: "junk"}
+                expect(flash[:alert]).to eq("Booking with id \"junk\" not found!")                
+            end
+            
+            it "sets flash[:alert] to a warning message when an invalid id is given" do
+                delete :destroy, params: {id: ""}
+                expect(flash[:alert]).to eq("No Booking id given!")                
+            end            
+        end
+    end
+    
     describe "create" do
+
+        after(:each) do
+            expect(:response).to redirect_to(administration_booking_manager_path)
+        end           
+        
         describe "valid details" do
             it "assigns @booking to the corresponding parameters" do
                 new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
@@ -214,12 +251,6 @@ RSpec.describe BookingController, type: :controller do
                 expect(booking.arrival_date).to eq(Date.parse(new_values[:arrival_date]))
                 expect(booking.departure_date).to eq(Date.parse(new_values[:departure_date]))
                 expect(booking.status).to eq(new_values[:status])
-            end
-            
-            it "redirects to the administration_booking_manager_path page" do
-                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
-                post :create, params: {booking: new_values}   
-                expect(response).to redirect_to(administration_booking_manager_path)
             end
             
             it "assigns flash[:notification] to a corresponding message" do
