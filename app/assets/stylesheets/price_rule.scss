@@ -38,6 +38,12 @@
     border-bottom: 1px solid #e5e5e5;
 }
 
+.price_rule_edit_td
+{
+    text-align: right;
+    font-weight: 600;
+}
+
 .price_rule_td_right
 {
     border-right: 0;
@@ -61,5 +67,41 @@
 {
     margin: auto;
     height: 25px;
+    font-size: 10px;
+}
+
+.price_manager_text_field_wrapper
+{
+    width: 150px;
+}
+
+.price_manager_text_field
+{
+    text-align: left;
+    width: 150px;
+}
+
+#price_rule_save_button
+{
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.price_rule_unit
+{
+    display: inline-block;
+}
+
+.price_manager_description_field
+{
+    width: 200px;
+    height: 50px;
+}
+
+.date_descriptor
+{
+    display: inline-block;
     font-size: 10px;
 }
