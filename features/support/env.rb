@@ -7,8 +7,12 @@
 require 'cucumber/rails'
 require 'factory_bot_rails'
 require 'capybara'
-
 require "selenium/webdriver"
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+
+DatabaseCleaner.clean
 
 Capybara.register_driver :firefox_headless do |app|
   options = ::Selenium::WebDriver::Firefox::Options.new

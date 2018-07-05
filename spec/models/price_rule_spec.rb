@@ -41,7 +41,14 @@ RSpec.describe PriceRule, type: :model do
     
     it "has a description attribute" do
       expect(FactoryBot.build(:price_rule)).to respond_to(:description)
-    end          
+    end
+  end
+  
+  describe "validation" do
+    it "requires the name attribute to be given" do
+      price_rule = PriceRule.new(name: "")
+      expect(price_rule.save).to eq(false)
+    end
   end
  
 end

@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   
   resources :booking
   
-  resources :price_rule, only: [:show, :edit, :update]
+  resources :price_rule, only: [:show, :edit, :update, :new, :create]
 end

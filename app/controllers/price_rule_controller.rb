@@ -26,6 +26,22 @@ class PriceRuleController < ApplicationController
         redirect_to(administration_price_manager_path)
     end
     
+    def new
+        @price_rule = PriceRule.new
+    end
+    
+    def create
+        @price_rule = PriceRule.new(price_rule_params)
+        
+        if @price_rule.save 
+            flash[:notification] = "Rule succesfully created"
+            redirect_to(administration_price_manager_path)
+        else
+            flash[:alert] = "Invalid attribute(s) given. No new rules have been created."
+            render 'new'
+        end
+    end
+    
     private
     
     def find_or_redirect

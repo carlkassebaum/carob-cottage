@@ -46,4 +46,12 @@ Feature: Create and Edit price rules
         | name     | value | period_type | min_people | max_people | start_date | end_date   | min_stay_duration | max_stay_duration | description                              |      
         | new_name | $190  | fixed       | 4          | 5          | 20-5-2018  | 20-7-2018  | 10                | 14                | new rate which is no long the base rate! |    
       
- 
+  Scenario: Create a new rule with no name
+    Given I am on the administration price manager page
+    And I follow "Add"
+    And I enter the following values into the corresponding fields:
+    | price_rule_value | price_rule_min_people | price_rule_max_people | price_rule_start_date | price_rule_end_date | price_rule_min_stay_duration | price_rule_max_stay_duration | price_rule_description                   |
+    | 190              | 4                     | 5                     | 20-5-2018             | 20-7-2018           | 10                           | 14                           | new rate which is no long the base rate! |
+    And I choose "price_rule_period_type_fixed"
+    And I press "Save"
+    Then I should see "Invalid attribute(s) given. No new rules have been created."

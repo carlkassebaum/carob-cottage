@@ -130,4 +130,70 @@ RSpec.describe PriceRuleController, type: :controller do
         end
     end
     
+    describe "edit" do
+        before :each do
+            @rule_1 = FactoryBot.create(:price_rule, id: 2, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+                start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+        end
+        
+        it "assigns @price_rule to the rule matching the id" do
+            get :edit, params: {id: @rule_1.id}
+            expect(assigns(:price_rule)).to eq(@rule_1)
+        end
+        
+        describe "invalid id" do
+            it "sets flash[:alert] when an invalid id is given" do
+                get :edit, params: {id: "junk"}
+                expect(flash[:alert]).to eq("No price rule with id \"junk\" found!")
+            end
+            
+            it "redirects when an invalid id is given" do
+                get :edit, params: {id: "junk"}
+                expect(response).to redirect_to(administration_price_manager_path)                
+            end
+        end
+    end
+    
+    describe "new" do
+        it "assigns @price_rule to an empty rule" do
+            get :new
+            expect(assigns(:price_rule).to_json).to eq(FactoryBot.build(:price_rule, {}).to_json)            
+        end
+    end
+    
+    describe "create" do
+        before :each do
+            @new_values= {name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+                start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people."}
+        end
+        
+        describe "valid params" do
+            it "creates a new price rule with the new parameters" do
+                post :create, params: {price_rule: @new_values}
+                price_rule = PriceRule.first
+                expect(price_rule.name).to eq(@new_values[:name])
+                expect(price_rule.value).to eq(@new_values[:value])
+                expect(price_rule.period_type).to eq(@new_values[:period_type]) 
+                expect(price_rule.max_people).to eq(@new_values[:max_people])
+                expect(price_rule.description).to eq(@new_values[:description])
+                expect(price_rule.min_people).to eq(@new_values[:min_people])
+                expect(price_rule.min_stay_duration).to eq(@new_values[:min_stay_duration])
+                expect(price_rule.max_stay_duration).to eq(@new_values[:max_stay_duration]) 
+                expect(price_rule.start_date).to eq(@new_values[:start_date])
+                expect(price_rule.end_date).to eq(@new_values[:end_date]) 
+                expect(flash[:notification]).to eq("Rule succesfully created")
+                expect(response).to redirect_to(administration_price_manager_path)
+            end
+        end
+        
+        describe "invalid params" do
+            it "requires a name and assigns flash[:alert] to a warning message" do
+                @new_values[:name] = ""
+                post :create, params: {price_rule: @new_values}
+                expect(flash[:alert]).to eq("Invalid attribute(s) given. No new rules have been created.")
+                expect(response).to render_template("new")
+            end
+        end
+    end    
+    
 end
