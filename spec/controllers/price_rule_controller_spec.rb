@@ -35,7 +35,7 @@ RSpec.describe PriceRuleController, type: :controller do
     end
     
     describe "show" do
-        before :all do
+        before :each do
             @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
                 start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")            
         end
@@ -158,6 +158,44 @@ RSpec.describe PriceRuleController, type: :controller do
         it "assigns @price_rule to an empty rule" do
             get :new
             expect(assigns(:price_rule).to_json).to eq(FactoryBot.build(:price_rule, {}).to_json)            
+        end
+    end
+    
+    describe "destroy" do
+        before :each do
+            @rule_1 = FactoryBot.create(:price_rule, id: 2, name: "Delete specific", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+                start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")         
+        end
+        
+        describe "valid id" do
+            it "removes the corresponding database entry with a given id" do
+                delete :destroy, params: {id: @rule_1.id}              
+                expect(PriceRule.all).to eq([])
+            end
+            
+            it "sets flash[:notification] to a success message" do
+                delete :destroy, params: {id: @rule_1.id}                 
+                expect(flash[:notification]).to eq("Price rule \"Delete specific\" succesfully deleted")
+            end
+            
+            it "redirects to the administration price manager page" do
+                delete :destroy, params: {id: @rule_1.id}                 
+                expect(response).to redirect_to(administration_price_manager_path)
+            end
+        end
+        
+        describe "invalid id" do
+            before :each do
+                delete :destroy, params: {id: "junk"}                   
+            end
+            
+            it "sets flash[:alert] to an error message" do
+                expect(flash[:alert]).to eq("No price rule with id \"junk\" found!")              
+            end
+            
+            it "redirects to the administration price manager page" do
+                expect(response).to redirect_to(administration_price_manager_path)                
+            end
         end
     end
     
