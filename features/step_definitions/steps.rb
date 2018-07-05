@@ -98,6 +98,12 @@ Given("the following bookings exist:") do |bookings|
   end      
 end
 
+Given("the following price rules exist:") do |price_rules|
+  price_rules.hashes.each do | price_rule |
+    FactoryBot.create(:price_rule, price_rule)
+  end  
+end
+
 Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
 end
