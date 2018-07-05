@@ -19,5 +19,5 @@ Feature: Delete a price rule
 
   Scenario: Delete an existing price rule
     Given I am on the administration price manager page
-    And I press "delete_price_rule_23"
-    Then I should see "Price rule \"Cleaning\" succesfully deleted"
+    And I follow "delete_price_rule_23"
+    Then I should see "succesfully deleted"

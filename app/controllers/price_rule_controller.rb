@@ -12,10 +12,19 @@ class PriceRuleController < ApplicationController
         find_or_redirect
     end
     
+    def destroy
+        find_or_redirect
+        
+        if @price_rule != nil
+            name = @price_rule.name
+            @price_rule.destroy
+            flash[:notification] = "Price rule \"#{name}\" succesfully deleted"
+            redirect_to(administration_price_manager_path)
+        end        
+    end
+    
     def update
         price_rule = PriceRule.find_by(id: params[:id])
-        
-        
         
         if !price_rule.nil? && price_rule.update(price_rule_params)
             flash[:notification] = "Rule succesfully updated"
