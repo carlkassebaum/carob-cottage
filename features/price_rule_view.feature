@@ -34,3 +34,14 @@ Feature: Price Rule View
       | Cleaning | A fixed $10 charge applies for cleaning.                                    |
       | 7 night stay | Stays for 7 nights are charged at $170 per night.                       | 
       | stays longer than 7 nights | Stays for 8 or more nights are charged at $165 per night. |
+  
+  Scenario: View a price rule
+    Given the following price rules exist:
+      | id | name                        | value | period_type | min_people | max_people | start_date | end_date  | min_stay_duration | max_stay_duration | description                                               |
+      | 20 | Base Rate                   | 185   | per_night   | 1          | 2          | 10-2-2018  | 14-2-2018 | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
+    And I am on the administration price manager page
+    And I follow "view_price_rule_20"
+    Then I should see the following:
+      | name                        | value | period_type | min_people     | max_people     | Start Date | End Date   | min_stay_duration     | max_stay_duration     | description |
+      | Name                        | Value | Period Type | Minimum People | Maximum People | 10-02-2018 | 14-02-2018 | Minimum Stay Duration | Maximum Stay Duration | Description |
+      | Base Rate                   | 185   | per_night   | 1              | 2              | 10-2-2018  | 14-02-2018 | 2                     | 6                     | A base rate of $185 per night applies for 1 to 2 people.  |    

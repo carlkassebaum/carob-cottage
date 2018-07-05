@@ -33,4 +33,28 @@ RSpec.describe PriceRuleController, type: :controller do
             expect(assigns(:price_rules).length).to eq(6)
         end
     end
+    
+    describe "show" do
+        before :all do
+            @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+                start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")            
+        end
+        
+        it "assigns @price_rule to the rule matching the id" do
+            get :show, params: {id: @rule_1.id}
+            expect(assigns(:price_rule)).to eq(@rule_1)
+        end
+        
+        describe "invalid id" do
+            it "sets flash[:alert] when an invalid id is given" do
+                get :show, params: {id: "junk"}
+                expect(flash[:alert]).to eq("No price rule with id \"junk\" found!")
+            end
+            
+            it "redirects when an invalid id is given" do
+                get :show, params: {id: "junk"}
+                expect(response).to redirect_to(administration_price_manager_path)                
+            end
+        end
+    end
 end

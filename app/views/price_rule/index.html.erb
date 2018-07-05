@@ -24,6 +24,11 @@
                     <td class="price_rule_td price_rule_description">
                         <%= price_rule.description %>
                     </td>
+                    
+                    <td class="price_rule_td price_rule_view_button"> 
+                        <%= link_to "View", price_rule_path(price_rule), class: "price_rule_button button form_button", id: "view_price_rule_#{price_rule.id}" %>
+                    </td>
+                    
                     <td class="price_rule_td price_rule_edit_button">
                         
                     </td>
@@ -34,5 +39,4 @@
             <% end %>         
         </table>
     </div>
-
 <% end %>

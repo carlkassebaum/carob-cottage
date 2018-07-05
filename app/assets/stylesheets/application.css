@@ -41,7 +41,8 @@ body, html
     background-color: #008CBA;
     border: none;
     color: white;
-    padding: 11px 32px;
+    padding-left: 32px;
+    padding-right: 32px;
 }
 
 .flash_alert
