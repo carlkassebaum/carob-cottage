@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PriceRuleController, type: :controller do
     describe "index" do
+        
+        it "assings @price_rules to an empty array when there are no price rules" do
+            get :index
+            expect(assigns(:price_rules)).to eq([])
+        end
+        
         it "assings @price_rules to an array of all current price rules" do
             rule_1 = FactoryBot.create(:price_rule, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
                 description: "A base rate of $185 per night applies for 1 to 2 people.")
@@ -26,7 +32,5 @@ RSpec.describe PriceRuleController, type: :controller do
             expect(assigns(:price_rules).include?rule_6).to eq(true)
             expect(assigns(:price_rules).length).to eq(6)
         end
-        
-        
     end
 end

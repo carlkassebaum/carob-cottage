@@ -9,23 +9,30 @@
     </div>
 </div>
 
-<div id="price_manager_body_wrapper">
-    <table class="price_manager_table center">
-        <% @price_rules.each do | price_rule | %>
-            <tr>
-                <td class="price_rule_td price_rule_name">
-                    <%= price_rule.name %>
-                </td>
-                <td class="price_rule_td price_rule_description">
-                    <%= price_rule.description %>
-                </td>
-                <td class="price_rule_td price_rule_edit_button">
-                    
-                </td>
-                <td class="price_rule_td_right price_rule_td price_rule_delete_button">
-                    
-                </td>
-            </tr>
-        <% end %>         
-    </table>
-</div>
+<% if @price_rules.empty? %>
+    <div id="price_rule_empty">
+        There are currently no price rules!
+    </div>
+<% else %>
+    <div id="price_manager_body_wrapper">
+        <table class="price_manager_table center">
+            <% @price_rules.each do | price_rule | %>
+                <tr>
+                    <td class="price_rule_td price_rule_name">
+                        <%= price_rule.name %>
+                    </td>
+                    <td class="price_rule_td price_rule_description">
+                        <%= price_rule.description %>
+                    </td>
+                    <td class="price_rule_td price_rule_edit_button">
+                        
+                    </td>
+                    <td class="price_rule_td_right price_rule_td price_rule_delete_button">
+                        
+                    </td>
+                </tr>
+            <% end %>         
+        </table>
+    </div>
+
+<% end %>
