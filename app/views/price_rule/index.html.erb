@@ -30,7 +30,7 @@
                     </td>
                     
                     <td class="price_rule_td price_rule_edit_button">
-                        
+                        <%= link_to "Edit", edit_price_rule_path(price_rule), class: "price_rule_button button form_button", id: "edit_price_rule_#{price_rule.id}" %>                        
                     </td>
                     <td class="price_rule_td_right price_rule_td price_rule_delete_button">
                         
@@ -40,3 +40,6 @@
         </table>
     </div>
 <% end %>
+<div id="price_rule_save_button">
+    <%= link_to "Add", new_price_rule_path, class: "price_rule_button button form_button" %>            
+</div>

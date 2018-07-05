@@ -6,4 +6,12 @@ RSpec.describe PriceRuleController, type: :routing do
     it 'routes get /price_rule/id to PriceRule#show' do
         expect(get: "/price_rule/1").to route_to( controller: "price_rule", action: "show", id: "1")        
     end
+    
+    it 'routes get /price_rule/id/edit to PriceRule#edit' do
+        expect(get: "/price_rule/1/edit").to route_to( controller: "price_rule", action: "edit", id: "1")               
+    end
+    
+    it 'routes put /price_rule/id to PriceRule#update' do
+        expect(put: "/price_rule/1").to route_to( controller: "price_rule", action: "update", id: "1")            
+    end
 end

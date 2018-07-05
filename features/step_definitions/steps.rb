@@ -2,6 +2,9 @@ require 'cucumber/rails'
 require 'uri'
 require 'cgi'
 require 'factory_bot_rails'
+require 'database_cleaner'
+
+
 
 module NavigationHelpers
   def path_to(page_name)

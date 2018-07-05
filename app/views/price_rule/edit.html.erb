@@ -1,0 +1,14 @@
+<%= render partial: "administrator/navigation_bar" %>
+<div id="flash_wrapper">
+    <%= render partial: "layouts/flash", locals: {flash_class: ""} %>    
+</div>
+
+<div id="price_manager_header_wrapper">
+    <div id="price_manager_header_text">
+        <%= "Editing \"#{@price_rule.name}\"" %>
+    </div>
+</div>
+
+<br/>
+
+<%= render partial: "modify", locals: {action: "update"} %>
