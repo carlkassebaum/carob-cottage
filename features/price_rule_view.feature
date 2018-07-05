@@ -43,5 +43,5 @@ Feature: Price Rule View
     And I follow "view_price_rule_20"
     Then I should see the following:
       | name                        | value | period_type | min_people     | max_people     | Start Date | End Date   | min_stay_duration     | max_stay_duration     | description |
-      | Name                        | Value | Period Type | Minimum People | Maximum People | 10-02-2018 | 14-02-2018 | Minimum Stay Duration | Maximum Stay Duration | Description |
-      | Base Rate                   | 185   | per_night   | 1              | 2              | 10-2-2018  | 14-02-2018 | 2                     | 6                     | A base rate of $185 per night applies for 1 to 2 people.  |    
+      | "Base Rate" Details         | Value | Period Type | Minimum People | Maximum People | Start Date | End Date   | Minimum Stay Duration | Maximum Stay Duration | Description |
+      | Base Rate                   | 185   | per_night   | 1              | 2              | 2018-02-10 | 2018-02-14 | 2                     | 6                     | A base rate of $185 per night applies for 1 to 2 people.  |    

@@ -1,0 +1,33 @@
+<%= render partial: "administrator/navigation_bar" %>
+
+<div id="price_manager_header_wrapper">
+    <div id="price_manager_header_text">
+        <%= "\"#{@price_rule.name}\" Details" %>
+    </div>
+</div>
+
+<table class="center" id="show_table">
+    <tr><td class="price_rule_td">Value</td><td class="price_rule_td price_rule_td_right">$<%= @price_rule.value %></td></tr>
+    <tr><td class="price_rule_td">Period Type</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.period_type %></td></tr>
+    <% unless @price_rule.min_people == 0 %>
+        <tr><td class="price_rule_td">Minimum People</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.min_people %></td></tr>
+    <% end %>
+    <% unless @price_rule.max_people == 0 %>
+        <tr><td class="price_rule_td">Maximum People</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.max_people %></td></tr>
+    <% end %>
+    <% unless @price_rule.start_date.nil? %>
+        <tr><td class="price_rule_td">Start Date</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.start_date %></td></tr>
+    <% end %>
+    <% unless @price_rule.end_date.nil? %>
+        <tr><td class="price_rule_td">End Date</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.end_date %></td></tr>
+    <% end %>
+    <% unless @price_rule.min_stay_duration == 0 %>
+        <tr><td class="price_rule_td">Minimum Stay Duration</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.min_stay_duration %> nights</td></tr>
+    <% end %>
+    <% unless @price_rule.max_stay_duration == 0 %>
+        <tr><td class="price_rule_td">Maximum Stay Duration</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.max_stay_duration %> nights</td></tr>
+    <% end %>
+    <% unless @price_rule.description.empty? %>
+        <tr><td class="price_rule_td">Description</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.description %></td></tr>
+    <% end %>    
+</table>
