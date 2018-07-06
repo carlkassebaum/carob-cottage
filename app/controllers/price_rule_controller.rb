@@ -1,4 +1,5 @@
 class PriceRuleController < ApplicationController
+    before_action :redirect_unless_logged_in
     
     def show
         find_or_redirect

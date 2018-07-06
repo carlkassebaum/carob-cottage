@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe PriceRuleController, type: :controller do
     describe "index" do
+        
         describe "logged out" do
+            before :each do
+                session[:logged_in] = nil                
+            end
+            
             it "redirects and sets flash[:alert]" do
                 get :index
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
@@ -57,12 +62,13 @@ RSpec.describe PriceRuleController, type: :controller do
         describe "logged out" do
             before :each do
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")                
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                session[:logged_in] = nil
             end
             
             it "redirects and sets flash[:alert]" do
                 get :show, params: {id: @rule_1.id}
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
@@ -76,7 +82,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true 
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")            
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
             end
             
             it "assigns @price_rule to the rule matching the id" do
@@ -101,12 +107,21 @@ RSpec.describe PriceRuleController, type: :controller do
     
     describe "edit" do
         describe "logged out" do
-            it "redirects and sets flash[:alert]" do
+            before :each do
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")            
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")                 
+                session[:logged_in] = nil                
+            end
+            
+            it "redirects and sets flash[:alert]" do
                 get :edit, params: {id: @rule_1.id}
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
+            end
+            
+            it "does not assign @price_rule" do
+                get :edit, params: {id: @rule_1.id}
+                expect(assigns(:price_rule)).to eq(nil)
             end
         end
         
@@ -139,6 +154,7 @@ RSpec.describe PriceRuleController, type: :controller do
     describe "update" do
         describe "logged out" do
             before :each do
+                session[:logged_in] = nil                   
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
                     start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.") 
                 @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night."}                  
@@ -146,7 +162,7 @@ RSpec.describe PriceRuleController, type: :controller do
             
             it "redirects and sets flash[:alert]" do
                 put :update, params: {id: @rule_1.id, price_rule: @new_values}
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
@@ -207,9 +223,13 @@ RSpec.describe PriceRuleController, type: :controller do
     
     describe "new" do
         describe "logged out" do
+            before :each do
+                session[:logged_in] = nil                   
+            end
+            
             it "redirects and sets flash[:alert]" do
                 get :new
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
@@ -231,13 +251,14 @@ RSpec.describe PriceRuleController, type: :controller do
     describe "destroy" do
         describe "logged out" do
             before :each do
+                session[:logged_in] = nil                   
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
                     start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.") 
             end
             
             it "redirects and sets flash[:alert]" do
                 delete :destroy, params: {id: @rule_1.id}
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
@@ -291,14 +312,13 @@ RSpec.describe PriceRuleController, type: :controller do
     describe "create" do
         describe "logged out" do
             before :each do
-                @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                session[:logged_in] = nil                   
                 @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night."}                    
             end
             
             it "redirects and sets flash[:alert]" do
                 post :create, params: {price_rule: @new_values}
-                expect(flash[:warning]).to eq("You must be logged in to view that content")
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
             end
             
