@@ -1,6 +1,7 @@
 class BookingController < ApplicationController
     include DateValidation
    
+    before_action :redirect_unless_logged_in, only: [:index]
    
     def index
         @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
