@@ -111,6 +111,11 @@ RSpec.describe BookingController, type: :controller do
     
     describe "show" do
         describe "logged out" do
+            it "sets flash[:alert] to a warning" do
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved") 
+                get :show, xhr: true , params: {id: 1}                
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
+            end
         end
         
         describe "logged in" do
@@ -131,6 +136,14 @@ RSpec.describe BookingController, type: :controller do
     end
     
     describe "edit" do
+        describe "logged out" do
+            it "sets flash[:alert] to a warning" do
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved") 
+                get :edit, xhr: true , params: {id: 1}                
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
+            end     
+        end
+        
         describe "logged in" do
             
             before :each do
@@ -233,6 +246,10 @@ RSpec.describe BookingController, type: :controller do
     
     describe "new" do
         describe "logged out" do
+            it "sets flash[:alert] to a warning message" do
+                get :new, xhr: true                
+                expect(flash[:alert]).to eq("You must be logged in to view that content")                 
+            end
         end
         
         describe "logged in" do
