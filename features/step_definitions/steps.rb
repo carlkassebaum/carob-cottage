@@ -9,7 +9,11 @@ require 'database_cleaner'
 module NavigationHelpers
   def path_to(page_name)
     case page_name
-
+    
+    when /^the price rule\((\d{1,})\) page$/
+      '/price_rule/$1'
+    when /^the price rule\((\d{1,})\) edit page$/
+      '/price_rule/$1/edit'
     when /^the home\s?page$/
       '/'
     when /^the administrator login page$/
@@ -214,6 +218,16 @@ Given("I enter the following values into the corresponding fields:") do |field_v
       fill_in(field, with: value)      
     end
   end
+end
+
+Given("I navigate to the price rule {string} page for id {string}") do | action, id |
+  if action == "show"
+    action = ""
+  else
+    action = "/#{action}"
+  end
+  
+  self.send("/price_rule/#{id}#{action}")
 end
 
 When(/^(?:|I )choose "([^"]*)"$/) do |field|
