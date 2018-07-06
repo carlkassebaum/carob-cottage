@@ -151,7 +151,14 @@ RSpec.describe BookingController, type: :controller do
     end
     
     describe "update" do
-        describe "logged out" do
+       describe "not logged in" do
+            it "redirects to the login page" do
+                booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}
+                put :update, params: {id: 1, booking: new_values}
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
+                expect(response).to redirect_to(administration_login_path)
+            end
         end
         
         describe "logged in" do
@@ -239,6 +246,12 @@ RSpec.describe BookingController, type: :controller do
     
     describe "destroy" do
         describe "logged out" do
+            it "redirects to the login page" do
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
+                delete :destroy, params: {id: @booking_1.id}
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
+                expect(response).to redirect_to(administration_login_path)            
+            end
         end
         
         describe "logged in" do
@@ -278,6 +291,15 @@ RSpec.describe BookingController, type: :controller do
     end
     
     describe "create" do
+        describe "logged out" do
+            it "redirects to the login page" do
+                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
+                post :create, params: {booking: new_values}
+                expect(flash[:alert]).to eq("You must be logged in to view that content")
+                expect(response).to redirect_to(administration_login_path)            
+            end
+        end
+
 
         describe "logged in" do
             before :each do
