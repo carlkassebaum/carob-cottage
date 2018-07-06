@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+FactoryBot.create(  :administrator,
+                    name: "bob",
+                    email_address: "bob@outlook.com",
+                    password: "foo_bar",
+                    password_confirmation: "foo_bar")
 
 Booking.create(name: "test_1", arrival_date: "20-1-2018", departure_date: "26-1-2018", status: "reserved")
 Booking.create(name: "test_2", arrival_date: "26-1-2018", departure_date: "2-2-2018",  status: "reserved")

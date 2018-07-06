@@ -19,9 +19,9 @@ RSpec.describe SessionController, type: :controller do
                 expect(response).to redirect_to(administration_path)
             end
             
-            it "sets the current user id to the session id" do
+            it "sets the logged in session to true" do
                 post :create, params: {session: {email_address: @valid_email_address, password: @valid_password}}
-                expect(session[:user_id]).to eq(@test_administrator.id)
+                expect(session[:logged_in]).to eq(true)
             end
         end
         
