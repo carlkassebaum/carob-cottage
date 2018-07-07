@@ -10,7 +10,7 @@ Feature: Log out as an administrator
   
   Scenario: Standard log out procedure
     Given I log in as an administrator with "bob@outlook.com" and "foo_bar"
-    And I am on the administration page
+    And I am on the administration booking manager page
     When I press "Sign out"
     Then I should see "Sign out successful"
     And I should be on the administration login page

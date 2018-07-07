@@ -6,7 +6,7 @@ class SessionController < ApplicationController
         admin = Administrator.find_by(email_address: params[:session][:email_address].downcase)
         if admin && admin.authenticate(params[:session][:password])
             session[:logged_in] = true
-            redirect_to administration_path
+            redirect_to administration_booking_manager_path
         else
             flash[:alert] = "Unkown email address or invalid password given"
             redirect_to administration_login_path

@@ -13,7 +13,7 @@ Feature: Login in an adminstrator
     When I fill in "email_address" with "bob@outlook.com"
     And I fill in "password" with "foo_bar"
     And I press "Sign in"
-    Then I should be redirected to the administrator home page
+    Then I am on the administration booking manager page
     
   Scenario: Invalid email address
     Given I am on the administrator login page

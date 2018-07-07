@@ -10,7 +10,7 @@ Feature: Price Rule View
     And I log in as an administrator with "bob@outlook.com" and "foo_bar"  
   
   Scenario: No price rules
-    Given I am on the administration page
+    Given I am on the administration booking manager page
     And I press "Price Manager"
     Then I should see "There are currently no price rules!"
   
@@ -23,8 +23,7 @@ Feature: Price Rule View
       | Cleaning                    | 10    | fixed       |            |            |            |          |                   |                   | A fixed $10 charge applies for cleaning.                  |
       | 7 night stay                | 170   | per_night   | 1          | 2          |            |          | 7                 | 7                 | Stays for 7 nights are charged at $170 per night.         | 
       | stays longer than 7 nights  | 165   | per_night   | 1          | 2          |            |          | 8                 |                   | Stays for 8 or more nights are charged at $165 per night. |  
-    Given I am on the administration page
-    And I press "Price Manager"
+    Given I am on the administration price manager page
     Then I should see "Current Price Rules"
     And I should see the following:
       | Rule Name | Description                                                                |
