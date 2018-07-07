@@ -13,7 +13,7 @@ class Booking < ApplicationRecord
     def unique_dates
         begin
             date_range = (self.arrival_date.tomorrow)..(self.departure_date.yesterday)
-            overlapping=Booking.bookings_within(date_range)
+            overlapping=Booking.bookings_within(date_range) - [self]
             if overlapping.length > 0
                 errors.add(:overlapping_dates, "Overlapping arrival/departure dates given.")                
             end
