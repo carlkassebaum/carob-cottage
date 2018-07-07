@@ -53,6 +53,7 @@ class BookingController < ApplicationController
             flash[:notification] = "Booking #{booking.id} sucessfully updated"
         else
             flash[:alert] = "No changes made."
+            booking.errors.each { | attribute, error_message | flash[:alert] += " #{error_message}" } unless booking.nil?
             flash[:alert] += " Invalid arrival date given." if error_attributes.include? :arrival_date
             flash[:alert] += " Invalid departure date given." if error_attributes.include? :departure_date            
         end
@@ -72,6 +73,9 @@ class BookingController < ApplicationController
             flash[:notification] = "New Booking succesfully created"
         else
             flash[:alert] = "Booking not created."
+            @booking.errors.each do | attribute, error_message |
+                flash[:alert] += " #{error_message}"
+            end
             flash[:alert] += " Invalid arrival date given." if error_attributes.include? :arrival_date
             flash[:alert] += " Invalid departure date given." if error_attributes.include? :departure_date            
         end

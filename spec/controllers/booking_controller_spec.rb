@@ -284,6 +284,15 @@ RSpec.describe BookingController, type: :controller do
                     expect(flash[:alert]).to eq("No changes made. Invalid departure date given.")
                     expect(response).to redirect_to(administration_booking_manager_path)                
                 end
+
+                it "sets flash[:alert] and redirects when the given dates overlap with existing dates" do
+                    @booking_2 = FactoryBot.create(:booking, name: "test_1", 
+                        arrival_date: "25-01-2018", departure_date: "27-01-2018")
+                    new_values = {arrival_date: "20-1-2018", departure_date: "26-01-2018"}
+                    put :update, params: {id: @booking_1.id, booking: new_values}
+                    expect(flash[:alert]).to eq("No changes made. Overlapping arrival/departure dates given.")
+                end
+                
             end
         end
     end
@@ -412,7 +421,6 @@ RSpec.describe BookingController, type: :controller do
                     new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
                     post :create, params: {booking: new_values}
                     expect(flash[:notification]).to eq("New Booking succesfully created")
-                    expect(response).to redirect_to(administration_booking_manager_path)
                 end
             end
             
@@ -439,6 +447,14 @@ RSpec.describe BookingController, type: :controller do
                     new_values = {name: "test_7", arrival_date: "26-1-2018", departure_date: "24-1-2018", status: "reserved"}  
                     post :create, params: {booking: new_values}
                     expect(flash[:alert]).to eq("Booking not created. Invalid departure date given.")            
+                end
+                
+                it "sets flash[:alert] and redirects when the given dates overlap with existing dates" do
+                    @booking_1 = FactoryBot.create(:booking, name: "test_1", 
+                        arrival_date: "20-1-2018", departure_date: "25-1-2018")
+                    new_values = {name: "test_7", arrival_date: "24-1-2018", departure_date: "26-1-2018", status: "reserved"}
+                    post :create, params: {booking: new_values}
+                    expect(flash[:alert]).to eq("Booking not created. Overlapping arrival/departure dates given.")
                 end
             end
         end
