@@ -6,7 +6,7 @@ Feature: Edit and Create bookings
   Background:
     Given the following bookings exist:
       | id  | name   | postcode | country   | contact_number   | email_address   | number_of_people | estimated_arrival_time | preferred_payment_method | arrival_date | departure_date | cost | status   |
-      | 12   | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 20-1-2018    | 25-1-2018      | 123  | booked   |
+      | 12  | test_1 | 5000     | Australia | +61234567890     | test@domain.com | 4                | 3pm                    | cash                     | 20-1-2018    | 25-1-2018      | 123  | booked   |
       | 14  | test_2 |          | Indonesia | +62 21 6539-0605 | test@foreign.id | 5                | 2pm                    | direct_debit             | 25-1-2018    | 2-2-2018       | 1000 | reserved |
       | 23  | test_3 |          | Austria   | 0043-1-893 42 02 | test@foreign.at | 1                | 9pm                    | cash                     | 15-5-2017    | 25-5-2017      | 800  | booked   | 
       | 34  | test_4 | 2158     | Australia | +61098765432     | test@dom.com.au | 2                | 4pm                    | cash                     | 29-5-2018    | 3-6-2018       | 132  | reserved |
@@ -81,6 +81,46 @@ Feature: Edit and Create bookings
       | junk_date              |
     And I press "Save"
     Then I should see "No changes made. Invalid departure date given."
+    
+  @javascript
+  Scenario: Overlapping booking dates on edit
+    Given I am on the administration booking manager page
+    And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"    
+    And I enter the following values into the corresponding fields:
+      | booking_departure_date |
+      | 26-1-2018              |
+    And I press "Save"
+    Then I should see "No changes made. Invalid departure date given."
+    
+  @javascript
+  Scenario: Overlapping booking dates on creation
+    Given I am on the administration booking manager page  
+    And I press "Add"
+    And I enter the following values into the corresponding fields:
+      | booking_name | booking_arrival_date | booking_departure_date |
+      | test_7       | 2018-02-01           | 2018-02-04             |
+    And I press "Save"
+    Then I should see "No changes made. Invalid arrival date given."
+    
+  @javascript
+  Scenario: Valid same arrival dates for existing booking departure
+    Given I am on the administration booking manager page
+    And I click on the "Booking" for the dates "5-3-2018" to "10-3-2018"    
+    And I enter the following values into the corresponding fields:
+      | booking_arrival_date |
+      | 2-2-2018             |
+    And I press "Save"
+    Then I should see "Booking 56 sucessfully updated"    
+  
+  @javascript
+  Scenario: Valid same departure dates for existing booking arrival
+    Given I am on the administration booking manager page  
+    And I press "Add"
+    And I enter the following values into the corresponding fields:
+      | booking_name | booking_arrival_date | booking_departure_date |
+      | test_7       | 2018-05-27           | 2018-05-29             |
+    And I press "Save"
+    Then I should see "New Booking succesfully created"    
     
   @javascript
   Scenario: Invalid arrival date entered on new booking
