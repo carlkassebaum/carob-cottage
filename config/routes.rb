@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   get 'administration/price_manager'    => "price_rule#index"
   
-  resources :booking
+  resources :booking, except: [:index]
   
-  resources :price_rule
+  resources :price_rule, except: [:index]
 end
