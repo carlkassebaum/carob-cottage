@@ -3,10 +3,29 @@ require 'rails_helper'
 RSpec.describe BookingController, type: :controller do
     describe "index" do
         describe "not logged in" do
+            before :each do
+                session[:logged_in] = nil
+            end
+            
             it "redirects to the login page" do
                 get :index
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
+            end
+            
+            it "does not assign @calendar_year" do
+                get :index
+                expect(assigns(:calendar_year)).to eq(nil)
+            end
+            
+            it "does not assign @month_calendar_options" do
+                get :index
+                expect(assigns(:calendar_year)).to eq(nil)                
+            end
+            
+            it "does not assign @year_reservations" do
+                get :index
+                expect(assigns(:calendar_year)).to eq(nil)                
             end
         end
         
@@ -34,8 +53,7 @@ RSpec.describe BookingController, type: :controller do
                     expect(assigns(:calendar_year)).to eq(2012)
                 end
                 
-                it "does not set @calendar_year to params[:year] if the year given is invalid" do
-                    Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
+                it  Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0)) do
                     get :index, params: {year: "AF2012"}
                     expect(assigns(:calendar_year)).to eq(2010)                
                 end
@@ -44,7 +62,7 @@ RSpec.describe BookingController, type: :controller do
                     Timecop.travel(Time.local(2010, 5, 15, 10, 0, 0))
                     get :index, params: {year: "-0001"}
                     expect(assigns(:calendar_year)).to eq(2010)                
-                end            
+                end
             end
             
             describe "retrieves and transforms booking data" do
@@ -68,7 +86,7 @@ RSpec.describe BookingController, type: :controller do
                         23 => {"stay"   => {id: @booking_1, status: "reserved"}},
                         24 => {"stay"   => {id: @booking_1, status: "reserved"}},
                         25 => {"depart" => {id: @booking_1, status: "reserved"},
-                               "arrive" => {id: @booking_7, status: "booked"  }},
+                              "arrive" => {id: @booking_7, status: "booked"  }},
                         26 => {"stay"   => {id: @booking_7, status: "booked"  }},
                         27 => {"depart" => {id: @booking_7, status: "booked"  }},
                         1  => {"stay"   => {id: @booking_2, status: "reserved"}},
@@ -111,10 +129,19 @@ RSpec.describe BookingController, type: :controller do
     
     describe "show" do
         describe "logged out" do
+            before :each do
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")                
+                session[:logged_in] = nil
+            end
+            
             it "sets flash[:alert] to a warning" do
-                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved") 
                 get :show, xhr: true , params: {id: 1}                
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
+            end
+            
+            it "does not assign @booking to any value" do
+                get :show, xhr: true , params: {id: 1}
+                expect(assigns(:booking)).to eq(nil)
             end
         end
         
@@ -137,15 +164,23 @@ RSpec.describe BookingController, type: :controller do
     
     describe "edit" do
         describe "logged out" do
+            before :each do
+                session[:logged_in] = nil
+            end            
+            
             it "sets flash[:alert] to a warning" do
                 @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved") 
                 get :edit, xhr: true , params: {id: 1}                
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
-            end     
+            end 
+            
+            it "does not assign @booking to any value" do
+                get :edit, xhr: true , params: {id: 1}
+                expect(assigns(:booking)).to eq(nil)
+            end            
         end
         
         describe "logged in" do
-            
             before :each do
                 @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
                 session[:logged_in] = true
@@ -165,12 +200,21 @@ RSpec.describe BookingController, type: :controller do
     
     describe "update" do
        describe "not logged in" do
+           before :each do
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
+                @new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}               
+           end
+           
             it "redirects to the login page" do
-                booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
-                new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "booked"}
-                put :update, params: {id: 1, booking: new_values}
+                put :update, params: {id: 1, booking: @new_values}
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)
+            end
+            
+            it "does not update the values within the booking" do
+                original_booking_attributes = @booking_1.to_json
+                put :update, params: {id: 1, booking: @new_values}
+                expect(@booking_1.to_json).to eq(original_booking_attributes)
             end
         end
         
@@ -246,9 +290,17 @@ RSpec.describe BookingController, type: :controller do
     
     describe "new" do
         describe "logged out" do
+            before :each do
+                session[:logged_in] = nil
+            end            
+            
             it "sets flash[:alert] to a warning message" do
                 get :new, xhr: true                
                 expect(flash[:alert]).to eq("You must be logged in to view that content")                 
+            end
+            
+            it "does not assign @booking to an empty booking" do
+                expect(assigns(:booking)).to eq(nil)
             end
         end
         
@@ -263,11 +315,21 @@ RSpec.describe BookingController, type: :controller do
     
     describe "destroy" do
         describe "logged out" do
+            before :each do
+                session[:logged_in] = nil
+                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")                
+            end
+            
             it "redirects to the login page" do
-                @booking_1 = FactoryBot.create(:booking, id: 1, name: "test_1", arrival_date: "20-1-2018",  departure_date: "25-1-2018", status: "reserved")
                 delete :destroy, params: {id: @booking_1.id}
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)            
+            end
+            
+            it "does not destroy the booking" do
+                original_values = @booking_1.to_json
+                delete :destroy, params: {id: @booking_1.id}
+                expect(Booking.find_by(id: @booking_1.id).to_json).to eq(original_values)
             end
         end
         
@@ -309,11 +371,19 @@ RSpec.describe BookingController, type: :controller do
     
     describe "create" do
         describe "logged out" do
-            it "redirects to the login page" do
+            before :each do
+                session[:logged_in] = nil
                 new_values = {name: "test_7", arrival_date: "21-1-2018", departure_date: "24-1-2018", status: "reserved"}
-                post :create, params: {booking: new_values}
+                post :create, params: {booking: new_values}                
+            end
+            
+            it "redirects to the login page" do
                 expect(flash[:alert]).to eq("You must be logged in to view that content")
                 expect(response).to redirect_to(administration_login_path)            
+            end
+            
+            it "does not create a new booking" do
+                expect(Booking.all).to eq([])
             end
         end
 
