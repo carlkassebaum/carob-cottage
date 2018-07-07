@@ -4,7 +4,7 @@ RSpec.describe Booking, type: :model do
   describe "bookings_within" do
     before :each do 
       @booking_1 = FactoryBot.create(:booking, name: "test_1", arrival_date: "20-1-2018", departure_date: "25-1-2018")
-      @booking_2 = FactoryBot.create(:booking, name: "test_2", arrival_date: "31-1-2017", departure_date: "5-1-2018")
+      @booking_2 = FactoryBot.create(:booking, name: "test_2", arrival_date: "31-1-2018", departure_date: "5-1-2018")
       @booking_3 = FactoryBot.create(:booking, name: "test_3", arrival_date: "15-5-2017", departure_date: "25-5-2017")
       @booking_4 = FactoryBot.create(:booking, name: "test_4", arrival_date: "29-5-2018", departure_date: "3-6-2018")
       @booking_5 = FactoryBot.create(:booking, name: "test_5", arrival_date: "1-8-2019",  departure_date: "2-10-2019")
@@ -22,6 +22,40 @@ RSpec.describe Booking, type: :model do
       expect(test_result.include? @booking_3).to eq(false)
       expect(test_result.include? @booking_5).to eq(false)
       expect(test_result.length).to eq(4)
+    end
+  end
+  
+  describe "validation" do
+    before :each do
+      @booking_1 = FactoryBot.create(:booking, name: "test_1", arrival_date: "20-1-2018", departure_date: "25-1-2018")
+      @booking_2 = FactoryBot.create(:booking, name: "test_2", arrival_date: "31-1-2018", departure_date: "5-1-2018")      
+    end
+    
+    it "allows for bookings with the same departure date and arrival dates of other bookings to be stored" do
+      booking = Booking.new(name: "test_3", arrival_date: "25-1-2018", departure_date: "31-1-2018")
+      expect(booking.save).to eq(true)
+    end
+    
+    describe "overlapping dates" do
+      it "forces save to evaluate to false with overlapping dates" do
+        booking = Booking.new(name: "test_3", arrival_date: "25-1-2018", departure_date: "1-2-2018")
+        expect(booking.save).to eq(false)
+      end
+      
+      it "adds invalid date messages to the error of the booking" do
+        booking = Booking.new(name: "test_3", arrival_date: "25-1-2018", departure_date: "1-2-2018")
+        booking.save
+        expect(booking.errors[:overlapping_dates]).to eq(["Overlapping arrival/departure dates given."])
+      end
+      
+      it "does not save the booking" do
+        booking = Booking.new(name: "test_3", arrival_date: "25-1-2018", departure_date: "1-2-2018")
+        booking.save
+        expect(Booking.all.include? @booking_1).to eq(true)
+        expect(Booking.all.include? @booking_2).to eq(true)
+        expect(Booking.all.include? booking).to eq(false)        
+        expect(Booking.all.length).to eq(2)
+      end
     end
   end
   
