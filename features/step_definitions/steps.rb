@@ -18,6 +18,8 @@ module NavigationHelpers
       '/'
     when /^the administrator login page$/
       '/administration/login'
+    when /^the reservation page$/
+      '/reservation'
     else
       begin
         page_name =~ /^the (.*) page$/
@@ -232,4 +234,12 @@ end
 
 When(/^(?:|I )choose "([^"]*)"$/) do |field|
   choose(field)
+end
+
+When("I tick {string}") do |id|
+  find(:css, "\##{id}").set(true)
+end
+
+When("I untick {string}") do |id|
+  find(:css, "\##{id}").set(false)
 end

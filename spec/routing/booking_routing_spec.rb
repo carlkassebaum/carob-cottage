@@ -28,4 +28,12 @@ RSpec.describe BookingController, type: :routing do
     it "routes delete '/booking/id' to booking#destroy" do
         expect(delete: "/booking/1").to route_to( controller: "booking", action: "destroy", id: "1")               
     end
+    
+    it "routes get '/reservation' to booking#new_customer_booking" do
+        expect(get: "/reservation").to route_to( controller: "booking", action: "new_customer_booking") 
+    end
+    
+    it "routes post '/reservation' to booking#create_customer_booking" do
+        expect(post: "/reservation").to route_to( controller: "booking", action: "create_customer_booking")         
+    end
 end

@@ -459,4 +459,11 @@ RSpec.describe BookingController, type: :controller do
             end
         end
     end
+    
+    describe "new_customer_booking" do
+        it "assigns @booking to an empty booking" do
+            get :new_customer_booking
+            expect(assigns(:booking).class).to eq(Booking)
+        end
+    end
 end

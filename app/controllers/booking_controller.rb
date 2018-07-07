@@ -95,6 +95,10 @@ class BookingController < ApplicationController
         redirect_to(administration_booking_manager_path)
     end
     
+    def new_customer_booking
+        @booking = Booking.new
+    end
+    
     private
     
     def assign_booking_with_alert_ajax(id)
