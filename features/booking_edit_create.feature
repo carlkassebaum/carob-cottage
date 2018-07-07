@@ -91,7 +91,7 @@ Feature: Edit and Create bookings
       | booking_departure_date |
       | 26-1-2018              |
     And I press "Save"
-    Then I should see "Invalid or overlapping arrival/departure dates given."
+    Then I should see "No changes made. Overlapping arrival/departure dates given."
     
   @javascript
   Scenario: Overlapping booking dates on creation
@@ -101,7 +101,7 @@ Feature: Edit and Create bookings
       | booking_name | booking_arrival_date | booking_departure_date |
       | test_7       | 2018-02-01           | 2018-02-04             |
     And I press "Save"
-    Then I should see "Invalid or overlapping arrival/departure dates given."
+    Then I should see "Booking not created. Overlapping arrival/departure dates given."
     
   @javascript
   Scenario: Valid same arrival dates for existing booking departure
