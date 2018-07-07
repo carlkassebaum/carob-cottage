@@ -85,12 +85,13 @@ Feature: Edit and Create bookings
   @javascript
   Scenario: Overlapping booking dates on edit
     Given I am on the administration booking manager page
-    And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"    
+    And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018"
+    And I press "Edit"
     And I enter the following values into the corresponding fields:
       | booking_departure_date |
       | 26-1-2018              |
     And I press "Save"
-    Then I should see "No changes made. Invalid departure date given."
+    Then I should see "Invalid or overlapping arrival/departure dates given."
     
   @javascript
   Scenario: Overlapping booking dates on creation
@@ -100,17 +101,20 @@ Feature: Edit and Create bookings
       | booking_name | booking_arrival_date | booking_departure_date |
       | test_7       | 2018-02-01           | 2018-02-04             |
     And I press "Save"
-    Then I should see "No changes made. Invalid arrival date given."
+    Then I should see "Invalid or overlapping arrival/departure dates given."
     
   @javascript
   Scenario: Valid same arrival dates for existing booking departure
     Given I am on the administration booking manager page
-    And I click on the "Booking" for the dates "5-3-2018" to "10-3-2018"    
+    And I click on the "Booking" for the dates "20-1-2018" to "25-1-2018" 
+    And I press "Edit" 
     And I enter the following values into the corresponding fields:
-      | booking_arrival_date |
-      | 2-2-2018             |
+      | booking_arrival_date | booking_departure_date |
+      | 2018-01-19           | 2018-01-25             |    
     And I press "Save"
-    Then I should see "Booking 56 sucessfully updated"    
+    And I click on the "Booking" for the dates "19-1-2018" to "25-1-2018"
+    Then I should see "2018-01-19"
+    And I should see "2018-01-25"
   
   @javascript
   Scenario: Valid same departure dates for existing booking arrival
