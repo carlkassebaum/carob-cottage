@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   
   delete 'administration/logout' => "session#destroy"
   
-  get '/administration' => "administrator#index"
-  
   get '/administration/booking_manager' => "booking#index"
   
   get 'administration/price_manager'    => "price_rule#index"
