@@ -2,7 +2,7 @@ module DateValidation
     def valid_date?(date_string)
         begin
             Date.parse(date_string)
-        rescue ArgumentError
+        rescue
             return false
         end
         

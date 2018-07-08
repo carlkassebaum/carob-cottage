@@ -17,12 +17,6 @@ Feature: Customer Reservation Form
     @javascript
     Scenario: Omit critical customer details
         Given I am on the reservation page
-
-        - Customer contact number
-        - email address
-        - booking number of people
-        - departure date
-
         And I enter the following values into the corresponding fields:
             | booking_name | booking_country | booking_estimated_arrival_time | booking_arrival_date | 
             | Bob          | Germany         | 5pm                            | 20-1-2018            |
@@ -30,7 +24,8 @@ Feature: Customer Reservation Form
         And I press "Place Reservation"
         Then I should see the following:
             | error_message                                |
-            | An email address must be given               |
-            | A contact number must be given               |
+            | You must provide an email address            |
+            | You must provide a contact number            |
             | You must specify how many adults are staying |
             | You must select a departure date             |
+        And I should be on the reservation page

@@ -3,6 +3,17 @@ class BookingController < ApplicationController
     OPTIONAL_PARAMS = ["postcode", "created_at", "updated_at", "id", "cost", "estimated_arrival_time"]
     DATE_PARAMS     = ["arrival_date", "departure_date"]
     
+    CUSTOMER_DATE_ERRORS = 
+    {
+        name:                     "A customer name must be given",
+        country:                  "You must specify your current country",
+        contact_number:           "You must provide a contact number",
+        email_address:            "You must provide an email address",
+        number_of_people:         "You must specify how many adults are staying",
+        arrival_date:             "You must select an arrival date",
+        departure_date:           "You must select a departure date",
+        preferred_payment_method: "You must select a payment method"
+    }    
     
     include DateValidation
    
@@ -102,17 +113,23 @@ class BookingController < ApplicationController
     
     def new_customer_booking
         @booking = Booking.new
+        @form_errors = {}
     end
     
     def create_customer_booking
         customer_params = customer_booking_params
         customer_params[:status] = "reserved"
-        @booking = Booking.new(customer_params)        
         errors = check_customer_params_for_errors(customer_params)
-        if errors.length == 0
-            if @booking.save
-                flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
-            end
+        @booking = Booking.new(customer_params)
+        @form_errors = {}
+        errors.each do | error |
+            @form_errors[error] = CUSTOMER_DATE_ERRORS[error]                
+        end
+        
+        if @form_errors.empty? && @booking.save
+            flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
+        else
+            render "booking/new_customer_booking"
         end
     end
     
@@ -121,7 +138,9 @@ class BookingController < ApplicationController
     def check_customer_params_for_errors(customer_params)
         errors = []
         (Booking.column_names - OPTIONAL_PARAMS - DATE_PARAMS).each do | attribute | 
-            errors << attribute.to_sym if @booking[attribute].nil?
+            if customer_params[attribute].nil? || customer_params[attribute].empty?
+                errors << attribute.to_sym
+            end
         end
         errors += check_for_date_errors
         
