@@ -1,4 +1,9 @@
 class BookingController < ApplicationController
+    
+    OPTIONAL_PARAMS = ["postcode", "created_at", "updated_at", "id", "cost", "estimated_arrival_time"]
+    DATE_PARAMS     = ["arrival_date", "departure_date"]
+    
+    
     include DateValidation
    
     before_action :redirect_unless_logged_in, only: [:index, :update, :create, :destroy]
@@ -99,7 +104,29 @@ class BookingController < ApplicationController
         @booking = Booking.new
     end
     
+    def create_customer_booking
+        customer_params = customer_booking_params
+        customer_params[:status] = "reserved"
+        @booking = Booking.new(customer_params)        
+        errors = check_customer_params_for_errors(customer_params)
+        if errors.length == 0
+            if @booking.save
+                flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
+            end
+        end
+    end
+    
     private
+    
+    def check_customer_params_for_errors(customer_params)
+        errors = []
+        (Booking.column_names - OPTIONAL_PARAMS - DATE_PARAMS).each do | attribute | 
+            errors << attribute.to_sym if @booking[attribute].nil?
+        end
+        errors += check_for_date_errors
+        
+        return errors
+    end
     
     def assign_booking_with_alert_ajax(id)
         @booking = Booking.find_by(id: id)
@@ -112,6 +139,12 @@ class BookingController < ApplicationController
         respond_to do |format|
             format.js
         end          
+    end
+    
+    def customer_booking_params
+        params.require(:booking).permit(:name, :cost, :email_address, :contact_number, 
+        :number_of_people, :estimated_arrival_time, :preferred_payment_method, 
+        :arrival_date, :departure_date, :country, :postcode)
     end
     
     def booking_params

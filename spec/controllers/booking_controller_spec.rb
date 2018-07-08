@@ -466,4 +466,37 @@ RSpec.describe BookingController, type: :controller do
             expect(assigns(:booking).class).to eq(Booking)
         end
     end
+    
+    describe "create_customer_booking" do
+        it "assigns @booking to the booking details given in the form" do
+            valid_params = 
+            {
+                name: "Bob", postcode: "5004", country: "Germany", contact_number: "0432111222", 
+                email_address: "bob@domain.com", number_of_people: 4, estimated_arrival_time: "4pm",
+                arrival_date: "20-1-2018", departure_date: "25-1-2018", preferred_payment_method: "Cash on Arrival"
+            }
+            post :create_customer_booking, params: {booking: valid_params}
+            booking_result = Booking.find_by(name: valid_params[:name])
+            expect(booking_result[:postcode]).to eq(valid_params[:postcode])
+            expect(booking_result[:country]).to eq(valid_params[:country])  
+            expect(booking_result[:contact_number]).to eq(valid_params[:contact_number])  
+            expect(booking_result[:email_address]).to eq(valid_params[:email_address])  
+            expect(booking_result[:number_of_people]).to eq(valid_params[:number_of_people]) 
+            expect(booking_result[:estimated_arrival_time]).to eq(valid_params[:estimated_arrival_time]) 
+            expect(booking_result[:arrival_date]).to eq(Date.parse(valid_params[:arrival_date]))
+            expect(booking_result[:departure_date]).to eq(Date.parse(valid_params[:departure_date]))
+            expect(booking_result[:status]).to eq("reserved")
+        end
+        
+        it "sets flash[:success] to a success message" do
+            valid_params = 
+            {
+                name: "Bob", postcode: "5004", country: "Germany", contact_number: "0432111222", 
+                email_address: "bob@domain.com", number_of_people: 4, estimated_arrival_time: "4pm",
+                arrival_date: "20-1-2018", departure_date: "25-1-2018", preferred_payment_method: "Cash on Arrival"
+            }
+            post :create_customer_booking, params: {booking: valid_params}
+            expect(flash[:sucess]).to eq("Your reservation request has been placed! You will receive a confirmation email shortly.")
+        end
+    end
 end

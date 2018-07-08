@@ -6,6 +6,8 @@
     <%= f.text_field   :postcode, class: "w3-input" %>
     <%= f.text_field   :number_of_people, class: "w3-input" %>
     <%= f.text_field   :estimated_arrival_time, class: "w3-input" %>
+    <%= f.text_field   :arrival_date %>
+    <%= f.text_field   :departure_date %> 
     <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true,  class: "w3-input"  %> Cash on Arrival
     <%= f.radio_button :preferred_payment_method, 'Direct Debit',    :checked => false, class: "w3-input" %> Direct Debit
     <input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" class="w3-input" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </br>
