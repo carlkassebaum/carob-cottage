@@ -13,7 +13,14 @@ class BookingController < ApplicationController
         arrival_date:             "You must select an arrival date",
         departure_date:           "You must select a departure date",
         preferred_payment_method: "You must select a payment method"
-    }    
+    }
+    
+    CONSTANT_DATE_OPTIONS = 
+    {   
+        form_date_in:        "booking_arrival_date",   
+        form_date_out:       "booking_departure_date",  
+        parent_element:      "reservation_calendar"
+    }
     
     include DateValidation
    
@@ -114,6 +121,9 @@ class BookingController < ApplicationController
     def new_customer_booking
         @booking = Booking.new
         @form_errors = {}
+        current_date = Date.today
+        start_date = Date.new(current_date.year, current_date.month, 1)
+        @reservation_calendar_options = {start_date: start_date}.merge(CONSTANT_DATE_OPTIONS)
     end
     
     def create_customer_booking
@@ -131,6 +141,10 @@ class BookingController < ApplicationController
         else
             render "booking/new_customer_booking"
         end
+    end
+    
+    def render_customer_reservation_calendar
+        
     end
     
     private

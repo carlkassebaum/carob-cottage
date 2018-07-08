@@ -1,5 +1,7 @@
 <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
     <div id="reservation_calendar">
+        <%= button_to "Check In", reservation_calendar_path(calendar_options: @reservation_calendar_options) %>
+        <button>Check Out</button>
     </div>
     
     Name

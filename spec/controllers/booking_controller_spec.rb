@@ -470,6 +470,20 @@ RSpec.describe BookingController, type: :controller do
             get :new_customer_booking
             expect(assigns(:form_errors)).to eq({})
         end
+
+        it "sets @reservation_calendar_options to a set of calendar options" do
+            Timecop.travel(Time.local(2018, 4, 10, 10, 0, 0))            
+            expected_options = 
+            {   
+                form_date_in:        "booking_arrival_date",   
+                form_date_out:       "booking_departure_date",  
+                parent_element:      "reservation_calendar",
+                start_date:          Date.new(2018, 4, 1)
+            }
+            get :new_customer_booking
+            expect(assigns(:reservation_calendar_options)).to eq(expected_options)
+        end        
+        
     end
     
     describe "create_customer_booking" do

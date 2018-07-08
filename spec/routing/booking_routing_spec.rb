@@ -36,4 +36,8 @@ RSpec.describe BookingController, type: :routing do
     it "routes post '/reservation' to booking#create_customer_booking" do
         expect(post: "/reservation").to route_to( controller: "booking", action: "create_customer_booking")         
     end
+    
+    it "routes get '/reservation/calendar' to booking#render_customer_reservation_calendar" do
+        expect(get: "/reservation/calendar").to route_to(controller: "booking", action: "render_customer_reservation_calendar")
+    end
 end
