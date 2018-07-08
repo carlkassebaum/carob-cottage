@@ -1,4 +1,7 @@
 <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
+    <div id="reservation_calendar">
+    </div>
+    
     Name
     <%= f.text_field   :name, class: "w3-input" %><%= @form_errors[:name] %>
     Contact Number
@@ -30,4 +33,5 @@
     <%= f.radio_button :preferred_payment_method, 'Direct Debit',    :checked => false, class: "w3-input" %> Direct Debit
     <input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" class="w3-input" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </br>
     <%= f.submit "Place Reservation", id: "place_reservation_button", disabled: true %>
+    
 <% end %>
