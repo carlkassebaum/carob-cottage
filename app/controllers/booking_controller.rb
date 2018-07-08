@@ -1,4 +1,20 @@
 class BookingController < ApplicationController
+    
+    OPTIONAL_PARAMS = ["postcode", "created_at", "updated_at", "id", "cost", "estimated_arrival_time"]
+    DATE_PARAMS     = ["arrival_date", "departure_date"]
+    
+    CUSTOMER_DATE_ERRORS = 
+    {
+        name:                     "A customer name must be given",
+        country:                  "You must specify your current country",
+        contact_number:           "You must provide a contact number",
+        email_address:            "You must provide an email address",
+        number_of_people:         "You must specify how many adults are staying",
+        arrival_date:             "You must select an arrival date",
+        departure_date:           "You must select a departure date",
+        preferred_payment_method: "You must select a payment method"
+    }    
+    
     include DateValidation
    
     before_action :redirect_unless_logged_in, only: [:index, :update, :create, :destroy]
@@ -95,7 +111,41 @@ class BookingController < ApplicationController
         redirect_to(administration_booking_manager_path)
     end
     
+    def new_customer_booking
+        @booking = Booking.new
+        @form_errors = {}
+    end
+    
+    def create_customer_booking
+        customer_params = customer_booking_params
+        customer_params[:status] = "reserved"
+        errors = check_customer_params_for_errors(customer_params)
+        @booking = Booking.new(customer_params)
+        @form_errors = {}
+        errors.each do | error |
+            @form_errors[error] = CUSTOMER_DATE_ERRORS[error]                
+        end
+        
+        if @form_errors.empty? && @booking.save
+            flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
+        else
+            render "booking/new_customer_booking"
+        end
+    end
+    
     private
+    
+    def check_customer_params_for_errors(customer_params)
+        errors = []
+        (Booking.column_names - OPTIONAL_PARAMS - DATE_PARAMS).each do | attribute | 
+            if customer_params[attribute].nil? || customer_params[attribute].empty?
+                errors << attribute.to_sym
+            end
+        end
+        errors += check_for_date_errors
+        
+        return errors
+    end
     
     def assign_booking_with_alert_ajax(id)
         @booking = Booking.find_by(id: id)
@@ -108,6 +158,12 @@ class BookingController < ApplicationController
         respond_to do |format|
             format.js
         end          
+    end
+    
+    def customer_booking_params
+        params.require(:booking).permit(:name, :cost, :email_address, :contact_number, 
+        :number_of_people, :estimated_arrival_time, :preferred_payment_method, 
+        :arrival_date, :departure_date, :country, :postcode)
     end
     
     def booking_params

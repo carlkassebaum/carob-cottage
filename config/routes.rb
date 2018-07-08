@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   resources :booking, except: [:index]
   
   resources :price_rule, except: [:index]
+  
+  get '/reservation' => "booking#new_customer_booking"
+  
+  post '/reservation' => "booking#create_customer_booking"
 end

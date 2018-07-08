@@ -1,0 +1,33 @@
+<%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
+    Name
+    <%= f.text_field   :name, class: "w3-input" %><%= @form_errors[:name] %>
+    Contact Number
+    <%= f.text_field   :contact_number, class: "w3-input" %>
+    <%= @form_errors[:contact_number] %>
+    Email Address
+    <%= f.email_field  :email_address, class: "w3-input" %>
+    <%= @form_errors[:email_address] %>
+    Country
+    <%= f.text_field   :country, class: "w3-input" %>
+    <%= @form_errors[:country] %>
+    Postcode
+    <%= f.text_field   :postcode, class: "w3-input" %>
+    <%= @form_errors[:postcode] %>
+    Number of People
+    <%= f.text_field   :number_of_people, class: "w3-input" %>
+    <%= @form_errors[:number_of_people] %>
+    ETA
+    <%= f.text_field   :estimated_arrival_time, class: "w3-input" %>
+    <%= @form_errors[:estimated_arrival_time] %>
+    Arrival Date
+    <%= f.text_field   :arrival_date %>
+    <%= @form_errors[:arrival_date] %>
+    Departure date
+    <%= f.text_field   :departure_date %>
+    <%= @form_errors[:departure_date] %> 
+    Preferred payment method
+    <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true,  class: "w3-input"  %> Cash on Arrival<%= @form_errors[:preferred_payment_method] %>
+    <%= f.radio_button :preferred_payment_method, 'Direct Debit',    :checked => false, class: "w3-input" %> Direct Debit
+    <input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" class="w3-input" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </br>
+    <%= f.submit "Place Reservation", id: "place_reservation_button", disabled: true %>
+<% end %>

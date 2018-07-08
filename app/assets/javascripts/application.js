@@ -73,3 +73,10 @@ var change_visibility = function(id, visibility)
     element.style.height = "0px";
   }
 }
+
+var invert_button_enabled = function(button_id, checkbox_id)
+{
+  var checkbox = document.getElementById(checkbox_id);  
+  var button = document.getElementById(button_id)
+  button.disabled = !checkbox.checked
+}
