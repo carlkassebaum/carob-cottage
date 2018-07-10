@@ -15,12 +15,7 @@ class BookingController < ApplicationController
         preferred_payment_method: "You must select a payment method"
     }
     
-    CONSTANT_DATE_OPTIONS = 
-    {   
-        form_date_in:        "booking_arrival_date",   
-        form_date_out:       "booking_departure_date",  
-        parent_element:      "reservation_calendar"
-    }
+    MIN_NIGHT_STAY = 2
     
     include DateValidation
    
@@ -99,7 +94,7 @@ class BookingController < ApplicationController
             @booking.errors.each do | attribute, error_message |
                 flash[:alert] += " #{error_message}"
             end
-            flash[:alert] += " Invalid arrival date given." if error_attributes.include? :arrival_date
+            flash[:alert] += " Invalid arrival date given."   if error_attributes.include? :arrival_date
             flash[:alert] += " Invalid departure date given." if error_attributes.include? :departure_date            
         end
         
@@ -122,8 +117,7 @@ class BookingController < ApplicationController
         @booking = Booking.new
         @form_errors = {}
         current_date = Date.today
-        start_date = Date.new(current_date.year, current_date.month, 1)
-        @reservation_calendar_options = {start_date: start_date}.merge(CONSTANT_DATE_OPTIONS)
+        @start_date = Date.new(current_date.year, current_date.month, 1)
     end
     
     def create_customer_booking
@@ -144,10 +138,72 @@ class BookingController < ApplicationController
     end
     
     def render_customer_reservation_calendar
+        params[:start_date] = Date.parse(params[:start_date])
+        raise ArgumentError.new("start date must be the first day of the month") if params[:start_date].mday != 1
+        if params[:check_in_date].nil?
+            response_action = "check_in_calendar"
+            @blocked_dates = blocked_dates(:check_in, params)
+        else
+            params[:check_in_date] = Date.parse(params[:check_in_date])
+            response_action = "check_out_calendar"
+            @blocked_dates  = blocked_dates(:check_out, params)
+            @min_dates      = params[:check_in_date]..(params[:check_in_date] + (MIN_NIGHT_STAY-1).days)
+        end
         
+        respond_to do | format |
+            format.js { render :action => "#{response_action}" }
+        end
     end
     
     private
+    
+    def blocked_dates(selector, calendar_params)
+        start_date = calendar_params[:start_date]
+        month = start_date..((start_date + 1.month).yesterday)
+        blocked = []
+        if (selector == :check_in)
+            return get_blocked_checkin_dates(start_date, month)
+        elsif (selector == :check_out)
+            return get_blocked_checkout_dates(start_date, month, calendar_params[:check_in_date])
+        end
+        return blocked
+    end
+    
+    def get_blocked_checkin_dates(start_date, month)
+        blocked = []
+        bookings_in_month = Booking.bookings_within(month)            
+        if Date.today >= (start_date + 1.month)
+            month.to_a.each { | date | blocked << date.mday }
+        elsif month === Date.today || Date.today < start_date
+            #block dates before today
+            (start_date..Date.today.yesterday).to_a.each { | date | blocked << date.mday }
+            #block dates after today
+            bookings_in_month.each do | booking |
+                start_date = booking.arrival_date - (MIN_NIGHT_STAY - 1).days
+                end_date   = booking.departure_date - 1.days
+                reserved_days = (start_date..end_date).to_a & month.to_a
+                reserved_days.each { | day | blocked << day.mday unless blocked.include? day.mday }
+            end
+        end
+        return blocked
+    end
+    
+    def get_blocked_checkout_dates(start_date, month, check_in_date)
+        #ensure the checkin date is valid
+        check_in_start = Date.new(check_in_date.year, check_in_date.month,1)
+        check_in_month = check_in_start..((check_in_start + 1.month).yesterday)
+        raise ArgumentError.new("invalid check in date") if get_blocked_checkin_dates(check_in_start, check_in_month).include? check_in_date.day
+        
+        blocked = []
+        next_booking = Booking.next_after_date(check_in_date)
+        next_available_date = next_booking.nil? ? start_date + 1.month : next_booking.arrival_date
+        available_dates_in_month = ((check_in_date+(MIN_NIGHT_STAY).days)..next_available_date).to_a & month.to_a
+        month.to_a.each do | date |
+            blocked << date.mday unless available_dates_in_month.include? date
+        end
+        
+        return blocked
+    end
     
     def check_customer_params_for_errors(customer_params)
         errors = []
