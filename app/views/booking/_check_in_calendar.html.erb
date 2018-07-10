@@ -1,0 +1,21 @@
+<button onclick="delete_contents('calendar')" >Check In</button>
+<button disabled>Check Out</button>
+
+<div id="calendar">
+    <%= link_to "Check In", reservation_calendar_path(start_date: @start_date), remote: true %>    
+    <%= link_to "Previous", reservation_calendar_path(start_date: (@start_date - 1.month)), method: :get, remote: true %>
+    <%= link_to "Next",     reservation_calendar_path(start_date: (@start_date + 1.month)), method: :get, remote: true %>
+
+    <div><%= Date::MONTHNAMES[@start_date.month] %></div>
+    <%= month_calendar start_date: @start_date do |date| %>
+        <td class="day">
+            <% if date.mon == @start_date.month %>
+                <% unless @blocked_dates.include? date.mday %>
+                    <%= link_to "#{date.mday}", reservation_calendar_path(start_date: @start_date, check_in_date: date), class: "check_in_unblocked", onclick: "set_form_value('booking_arrival_date','#{date.strftime("%Y-%m-%d")}')", remote: true %>
+                <% else %>
+                    <div class="check_in_blocked">-</div>
+                <% end %>
+            <% end %>
+        </td>
+    <% end %> 
+</div>

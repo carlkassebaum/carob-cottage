@@ -140,14 +140,26 @@ class BookingController < ApplicationController
     def render_customer_reservation_calendar
         params[:start_date] = Date.parse(params[:start_date])
         raise ArgumentError.new("start date must be the first day of the month") if params[:start_date].mday != 1
+        
+        @start_date = params[:start_date]
         if params[:check_in_date].nil?
             response_action = "check_in_calendar"
             @blocked_dates = blocked_dates(:check_in, params)
         else
-            params[:check_in_date] = Date.parse(params[:check_in_date])
-            response_action = "check_out_calendar"
-            @blocked_dates  = blocked_dates(:check_out, params)
-            @min_dates      = params[:check_in_date]..(params[:check_in_date] + (MIN_NIGHT_STAY-1).days)
+            response_action = "check_out_calendar"            
+            @check_in_date  = params[:check_in_date]
+            @check_out_date = params[:check_out_date]
+            unless params[:hide_calendar]
+                
+                params[:check_in_date] = Date.parse(params[:check_in_date])
+                @blocked_dates  = blocked_dates(:check_out, params)
+                @min_stay_dates = []
+                (params[:check_in_date]..(params[:check_in_date] + (MIN_NIGHT_STAY-1).days)).to_a.each do | date |
+                    @min_stay_dates << date.mday
+                end
+            else
+                @hide_calendar = true
+            end
         end
         
         respond_to do | format |

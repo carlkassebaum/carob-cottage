@@ -591,9 +591,47 @@ RSpec.describe BookingController, type: :controller do
                 expect(assigns(:blocked_dates)).to eq((1..31).to_a)                   
             end
             
+            it "sets @min_stay_dates to the MIN_NIGHT_STAY dates after the checkin date" do
+                Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018"}
+                expect(assigns(:min_stay_dates)).to eq([18,19])                      
+            end
+            
+            it "sets @check_in_date to params[:check_in_date]" do
+                Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018"}
+                expect(assigns(:check_in_date)).to eq("18-1-2018")
+            end
+            
+            it "sets @check_out_date to params[:check_out_date]" do
+                Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018", check_out_date: "20-1-2018"}
+                expect(assigns(:check_out_date)).to eq("20-1-2018")
+            end
+            
             it "raises an argument error if the check in date is invalid" do
                 Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
                 expect{ get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-1-2018", check_in_date: "19-1-2018"} }.to raise_error(ArgumentError)                
+            end
+            
+            describe "@hide_calendar" do
+                it "sets params[:hide_calendar] to @hide_calendar" do
+                    Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                    get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018", check_out_date: "20-1-2018", hide_calendar: true}
+                    expect(assigns(:hide_calendar)).to eq(true)
+                end
+                
+                it "does not set any blocked dates" do
+                    Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                    get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018", check_out_date: "20-1-2018", hide_calendar: true}                    
+                    expect(assigns(:blocked_dates)).to eq(nil)                       
+                end
+                
+                it "does not set any stay dates" do
+                    Timecop.travel(Time.local(2018, 1, 15, 0, 0, 0))
+                    get :render_customer_reservation_calendar, xhr: true, params: {start_date: "1-12-2017", check_in_date: "18-1-2018", check_out_date: "20-1-2018", hide_calendar: true}                    
+                    expect(assigns(:min_stay_dates)).to eq(nil)                       
+                end                
             end
         end
     end

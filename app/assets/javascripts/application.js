@@ -54,6 +54,12 @@ var delete_parent_contents = function(child_id)
   parent.style.width = "0px"
 }
 
+var delete_contents = function(id)
+{
+  var element = document.getElementById(id);
+  element.innerHTML = '';
+}
+
 var set_width = function(id,width)
 {
   document.getElementById(id).style.width = width;
@@ -78,4 +84,9 @@ var invert_button_enabled = function(button_id, checkbox_id)
   var checkbox = document.getElementById(checkbox_id);  
   var button = document.getElementById(button_id)
   button.disabled = !checkbox.checked
+}
+
+var set_form_value = function(field_id,value)
+{
+  document.getElementById(field_id).value = value
 }
