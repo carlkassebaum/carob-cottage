@@ -149,9 +149,12 @@ class BookingController < ApplicationController
             response_action = "check_out_calendar"            
             @check_in_date  = params[:check_in_date]
             @check_out_date = params[:check_out_date]
+            
             unless params[:hide_calendar]
                 
                 params[:check_in_date] = Date.parse(params[:check_in_date])
+                params[:check_out_date] = Date.parse(params[:check_out_date]) unless params[:check_out_date].nil?
+                
                 @blocked_dates  = blocked_dates(:check_out, params)
                 @min_stay_dates = []
                 (params[:check_in_date]..(params[:check_in_date] + (MIN_NIGHT_STAY-1).days)).to_a.each do | date |
