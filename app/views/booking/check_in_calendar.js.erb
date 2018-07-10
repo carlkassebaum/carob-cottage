@@ -1,3 +1,5 @@
+$("#check_in_button_wrapper").html("<%= escape_javascript(render partial: 'booking/date_buttons/check_in_buttons/check_in') %>");
+$("#check_out_button_wrapper").html("<%= escape_javascript(render partial: 'booking/date_buttons/check_in_buttons/check_out') %>");
 $("#reservation_calendar").html("<%= escape_javascript(render partial: 'check_in_calendar') %>");
 set_form_value('booking_arrival_date','')
 set_form_value('booking_departure_date','')

@@ -9,6 +9,9 @@ $reserved_end_colour        : #dbdbdb;
 $booked_end_colour          : #af50a6;
 $light_blue                 : #aedfef;
 
+$body_background            : linear-gradient(#65a3ce, #406E8E);
+$form_background-color      : #fdfdfd;
+
 .full_reservation_calendar_headers
 {
     width: 35px;
@@ -284,3 +287,21 @@ table.center
     z-index: 10;
 }
 
+.form_body
+{
+    background-color: $form_background-color;    
+    position: relative;
+    width: 1024px;
+    margin: auto;
+    text-align: center;
+}
+
+#customer_page
+{
+    background: $body_background;
+}
+
+.customer_form
+{
+    background-color: $form_background-color;
+}

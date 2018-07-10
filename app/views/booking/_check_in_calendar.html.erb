@@ -1,8 +1,4 @@
-<button onclick="delete_contents('calendar')" >Check In</button>
-<button disabled>Check Out</button>
-
 <div id="calendar">
-    <%= link_to "Check In", reservation_calendar_path(start_date: @start_date), remote: true %>    
     <%= link_to "Previous", reservation_calendar_path(start_date: (@start_date - 1.month)), method: :get, remote: true %>
     <%= link_to "Next",     reservation_calendar_path(start_date: (@start_date + 1.month)), method: :get, remote: true %>
 

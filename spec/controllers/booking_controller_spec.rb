@@ -485,7 +485,7 @@ RSpec.describe BookingController, type: :controller do
                 @valid_params = 
                 {
                     name: "Bob", postcode: "5004", country: "Germany", contact_number: "0432111222", 
-                    email_address: "bob@domain.com", number_of_people: 4, estimated_arrival_time: "4pm",
+                    email_address: "bob@domain.com", number_of_people: "4 people", estimated_arrival_time: "4pm",
                     arrival_date: "20-1-2018", departure_date: "25-1-2018", preferred_payment_method: "Cash on Arrival"
                 }                
             end
@@ -497,7 +497,7 @@ RSpec.describe BookingController, type: :controller do
                 expect(booking_result[:country]).to eq(@valid_params[:country])  
                 expect(booking_result[:contact_number]).to eq(@valid_params[:contact_number])  
                 expect(booking_result[:email_address]).to eq(@valid_params[:email_address])  
-                expect(booking_result[:number_of_people]).to eq(@valid_params[:number_of_people]) 
+                expect(booking_result[:number_of_people]).to eq(4) 
                 expect(booking_result[:estimated_arrival_time]).to eq(@valid_params[:estimated_arrival_time]) 
                 expect(booking_result[:arrival_date]).to eq(Date.parse(@valid_params[:arrival_date]))
                 expect(booking_result[:departure_date]).to eq(Date.parse(@valid_params[:departure_date]))

@@ -1,10 +1,3 @@
-<%= link_to "Check In",  reservation_calendar_path(start_date: @start_date), remote: true %>
-<% if @check_out_date %>
-    <%= link_to "Check Out",  reservation_calendar_path(start_date: @start_date, check_in_date: @check_in_date, check_out_date: @check_out_date), remote: true %>
-<% else %>
-    <div> Check Out</div>
-<% end %>
-
 <% unless @hide_calendar %>
     <div id="calendar">
         <%= link_to "Previous", reservation_calendar_path(start_date: (@start_date - 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true %>

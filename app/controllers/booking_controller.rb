@@ -16,11 +16,14 @@ class BookingController < ApplicationController
     }
     
     MIN_NIGHT_STAY = 2
+    GUEST_SELECTOR = ["1 person", "2 people", "3 people", "4 people", "5 people"]
+    CUSTOMER_BODY_ID="customer_page"
     
     include DateValidation
    
     before_action :redirect_unless_logged_in, only: [:index, :update, :create, :destroy]
     before_action :js_redirect_unless_logged_in, only: [:new, :show, :edit]
+    before_action :is_customer_page,             only: [:new_customer_booking, :create_customer_booking]
    
     def index
         @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
@@ -118,11 +121,13 @@ class BookingController < ApplicationController
         @form_errors = {}
         current_date = Date.today
         @start_date = Date.new(current_date.year, current_date.month, 1)
+        @guest_selector = GUEST_SELECTOR
     end
     
     def create_customer_booking
         customer_params = customer_booking_params
         customer_params[:status] = "reserved"
+        customer_params[:number_of_people] = extract_number_of_people(customer_params[:number_of_people])
         errors = check_customer_params_for_errors(customer_params)
         @booking = Booking.new(customer_params)
         @form_errors = {}
@@ -150,8 +155,8 @@ class BookingController < ApplicationController
             @check_in_date  = params[:check_in_date]
             @check_out_date = params[:check_out_date]
             
-            unless params[:hide_calendar]
-                
+            unless params[:hide_calendar] == "true"
+                @hide_calendar = false
                 params[:check_in_date] = Date.parse(params[:check_in_date])
                 params[:check_out_date] = Date.parse(params[:check_out_date]) unless params[:check_out_date].nil?
                 
@@ -171,6 +176,13 @@ class BookingController < ApplicationController
     end
     
     private
+    
+    def extract_number_of_people(number_of_guests)
+        return nil if number_of_guests.nil?
+        number_of_guests.slice! "people"
+        number_of_guests.slice! "person"
+        return number_of_guests
+    end
     
     def blocked_dates(selector, calendar_params)
         start_date = calendar_params[:start_date]
@@ -254,6 +266,10 @@ class BookingController < ApplicationController
     def booking_params
         params.require(:booking).permit(:name, :cost, :status, :email_address, :contact_number, :number_of_people, :estimated_arrival_time, 
         :preferred_payment_method, :arrival_date, :departure_date, :postcode, :country)
+    end
+    
+    def is_customer_page
+        @body_id = "customer_page"
     end
     
     def check_for_date_errors
