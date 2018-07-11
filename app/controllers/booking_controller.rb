@@ -15,15 +15,17 @@ class BookingController < ApplicationController
         preferred_payment_method: "You must select a payment method"
     }
     
-    MIN_NIGHT_STAY = 2
-    GUEST_SELECTOR = ["1 person", "2 people", "3 people", "4 people", "5 people"]
-    CUSTOMER_BODY_ID="customer_page"
+    MIN_NIGHT_STAY  = 2
+    GUEST_SELECTOR  = ["1 person", "2 people", "3 people", "4 people", "5 people"]
+    CUSTOMER_BODY_ID= "customer_page"
     
     include DateValidation
    
     before_action :redirect_unless_logged_in, only: [:index, :update, :create, :destroy]
     before_action :js_redirect_unless_logged_in, only: [:new, :show, :edit]
     before_action :is_customer_page,             only: [:new_customer_booking, :create_customer_booking]
+    before_action :assign_guest_selector,        only: [:new_customer_booking, :create_customer_booking]
+    before_action :assign_current_date,          only: [:new_customer_booking, :create_customer_booking]
    
     def index
         @calendar_options={header_class: "full_reservation_calendar_headers", body_class: "full_reservation_calendar_body"}
@@ -119,9 +121,6 @@ class BookingController < ApplicationController
     def new_customer_booking
         @booking = Booking.new
         @form_errors = {}
-        current_date = Date.today
-        @start_date = Date.new(current_date.year, current_date.month, 1)
-        @guest_selector = GUEST_SELECTOR
     end
     
     def create_customer_booking
@@ -176,6 +175,15 @@ class BookingController < ApplicationController
     end
     
     private
+    
+    def assign_guest_selector
+        @guest_selector = GUEST_SELECTOR
+    end
+    
+    def assign_current_date
+        current_date = Date.today
+        @start_date = Date.new(current_date.year, current_date.month, 1)        
+    end
     
     def extract_number_of_people(number_of_guests)
         return nil if number_of_guests.nil?

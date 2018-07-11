@@ -13,6 +13,7 @@ $body_background            : linear-gradient(#65a3ce, #406E8E);
 $form_background-color      : #fdfdfd;
 $form_text_color            : #474747;
 $form_text_color_unfilled   : #999595;
+$form_error                 : #ef9f00;
 
 .full_reservation_calendar_headers
 {
@@ -336,6 +337,30 @@ table.center
     color: $form_text_color;
     height: 35px;
 }
+
+.customer_form_error
+{
+    height: auto;
+    border-bottom: 1px solid $form_error;
+    color: $form_text_color;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.date_customer_form_error
+{
+    margin-top: -5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.form_error
+{
+    text-align: left;
+    padding-left: 36px;
+}
+
 
 .customer_form_unfilled
 {

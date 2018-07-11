@@ -10,25 +10,25 @@
                     <td><%= f.select :number_of_people, @guest_selector, id: "booking_number_of_people", class: "customer_form w3-input" %></td>
                 </tr>
                 <tr>
-                    <td><%= @form_errors[:arrival_date] %></td>
-                    <td><%= @form_errors[:departure_date] %></td>
+                    <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:arrival_date]} %>   
+                    <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:departure_date]} %>  
                     <td></td>
                 </tr>
             </table>
             <div id="reservation_calendar">
             </div>                     
             <%= f.text_field   :name, id: "booking_name", class: "customer_form w3-input", placeholder: "Name" %>
-            <%= @form_errors[:name] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:name] } %>
             <%= f.text_field   :contact_number, id: "booking_contact_number", class: "customer_form w3-input", placeholder: "Contact Number" %>
-            <%= @form_errors[:contact_number] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:contact_number] } %>
             <%= f.email_field  :email_address, id: "booking_email_address", class: "customer_form w3-input", placeholder: "Email Address" %>
-            <%= @form_errors[:email_address] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:email_address] } %>
             <%= f.text_field   :country, id: "booking_country", class: "customer_form w3-input", placeholder: "Country" %>
-            <%= @form_errors[:country] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:country] } %>
             <%= f.text_field   :postcode, id: "booking_postcode", class: "customer_form w3-input", placeholder: "Postcode (optional)" %>
-            <%= @form_errors[:postcode] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:postcode] } %>
             <%= f.text_field   :estimated_arrival_time, id: "booking_estimated_arrival_time", class: "customer_form w3-input", placeholder: "Estimated Arrival Time (After 2pm)" %>
-            <%= @form_errors[:estimated_arrival_time] %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:estimated_arrival_time] } %>
             <table id="preferred_payment_method">
                 <tr>
                     <td id="booking_preferred_payment_method">
@@ -41,7 +41,7 @@
                         <%= f.radio_button :preferred_payment_method, 'Direct Debit', :checked => false %> Direct Debit
                     </td>
                 </tr>
-                <%= @form_errors[:preferred_payment_method] %>
+                <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:preferred_payment_method] } %>
             </table>
             <table id="booking_agreement_wrapper">
                 <tr>

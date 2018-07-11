@@ -126,3 +126,8 @@ var highlight_date_elements = function(check_in_date, end_date)
     }
   }
 }
+
+$(document).one('click','body *',function()
+{
+    $(".customer_form_error").fadeOut()  
+});
