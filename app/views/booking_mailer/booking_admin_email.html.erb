@@ -1,13 +1,15 @@
-<h1>Carob Cottage Reservation Placed</h1>
+<h1>New Reservation Request</h1>
 
 <p>
-    Hi <%= @booking.name %>, 
+    Hi <%= @admin.name %>, 
 </p>
 
 <p>
-    Thank you for choosing to place a reservation at Carob Cottage. We're sure you will enjoy your stay!
-    Below is a copy of your booking details. 
+    You have received a new booking request! Go to the <a href="www.carobcottage.com/administration/booking_manager">Carob Cottage Booking Manager</a> to set this reservation to booked, 
+    and make sure to respond to the guest at <%= @booking.email_address %> as soon as possible!
 </p>
+
+<h3>Booking Details</h3>
 
 <table>
     <tr>
@@ -45,6 +47,14 @@
     <tr>
         <td>Country:</td>
         <td><%= @booking.country %></td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td><%= @booking.status %></td>
+    </tr>
+    <tr>
+        <td>Submitted at: </td>
+        <td><%= @booking.created_at %></td>
     </tr>
     
     <% unless @booking.postcode.nil? || @booking.postcode.empty? %>

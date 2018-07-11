@@ -22,7 +22,7 @@ module Carobcottage
         :port => 587,
         :domain => 'localhost:3000',
         :user_name => "staycarobcottage@gmail.com",
-        :password => "PASSWORD",
+        :password => "password",
         :authentication => :plain,
         :enable_starttls_auto => true
     }
