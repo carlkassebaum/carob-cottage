@@ -27,8 +27,6 @@ module Carobcottage
         :enable_starttls_auto => true
     }
     config.action_mailer.default_options = {from: 'staycarobcottage@gmail.com'}
-    config.action_mailer.asset_host = 'http://localhost:3000'  
-    config.action_controller.asset_host = 'http://localhost:3000'    
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
