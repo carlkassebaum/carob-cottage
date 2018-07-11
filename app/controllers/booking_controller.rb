@@ -136,6 +136,7 @@ class BookingController < ApplicationController
         
         if @form_errors.empty? && @booking.save
             flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
+            BookingMailer.booking_confirmation_email(@booking).deliver_now
         else
             render "booking/new_customer_booking"
         end

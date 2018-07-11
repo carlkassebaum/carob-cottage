@@ -1,0 +1,74 @@
+<h1>Carob Cottage Reservation Placed</h1>
+
+<p>
+    Hi <%= @booking.name %>, 
+</p>
+
+<p>
+    Thank you for choosing to place a reservation at Carob Cottage. We're sure you will enjoy your stay!
+    Below is a copy of your booking details. 
+</p>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td><%= @booking.name %></td>
+    </tr>
+    <tr>
+        <td>Email address:</td>
+        <td><%= @booking.email_address %></td>
+    </tr>
+    <tr>
+        <td>Arrival Date:</td>
+        <td><%= @booking.arrival_date.strftime("%d-%m-%Y") %></td>
+    </tr>
+    <tr>
+        <td>Departure Date:</td>
+        <td><%= @booking.departure_date.strftime("%d-%m-%Y") %></td>
+    </tr>    
+    <tr>
+        <td>Contact number: </td>
+        <td><%= @booking.contact_number %></td>
+    </tr>    
+    <tr>
+        <td>Number of guests:</td>
+        <td><%= @booking.number_of_people %></td>
+    </tr>
+    <tr>
+        <td>Preffered payment method:</td>
+        <td><%= @booking.preferred_payment_method %></td>
+    </tr>
+    <tr>
+        <td>Estimated Cost:</td>
+        <td><%= @booking.cost %></td>
+    </tr>
+    <tr>
+        <td>Country</td>
+        <td><%= @booking.country %></td>
+    </tr>
+    
+    <% unless @booking.postcode.nil? || @booking.postcode.empty? %>
+        <tr>
+            <td>Postcode:</td>
+            <td><%= @booking.postcode %></td>
+        </tr>
+    <% end %>
+    
+    <% unless @booking.estimated_arrival_time.nil? || @booking.estimated_arrival_time.empty? %>
+        <tr>
+            <td>Estimated Arrival Time:</td>
+            <td><%= @booking.estimated_arrival_time %></td>
+        </tr>
+    <% end %>    
+    
+</table>
+
+<p>
+    If any of these look incorrect, be sure to contact us at staycarobcottage@gmail.com. 
+</p>
+<p>
+    Kind regards,
+</p>
+<p>
+    Carob Cottage.
+</p>
