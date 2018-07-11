@@ -29,11 +29,26 @@
             <%= @form_errors[:postcode] %>
             <%= f.text_field   :estimated_arrival_time, id: "booking_estimated_arrival_time", class: "customer_form w3-input", placeholder: "Estimated Arrival Time (After 2pm)" %>
             <%= @form_errors[:estimated_arrival_time] %>
-            Preferred payment method
-            <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true,  class: "w3-input"  %> Cash on Arrival<%= @form_errors[:preferred_payment_method] %>
-            <%= f.radio_button :preferred_payment_method, 'Direct Debit',    :checked => false, class: "w3-input" %> Direct Debit
-            <input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" class="w3-input" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </br>
-            <%= f.submit "Place Reservation", id: "place_reservation_button", disabled: true %>
+            <table id="preferred_payment_method">
+                <tr>
+                    <td id="booking_preferred_payment_method">
+                        Preferred payment method
+                    </td>
+                    <td class="custom_radio_container">
+                        <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true  %> Cash on Arrival
+                    </td>
+                    <td class="custom_radio_container">
+                        <%= f.radio_button :preferred_payment_method, 'Direct Debit', :checked => false %> Direct Debit
+                    </td>
+                </tr>
+                <%= @form_errors[:preferred_payment_method] %>
+            </table>
+            <table id="booking_agreement_wrapper">
+                <tr>
+                    <td><input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </td>                   
+                </tr>
+            </table>
+            <%= f.submit "Place Reservation", class: "form_button", id: "place_reservation_button", disabled: true %>
             </table>            
         <% end %>
     </div>

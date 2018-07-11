@@ -266,7 +266,10 @@ table.center
 
 .booking_form_element
 {
+    padding-left: 25px;
     height: 25px;
+    background-repeat: no-repeat;
+    background-size: auto 15px;       
 }
 
 #cost_field
@@ -325,11 +328,13 @@ table.center
 
 .customer_form
 {
+    margin-top: 10px;
     background-color: $form_background-color;
     padding-left: 36px;
     background-repeat: no-repeat;
     background-size: auto 25px; 
     color: $form_text_color;
+    height: 35px;
 }
 
 .customer_form_unfilled
@@ -344,6 +349,7 @@ table.center
 
 #booking_number_of_people
 {
+    margin-top: 10px;
     padding-left: 34px; 
     background-image: url(asset-path('form_icons/number_of_people.png'));
     background-position: 5px 7px;     
@@ -385,4 +391,60 @@ table.center
 {
     background-image: url(asset-path('form_icons/estimated_arrival_time.png'));
     background-position: 5px 7px;    
+}
+
+#preferred_payment_method
+{
+    margin-top: 10px;
+    height: 35px;
+    border-bottom: 1px solid #cccccc;
+    width: 100%;
+}
+
+#booking_preferred_payment_method
+{
+    background-image: url(asset-path('form_icons/preferred_payment_method.png'));
+    background-position: 3px 7px;
+    background-repeat: no-repeat;
+    background-size: auto 18px;     
+    padding-left: 35px;
+    width: 280px;
+    text-align: left;
+}
+
+#booking_preferred_payment_method_cash_on_arrival
+{
+    text-align: right;
+}
+
+#booking_preferred_payment_method_direct_debit
+{
+    margin-left: 10px;
+    text-align: right;
+}
+
+#booking_agreement_wrapper
+{
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 25px;
+    background-image: url(asset-path('form_icons/agreement.png'));
+    background-position: 3px 7px;
+    background-repeat: no-repeat;
+    background-size: auto 25px;        
+}
+
+#booking_agreement
+{
+    margin-left: 34px;
+}
+
+#place_reservation_button
+{
+    height: 40px;
+    font-weight: 600;
+    font-size: 16px;
 }
