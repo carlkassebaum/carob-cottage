@@ -65,6 +65,6 @@ class PriceRuleController < ApplicationController
     
     def price_rule_params
         params.require(:price_rule).permit(:name, :value, :period_type, :min_people, :max_people, :min_stay_duration, :max_stay_duration, 
-        :description, :start_date, :end_date)
+        :description, :start_date, :end_date, :rate_type)
     end
 end

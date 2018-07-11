@@ -32,18 +32,18 @@ RSpec.describe PriceRuleController, type: :controller do
             
             it "assings @price_rules to an array of all current price rules" do
                 rule_1 = FactoryBot.create(:price_rule, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    description: "A base rate of $185 per night applies for 1 to 2 people.")
+                    description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
                 rule_2 = FactoryBot.create(:price_rule, name: "Additonal People", 
                     value: 30, period_type: "per_night", min_people: 3, 
-                    description: "Additonal people are charged at $30 per night.")
+                    description: "Additonal people are charged at $30 per night.", rate_type: "per_person")
                 rule_3 = FactoryBot.create(:price_rule, name: "Easter", value: 205, period_type: "per_night", min_people: 1, max_people: 2, start_date: "19-4", end_date: "22-4",
-                    description: "Stays during the Easter period are charged at $205 per night.")
+                    description: "Stays during the Easter period are charged at $205 per night.", rate_type: "all_guests")
                 rule_4 = FactoryBot.create(:price_rule, name: "Cleaning", value: 10, period_type: "fixed",
-                    description: "Stays during the Easter period are charged at $205 per night.")
+                    description: "Stays during the Easter period are charged at $205 per night.", rate_type: "all_guests")
                 rule_5 = FactoryBot.create(:price_rule, name: "7 night stay", value: 170, period_type: "per_night", min_people: 1, max_people: 2,
-                    min_stay_duration: 7, max_stay_duration: 7, description: "Stays for 7 nights are charged at $170 per night.")
+                    min_stay_duration: 7, max_stay_duration: 7, description: "Stays for 7 nights are charged at $170 per night.", rate_type: "all_guests")
                 rule_6 = FactoryBot.create(:price_rule, name: "Stays longer than 7 nights", value: 165, period_type: "per_night", min_people: 1, max_people: 2,
-                    min_stay_duration: 8, description: "Stays for 8 or more nights are charged at $165 per night.")
+                    min_stay_duration: 8, description: "Stays for 8 or more nights are charged at $165 per night.", rate_type: "all_guests")
                     
                 get :index
                 expect(assigns(:price_rules).include?rule_1).to eq(true)
@@ -62,7 +62,7 @@ RSpec.describe PriceRuleController, type: :controller do
         describe "logged out" do
             before :each do
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
                 session[:logged_in] = nil
             end
             
@@ -82,7 +82,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true 
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
             end
             
             it "assigns @price_rule to the rule matching the id" do
@@ -109,7 +109,7 @@ RSpec.describe PriceRuleController, type: :controller do
         describe "logged out" do
             before :each do
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")                 
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")                 
                 session[:logged_in] = nil                
             end
             
@@ -129,7 +129,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true
                 @rule_1 = FactoryBot.create(:price_rule, id: 2, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
             end
             
             it "assigns @price_rule to the rule matching the id" do
@@ -156,7 +156,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = nil                   
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.") 
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests") 
                 @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night."}                  
             end
             
@@ -177,7 +177,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true
                 @rule_1 = FactoryBot.create(:price_rule, id: 2, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
                 @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night."}
             end
             
@@ -253,7 +253,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = nil                   
                 @rule_1 = FactoryBot.create(:price_rule, id: 1, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.") 
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests") 
             end
             
             it "redirects and sets flash[:alert]" do
@@ -273,7 +273,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true
                 @rule_1 = FactoryBot.create(:price_rule, id: 2, name: "Delete specific", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.")         
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")         
             end
             
             describe "valid id" do
@@ -313,7 +313,7 @@ RSpec.describe PriceRuleController, type: :controller do
         describe "logged out" do
             before :each do
                 session[:logged_in] = nil                   
-                @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night."}                    
+                @new_values = {name: "new_name", value: 50, period_type: "fixed", max_people: 4, description: "Additonal people are charged at $30 per night.", rate_type: "all_guests"}                    
             end
             
             it "redirects and sets flash[:alert]" do
@@ -332,7 +332,7 @@ RSpec.describe PriceRuleController, type: :controller do
             before :each do
                 session[:logged_in] = true
                 @new_values= {name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
-                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people."}
+                    start_date: "10-2-2018", end_date: "14-2-2018", description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests"}
             end
         
             describe "valid params" do
@@ -348,7 +348,8 @@ RSpec.describe PriceRuleController, type: :controller do
                     expect(price_rule.min_stay_duration).to eq(@new_values[:min_stay_duration])
                     expect(price_rule.max_stay_duration).to eq(@new_values[:max_stay_duration]) 
                     expect(price_rule.start_date).to eq(@new_values[:start_date])
-                    expect(price_rule.end_date).to eq(@new_values[:end_date]) 
+                    expect(price_rule.end_date).to eq(@new_values[:end_date])
+                    expect(price_rule.rate_type).to eq(@new_values[:rate_type])
                     expect(flash[:notification]).to eq("Rule succesfully created")
                     expect(response).to redirect_to(administration_price_manager_path)
                 end

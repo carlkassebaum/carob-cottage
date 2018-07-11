@@ -17,6 +17,13 @@
             </td>
         </tr>
         <tr>
+            <td class="price_rule_edit_td">Rate Type</td>
+            <td class="price_manager_text_field_wrapper">
+                <%= f.radio_button :rate_type, 'all_guests', :checked => ("#{@price_rule.rate_type}" == "all_guests") %> All Guests
+                <%= f.radio_button :rate_type, 'per_person', :checked => ("#{@price_rule.rate_type}" == "per_person") %> Per Person
+            </td>
+        </tr>        
+        <tr>
             <td class="price_rule_edit_td">Minimum People</td>
             <td class="price_manager_text_field_wrapper"><%= f.text_field :min_people, class: "price_manager_text_field w3-input", value: "#{@price_rule.min_people}" %></td>
             <td>people</td>

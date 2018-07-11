@@ -15,6 +15,10 @@ RSpec.describe PriceRule, type: :model do
       expect(FactoryBot.build(:price_rule)).to respond_to(:period_type)
     end
     
+    it "has a rate type attribute" do
+      expect(FactoryBot.build(:price_rule)).to respond_to(:rate_type)      
+    end
+    
     it "has a min_people attribute" do
       expect(FactoryBot.build(:price_rule)).to respond_to(:min_people)
     end

@@ -9,6 +9,7 @@
 <table class="center" id="show_table">
     <tr><td class="price_rule_td">Value</td><td class="price_rule_td price_rule_td_right">$<%= @price_rule.value %></td></tr>
     <tr><td class="price_rule_td">Period Type</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.period_type %></td></tr>
+    <tr><td class="price_rule_td">Rate Type</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.rate_type %></td></tr>    
     <% unless @price_rule.min_people == 0 %>
         <tr><td class="price_rule_td">Minimum People</td><td class="price_rule_td price_rule_td_right"><%= @price_rule.min_people %></td></tr>
     <% end %>
