@@ -1,0 +1,29 @@
+<div id="booking_header_wrapper">
+    <table class="center">
+        <tr>
+            <td>
+                <%= link_to reservation_calendar_path(start_date: (@start_date - 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "previous_year" do %>
+                    <img class="navigation_arrow" 
+                    src="/assets/navigation_arrows/arrow_left.png" 
+                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_left_highlight.png')"
+                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_left.png')" 
+                    />                
+                <% end %>
+            </td>
+            <td>
+                <div id="booking_summary_title">
+                    <%= Date::MONTHNAMES[@start_date.month] %>
+                </div>                
+            </td>
+            <td>
+                <%= link_to reservation_calendar_path(start_date: (@start_date + 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "previous_year" do %>           
+                    <img class="navigation_arrow" 
+                    src="/assets/navigation_arrows/arrow_right.png" 
+                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_right_highlight.png')"
+                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_right.png')" 
+                    /> 
+                <% end %>
+            </td>            
+        </tr>
+    </table>
+</div>    

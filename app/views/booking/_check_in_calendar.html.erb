@@ -1,8 +1,5 @@
 <div id="calendar">
-    <%= link_to "Previous", reservation_calendar_path(start_date: (@start_date - 1.month)), method: :get, remote: true %>
-    <%= link_to "Next",     reservation_calendar_path(start_date: (@start_date + 1.month)), method: :get, remote: true %>
-
-    <div><%= Date::MONTHNAMES[@start_date.month] %></div>
+    <%= render partial: "booking/date_buttons/month_calendar_header" %>
     <%= month_calendar start_date: @start_date do |date| %>
         <td class="customer_calendar_day">
             <% if date.mon == @start_date.month %>
