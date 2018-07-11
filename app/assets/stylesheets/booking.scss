@@ -11,6 +11,8 @@ $light_blue                 : #aedfef;
 
 $body_background            : linear-gradient(#65a3ce, #406E8E);
 $form_background-color      : #fdfdfd;
+$form_text_color            : #474747;
+$form_text_color_unfilled   : #999595;
 
 .full_reservation_calendar_headers
 {
@@ -304,4 +306,60 @@ table.center
 .customer_form
 {
     background-color: $form_background-color;
+    padding-left: 34px;
+    background-repeat: no-repeat;
+    background-size: auto 25px; 
+    color: $form_text_color;
+}
+
+.customer_form_unfilled
+{
+    color: $form_text_color_unfilled
+}
+
+.customer_form_disabled
+{
+    cursor: not-allowed;
+}
+
+#booking_name
+{
+    background-image: url(asset-path('form_icons/name.png'));
+    background-position: 5px 5px;    
+}
+
+#booking_contact_number
+{
+    background-image: url(asset-path('form_icons/phone_icon.png'));
+    background-position: 9px 6px;    
+}
+
+#booking_email_address
+{
+    background-image: url(asset-path('form_icons/email.png'));
+    background-position: 5px 6px;    
+}
+
+#booking_country
+{
+    background-image: url(asset-path('form_icons/country.png'));
+    background-position: 5px 6px;    
+}
+
+#booking_postcode
+{
+    background-image: url(asset-path('form_icons/postcode.png'));
+    background-position: 5px 7px;    
+}
+
+#booking_estimated_arrival_time
+{
+    background-image: url(asset-path('form_icons/estimated_arrival_time.png'));
+    background-position: 5px 7px;    
+}
+
+#check_in_button, #check_out_button
+{
+    background-image: url(asset-path('form_icons/calendar.png'));
+    background-position: 5px 6px;
 }

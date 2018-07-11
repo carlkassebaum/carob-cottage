@@ -1,9 +1,9 @@
 <% if @check_out_date %>
     <%= link_to Date.parse(@check_out_date).strftime("%d-%m-%Y"),  
     reservation_calendar_path(start_date: @start_date, check_in_date: @check_in_date, check_out_date: @check_out_date, hide_calendar: !@hide_calendar), 
-    class: "check_button",
+    class: "check_button customer_form",
     id:    "check_out_button",    
     remote: true %>
 <% else %>
-    <div class="check_button" id="check_out_button"> Check Out</div>
+    <div class="check_button customer_form customer_form_disabled" id="check_out_button"> Check Out</div>
 <% end %>
