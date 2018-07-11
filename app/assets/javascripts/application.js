@@ -91,11 +91,15 @@ var set_form_value = function(field_id,value)
   document.getElementById(field_id).value = value
 }
 
+var set_text_value = function(id, value)
+{
+  document.getElementById(id).textContent = value
+}
+
 var highlight_date_elements = function(check_in_date, end_date)
 {
   check_in_date     = new Date(check_in_date)
   end_date          = new Date(end_date)
-  console.log(end_date)
   var start_date    = new Date(end_date.getFullYear(), end_date.getMonth(), 1)  
   
   var date_elements = document.getElementsByClassName("check_in_unblocked")

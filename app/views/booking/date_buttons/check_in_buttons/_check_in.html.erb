@@ -1,1 +1,5 @@
-<%= link_to "Check In",  reservation_calendar_path(start_date: @start_date, hide_calendar: true), remote: true %>
+<%= link_to "Check In",
+    reservation_calendar_path(start_date: @start_date, hide_calendar: true), 
+    class: "check_button",
+    id:    "check_in_button",
+    remote: true %>

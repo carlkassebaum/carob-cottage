@@ -1,1 +1,5 @@
-<%= link_to "Check In",  reservation_calendar_path(start_date: @start_date), remote: true %>
+<%= link_to @check_in_date.nil? ? "Check In" : Date.parse(@check_in_date).strftime("%d-%m-%Y"),  
+    reservation_calendar_path(start_date: @start_date), 
+    class: "check_button", 
+    id: "check_in_button", 
+    remote: true %>

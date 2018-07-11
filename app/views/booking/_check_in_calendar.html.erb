@@ -7,7 +7,11 @@
         <td class="day">
             <% if date.mon == @start_date.month %>
                 <% unless @blocked_dates.include? date.mday %>
-                    <%= link_to "#{date.mday}", reservation_calendar_path(start_date: @start_date, check_in_date: date), class: "check_in_unblocked", onclick: "set_form_value('booking_arrival_date','#{date.strftime("%Y-%m-%d")}')", remote: true %>
+                    <%= link_to "#{date.mday}", 
+                        reservation_calendar_path(start_date: @start_date, check_in_date: date), 
+                        class: "check_in_unblocked", 
+                        onclick: "set_form_value('booking_arrival_date','#{date.strftime("%Y-%m-%d")}')", 
+                        remote: true %>
                 <% else %>
                     <div class="check_in_blocked">-</div>
                 <% end %>
