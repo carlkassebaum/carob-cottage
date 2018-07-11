@@ -1,6 +1,7 @@
 $selector_colour: #008CBA;
 $calendar_colour: #4f4f4f;
 $calendar_blocked_colour: #bcbcbc;
+$check_in_out_highlight_colour: #e5f1f9;
 
 .month_calendar 
 {
@@ -98,4 +99,9 @@ $calendar_blocked_colour: #bcbcbc;
 {
     border-bottom: 1px solid $calendar_blocked_colour;
     margin-bottom: 10px;
+}
+
+#check_in_button:hover, #check_out_button:hover
+{
+    background-color: $check_in_out_highlight_colour;
 }
