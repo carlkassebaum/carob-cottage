@@ -2,11 +2,11 @@
     <table class="center" id="show_table">
         <tr>
             <td class="price_rule_edit_td">Name</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :name, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.name}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :name, class: "price_manager_text_field w3-input", value: "#{@price_rule.name}" %></td>
         </tr>        
         <tr>
             <td class="price_rule_edit_td">Value</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :value, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.value}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :value, class: "price_manager_text_field w3-input", value: "#{@price_rule.value}" %></td>
             <td>AUD</td>
         </tr>
         <tr>
@@ -18,35 +18,35 @@
         </tr>
         <tr>
             <td class="price_rule_edit_td">Minimum People</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :min_people, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.min_people}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :min_people, class: "price_manager_text_field w3-input", value: "#{@price_rule.min_people}" %></td>
             <td>people</td>
         </tr>
         <tr>
             <td class="price_rule_edit_td">Maximum People</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :max_people, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.max_people}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :max_people, class: "price_manager_text_field w3-input", value: "#{@price_rule.max_people}" %></td>
             <td>people</td>
         </tr>
         <tr>
             <td class="price_rule_edit_td">Start Date <div class="date_descriptor">(dd-mm-yyyy)</div> </td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :start_date, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.start_date}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :start_date, class: "price_manager_text_field w3-input", value: "#{@price_rule.start_date}" %></td>
         </tr>
         <tr>
             <td class="price_rule_edit_td">End Date <div class="date_descriptor">(dd-mm-yyyy)</div></td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :end_date, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.end_date}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :end_date, class: "price_manager_text_field w3-input", value: "#{@price_rule.end_date}" %></td>
         </tr>
         <tr>
             <td class="price_rule_edit_td">Minimum Stay Duration</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :min_stay_duration, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.min_stay_duration}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :min_stay_duration, class: "price_manager_text_field w3-input", value: "#{@price_rule.min_stay_duration}" %></td>
             <td>nights</td>
         </tr>
         <tr>
             <td class="price_rule_edit_td">Maximum Stay Duration</td>
-            <td class="price_manager_text_field_wrapper"><%= f.text_field :max_stay_duration, class: "price_manager_text_field booking_form_element w3-input", value: "#{@price_rule.max_stay_duration}" %></td>
+            <td class="price_manager_text_field_wrapper"><%= f.text_field :max_stay_duration, class: "price_manager_text_field w3-input", value: "#{@price_rule.max_stay_duration}" %></td>
             <td>nights</td>            
         </tr>
         <tr>
             <td class="price_rule_edit_td">Description</td>
-            <td colspan="2"><%= f.text_area :description, class: "price_manager_description_field booking_form_element", value: "#{@price_rule.description}" %></td>
+            <td colspan="2"><%= f.text_area :description, class: "price_manager_description_field", value: "#{@price_rule.description}" %></td>
         </tr>
     </table>
     <div id="price_rule_save_button">
