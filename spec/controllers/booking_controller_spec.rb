@@ -485,7 +485,7 @@ RSpec.describe BookingController, type: :controller do
                 @valid_params = 
                 {
                     name: "Bob", postcode: "5004", country: "Germany", contact_number: "0432111222", 
-                    email_address: "bob@domain.com", number_of_people: "4 people", estimated_arrival_time: "4pm",
+                    email_address: "staycarobcottage@gmail.com", number_of_people: "4 people", estimated_arrival_time: "4pm",
                     arrival_date: "20-1-2018", departure_date: "25-1-2018", preferred_payment_method: "Cash on Arrival"
                 }                
             end

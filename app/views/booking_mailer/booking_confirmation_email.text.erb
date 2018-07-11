@@ -1,0 +1,27 @@
+Carob Cottage Reservation Placed
+
+Hi <%= @booking.name %>, 
+Thank you for choosing to place a reservation at Carob Cottage. We're sure you will enjoy your stay!
+Below is a copy of your booking details. 
+
+Name: <%= @booking.name %>
+Email address: <%= @booking.email_address %>
+Arrival Date: <%= @booking.arrival_date.strftime("%d-%m-%Y") %>
+Departure Date: <%= @booking.departure_date.strftime("%d-%m-%Y") %>
+Contact number: <%= @booking.contact_number %>
+Number of guests: <%= @booking.number_of_people %>
+Preffered payment method: <%= @booking.preferred_payment_method %>
+Estimated Cost: <%= @booking.cost %>
+Country: <%= @booking.country %>
+<% unless @booking.postcode.nil? || @booking.postcode.empty? %>
+    Postcode: <%= @booking.postcode %>
+<% end %>
+<% unless @booking.estimated_arrival_time.nil? || @booking.estimated_arrival_time.empty? %>
+    Estimated Arrival Time: <%= @booking.estimated_arrival_time %>
+<% end %>    
+
+If any of these look incorrect, be sure to contact us at staycarobcottage@gmail.com. 
+
+Kind regards,
+
+Carob Cottage.

@@ -136,6 +136,8 @@ class BookingController < ApplicationController
         
         if @form_errors.empty? && @booking.save
             flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
+            BookingMailer.booking_confirmation_email(@booking).deliver_later
+            notify_all_admins(@booking)
         else
             render "booking/new_customer_booking"
         end
@@ -175,6 +177,12 @@ class BookingController < ApplicationController
     end
     
     private
+    
+    def notify_all_admins(booking)
+        Administrator.all.each do | administrator |
+            BookingMailer.booking_admin_email(administrator, booking).deliver_later
+        end
+    end
     
     def assign_guest_selector
         @guest_selector = GUEST_SELECTOR
