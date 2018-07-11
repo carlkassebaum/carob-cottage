@@ -1,0 +1,27 @@
+<% unless @hide_calendar %>
+    <div id="calendar">
+        <%= render partial: "booking/date_buttons/month_calendar_header" %>
+        <%= month_calendar start_date: @start_date do |date| %>
+            <td class="customer_calendar_day">
+                <% if date.mon == @start_date.month %>
+                    <% class_list = "" %>                
+                    <% class_list += " check_out_highlight" if !params[:check_out_date].nil? && (date.between?(params[:check_in_date],params[:check_out_date])) %>                    
+                    <% if !@blocked_dates.include? date.mday %>
+                        <% class_list += " check_out_date_highlight" if date == params[:check_out_date] %> 
+                        <%= link_to "#{date.mday}", 
+                            reservation_calendar_path(start_date: @start_date, check_in_date: @check_in_date, check_out_date: date, hide_calendar: true), 
+                            class: "check_out_unblocked #{class_list}", 
+                            onclick: "set_form_value('booking_departure_date','#{date.strftime("%Y-%m-%d")}')",
+                            onmouseover: "highlight_date_elements('#{@check_in_date}','#{date}')",
+                            remote: true %>
+                    <% elsif @min_stay_dates.include? date.mday %>
+                        <% class_list += " check_in_date_highlight" if date == params[:check_in_date] %>                    
+                        <div class="check_out_unblocked <%= class_list %>"><%= date.mday %></div>
+                    <% else %>    
+                        <div class="check_in_blocked"><%= date.mday %></div>
+                    <% end %>
+                <% end %>
+            </td>
+        <% end %>
+    </div>
+<% end %>

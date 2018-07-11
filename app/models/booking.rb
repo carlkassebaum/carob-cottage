@@ -8,6 +8,11 @@ class Booking < ApplicationRecord
         (arrivals + departures).uniq
     end
     
+    def self.next_after_date(date)
+        bookings = Booking.where("arrival_date > ?", date)
+        return bookings.length == 0 ? nil : bookings[0]
+    end
+    
     private
     
     def unique_dates

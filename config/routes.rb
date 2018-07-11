@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   
   get '/reservation' => "booking#new_customer_booking"
   
+  get '/reservation/calendar' => "booking#render_customer_reservation_calendar"
+  
   post '/reservation' => "booking#create_customer_booking"
 end

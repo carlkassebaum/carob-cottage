@@ -1,33 +1,55 @@
-<%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
-    Name
-    <%= f.text_field   :name, class: "w3-input" %><%= @form_errors[:name] %>
-    Contact Number
-    <%= f.text_field   :contact_number, class: "w3-input" %>
-    <%= @form_errors[:contact_number] %>
-    Email Address
-    <%= f.email_field  :email_address, class: "w3-input" %>
-    <%= @form_errors[:email_address] %>
-    Country
-    <%= f.text_field   :country, class: "w3-input" %>
-    <%= @form_errors[:country] %>
-    Postcode
-    <%= f.text_field   :postcode, class: "w3-input" %>
-    <%= @form_errors[:postcode] %>
-    Number of People
-    <%= f.text_field   :number_of_people, class: "w3-input" %>
-    <%= @form_errors[:number_of_people] %>
-    ETA
-    <%= f.text_field   :estimated_arrival_time, class: "w3-input" %>
-    <%= @form_errors[:estimated_arrival_time] %>
-    Arrival Date
-    <%= f.text_field   :arrival_date %>
-    <%= @form_errors[:arrival_date] %>
-    Departure date
-    <%= f.text_field   :departure_date %>
-    <%= @form_errors[:departure_date] %> 
-    Preferred payment method
-    <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true,  class: "w3-input"  %> Cash on Arrival<%= @form_errors[:preferred_payment_method] %>
-    <%= f.radio_button :preferred_payment_method, 'Direct Debit',    :checked => false, class: "w3-input" %> Direct Debit
-    <input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" class="w3-input" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </br>
-    <%= f.submit "Place Reservation", id: "place_reservation_button", disabled: true %>
-<% end %>
+<div class="form_wrapper">
+    <div class="form_body">
+        <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
+            <%= f.hidden_field :arrival_date %>
+            <%= f.hidden_field :departure_date %>
+            <table class="center">
+                <tr>
+                    <td id="check_in_button_wrapper" ><%= render partial: "booking/date_buttons/new_buttons/check_in"  %></td>
+                    <td id="check_out_button_wrapper"><%= render partial: "booking/date_buttons/new_buttons/check_out" %></td>
+                    <td><%= f.select :number_of_people, @guest_selector, id: "booking_number_of_people", class: "customer_form w3-input" %></td>
+                </tr>
+                <tr>
+                    <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:arrival_date]} %>   
+                    <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:departure_date]} %>  
+                    <td></td>
+                </tr>
+            </table>
+            <div id="reservation_calendar">
+            </div>                     
+            <%= f.text_field   :name, id: "booking_name", class: "customer_form w3-input", placeholder: "Name" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:name] } %>
+            <%= f.text_field   :contact_number, id: "booking_contact_number", class: "customer_form w3-input", placeholder: "Contact Number" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:contact_number] } %>
+            <%= f.email_field  :email_address, id: "booking_email_address", class: "customer_form w3-input", placeholder: "Email Address" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:email_address] } %>
+            <%= f.text_field   :country, id: "booking_country", class: "customer_form w3-input", placeholder: "Country" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:country] } %>
+            <%= f.text_field   :postcode, id: "booking_postcode", class: "customer_form w3-input", placeholder: "Postcode (optional)" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:postcode] } %>
+            <%= f.text_field   :estimated_arrival_time, id: "booking_estimated_arrival_time", class: "customer_form w3-input", placeholder: "Estimated Arrival Time (After 2pm)" %>
+            <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:estimated_arrival_time] } %>
+            <table id="preferred_payment_method">
+                <tr>
+                    <td id="booking_preferred_payment_method">
+                        Preferred payment method
+                    </td>
+                    <td class="custom_radio_container">
+                        <%= f.radio_button :preferred_payment_method, 'Cash on Arrival', :checked => true  %> Cash on Arrival
+                    </td>
+                    <td class="custom_radio_container">
+                        <%= f.radio_button :preferred_payment_method, 'Direct Debit', :checked => false %> Direct Debit
+                    </td>
+                </tr>
+                <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:preferred_payment_method] } %>
+            </table>
+            <table id="booking_agreement_wrapper">
+                <tr>
+                    <td><input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </td>                   
+                </tr>
+            </table>
+            <%= f.submit "Place Reservation", class: "form_button", id: "place_reservation_button", disabled: true %>
+            </table>            
+        <% end %>
+    </div>
+</div>

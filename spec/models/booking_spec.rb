@@ -59,6 +59,23 @@ RSpec.describe Booking, type: :model do
     end
   end
   
+  describe "next_after_date" do
+    before :each do 
+      @booking_1 = FactoryBot.create(:booking, name: "test_1", arrival_date: "20-1-2018", departure_date: "25-1-2018")
+      @booking_2 = FactoryBot.create(:booking, name: "test_2", arrival_date: "31-1-2018", departure_date: "5-2-2018")
+    end
+    
+    it "gets the booking after the given date" do
+      current_date = Date.new(2018, 1, 27)
+      expect(Booking.next_after_date(current_date)).to eq(@booking_2)
+    end
+    
+    it "returns nil if there are no bookings after the given date" do
+      current_date = Date.new(2018, 2, 8)
+      expect(Booking.next_after_date(current_date)).to eq(nil)      
+    end
+  end
+  
   describe "attributes" do
     it "has a name attribute" do
       expect(FactoryBot.build(:booking)).to respond_to(:name)

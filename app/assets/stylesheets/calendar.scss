@@ -1,3 +1,8 @@
+$selector_colour: #008CBA;
+$calendar_colour: #4f4f4f;
+$calendar_blocked_colour: #bcbcbc;
+$check_in_out_highlight_colour: #e5f1f9;
+
 .month_calendar 
 {
     border-collapse: separate;
@@ -8,4 +13,95 @@
 {
     height: 25px;
     text-align: center;
+}
+
+.check_button, #booking_number_of_people
+{
+    text-align: left;
+    display:block;    
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid $selector_colour;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;    
+}
+
+.check_button
+{
+    padding-top: 8px;
+    background-image: url(asset-path('form_icons/calendar.png'));
+    background-position: 5px 6px;
+}
+
+#calendar
+{
+    border: 1px solid $selector_colour;
+    background-color: white;    
+}
+
+.triangle-up 
+{
+	width: 0;
+	height: 0;
+	border-left: 9px solid transparent;
+	border-right: 9px solid transparent;
+	border-bottom: 18px solid $selector_colour;
+}
+
+.selected_triangle
+{
+    position: absolute;
+    margin-left: 30px;
+    margin-top: -11px;
+}
+
+.customer_calendar_day
+{
+    width: 38px;
+    height: 28px;
+    color: $calendar_colour;
+}
+
+.check_in_unblocked, .check_out_unblocked
+{
+    display: inline-block;
+    width: 106%;
+    height: 100%;
+    cursor: default;
+    text-decoration: none;
+}
+
+.check_out_highlight, .check_in_unblocked:hover
+{
+    cursor: default;    
+    background-color: #e5f4ff;
+}
+
+.check_out_date_highlight, .check_in_date_highlight
+{
+    background-color: #008CBA;
+    color: white;
+}
+
+.check_in_blocked
+{
+    display: inline-block;    
+    width: 106%;    
+    height: 100%;    
+    cursor: not-allowed;    
+    color: $calendar_blocked_colour;
+}
+
+.bottom_border_reservation
+{
+    border-bottom: 1px solid $calendar_blocked_colour;
+    margin-bottom: 10px;
+}
+
+#check_in_button:hover, #check_out_button:hover
+{
+    background-color: $check_in_out_highlight_colour;
 }

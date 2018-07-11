@@ -10,7 +10,7 @@
             </tr>
             <tr>
                 <td class="booking_attribute">Status:</td><td class="gray_border_right">
-                    <%= f.radio_button :status, 'reserved', :checked => ("#{@booking.status}" == "reserved") %> Reserved
+                    <%= f.radio_button :status, 'reserved', :checked => ("#{@booking.status}" != "booked") %> Reserved
                     <%= f.radio_button :status, 'booked'  , :checked => ("#{@booking.status}" == "booked") %>   Booked
                 </td>
                 <td class="booking_attribute">Email Address: </td><td><%= f.text_field :email_address, class: "booking_form_element w3-input", value: "#{@booking.email_address}"%></td>        
