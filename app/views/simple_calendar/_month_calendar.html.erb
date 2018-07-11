@@ -1,5 +1,5 @@
 <div>
-  <table class="month_calendar">
+  <table class="center month_calendar">
     <tr>
       <% date_range.slice(0, 7).each do |day| %>
         <th class=<%= (@calendar_options.nil? || @calendar_options[:header_class].nil?) ? "" : @calendar_options[:header_class] %>>

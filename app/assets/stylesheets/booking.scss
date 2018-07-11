@@ -322,6 +322,15 @@ table.center
     cursor: not-allowed;
 }
 
+#booking_number_of_people
+{
+    padding-left: 34px; 
+    background-image: url(asset-path('form_icons/number_of_people.png'));
+    background-position: 5px 7px;     
+    background-repeat: no-repeat;
+    background-size: auto 25px;    
+}
+
 #booking_name
 {
     background-image: url(asset-path('form_icons/name.png'));
@@ -358,8 +367,3 @@ table.center
     background-position: 5px 7px;    
 }
 
-#check_in_button, #check_out_button
-{
-    background-image: url(asset-path('form_icons/calendar.png'));
-    background-position: 5px 6px;
-}

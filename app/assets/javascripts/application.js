@@ -102,27 +102,27 @@ var highlight_date_elements = function(check_in_date, end_date)
   end_date          = new Date(end_date)
   var start_date    = new Date(end_date.getFullYear(), end_date.getMonth(), 1)  
   
-  var date_elements = document.getElementsByClassName("check_in_unblocked")
+  var date_elements = document.getElementsByClassName("check_out_unblocked")
   for(var i = 0; i < date_elements.length; i++)
   {
     var current_element = date_elements[i]
     var current_date = new Date(end_date.getFullYear(), end_date.getMonth(),current_element.textContent.replace(/\s/g,''),9,30)
     if ((current_date.getTime() != check_in_date.getTime()) && (current_date > start_date && current_date < end_date))
     {
-      current_element.classList.add("highlight")
+      current_element.classList.add("check_out_highlight")
     }
     else
     {
-      current_element.classList.remove("highlight")
+      current_element.classList.remove("check_out_highlight")
     }
     
     if (current_date.getTime() === end_date.getTime())
     {
-      current_element.classList.add("end_date_highlight")
+      current_element.classList.add("check_out_date_highlight")
     }
     else
     {
-      current_element.classList.remove("end_date_highlight")
+      current_element.classList.remove("check_out_date_highlight")
     }
   }
 }
