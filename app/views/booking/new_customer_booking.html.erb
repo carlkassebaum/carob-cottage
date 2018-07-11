@@ -1,11 +1,11 @@
-<div class="customer_page">
+<div class="form_wrapper">
     <div class="form_body">
         <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
             <%= f.hidden_field :arrival_date %>
             <%= f.hidden_field :departure_date %>
             <table class="center">
                 <tr>
-                    <td id="check_in_button_wrapper"><%= render partial: "booking/date_buttons/new_buttons/check_in"  %></td>
+                    <td id="check_in_button_wrapper" ><%= render partial: "booking/date_buttons/new_buttons/check_in"  %></td>
                     <td id="check_out_button_wrapper"><%= render partial: "booking/date_buttons/new_buttons/check_out" %></td>
                     <td><%= f.select :number_of_people, @guest_selector, id: "booking_number_of_people", class: "customer_form w3-input" %></td>
                 </tr>
@@ -14,14 +14,9 @@
                     <td><%= @form_errors[:departure_date] %></td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <div id="reservation_calendar">
-                        </div>                        
-                    </td>
-                    <td></td>
-                </tr>
             </table>
+            <div id="reservation_calendar">
+            </div>                     
             <%= f.text_field   :name, id: "booking_name", class: "customer_form w3-input", placeholder: "Name" %>
             <%= @form_errors[:name] %>
             <%= f.text_field   :contact_number, id: "booking_contact_number", class: "customer_form w3-input", placeholder: "Contact Number" %>

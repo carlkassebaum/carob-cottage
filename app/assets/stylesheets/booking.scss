@@ -39,6 +39,11 @@ $form_text_color_unfilled   : #999595;
     border-spacing: 0px 0px;
 }
 
+#reservation_calendar
+{
+    width: 350px;
+}
+
 .month_title
 {
     margin-top:      -2px;
@@ -289,24 +294,39 @@ table.center
     z-index: 10;
 }
 
-.form_body
+.form_wrapper
 {
-    background-color: $form_background-color;    
-    position: relative;
-    width: 1024px;
-    margin: auto;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 100%;
+    background-color: $form_background-color; 
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;     
+    box-shadow: 0 0 20px black;
 }
 
-#customer_page
+.form_body
 {
-    background: $body_background;
+    margin-top: 30px;
+    overflow: hidden;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#reservation_page
+{
+    background-image: url(asset-path('carob_cottage_scenary/reservation_background.jpg'));
+    background-size:  cover;     
+    background-repeat: no-repeat;
+    background-position: center bottom;
 }
 
 .customer_form
 {
     background-color: $form_background-color;
-    padding-left: 34px;
+    padding-left: 36px;
     background-repeat: no-repeat;
     background-size: auto 25px; 
     color: $form_text_color;
@@ -366,4 +386,3 @@ table.center
     background-image: url(asset-path('form_icons/estimated_arrival_time.png'));
     background-position: 5px 7px;    
 }
-

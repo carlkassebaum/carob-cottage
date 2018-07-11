@@ -269,7 +269,7 @@ class BookingController < ApplicationController
     end
     
     def is_customer_page
-        @body_id = "customer_page"
+        @body_id = "reservation_page"
     end
     
     def check_for_date_errors
