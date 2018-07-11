@@ -2,7 +2,7 @@
     <table class="center">
         <tr>
             <td>
-                <%= link_to reservation_calendar_path(start_date: (@start_date - 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "previous_year" do %>
+                <%= link_to reservation_calendar_path(start_date: (@start_date - 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "previous_month" do %>
                     <img class="navigation_arrow" 
                     src="/assets/navigation_arrows/arrow_left.png" 
                     onmouseover="change_image(this, '/assets/navigation_arrows/arrow_left_highlight.png')"
@@ -16,7 +16,7 @@
                 </div>                
             </td>
             <td>
-                <%= link_to reservation_calendar_path(start_date: (@start_date + 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "previous_year" do %>           
+                <%= link_to reservation_calendar_path(start_date: (@start_date + 1.month), check_in_date: @check_in_date, check_out_date: @check_out_date), method: :get, remote: true , id: "next_month" do %>           
                     <img class="navigation_arrow" 
                     src="/assets/navigation_arrows/arrow_right.png" 
                     onmouseover="change_image(this, '/assets/navigation_arrows/arrow_right_highlight.png')"

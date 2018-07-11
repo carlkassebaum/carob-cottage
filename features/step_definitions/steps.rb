@@ -243,3 +243,8 @@ end
 When("I untick {string}") do |id|
   find(:css, "\##{id}").set(false)
 end
+
+#
+Given("I select {string} from {string}") do |option_name, option_list|
+  select option_name, :from => option_list
+end
