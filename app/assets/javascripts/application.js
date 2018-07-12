@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery 
+//= require jquery-ui
 //= require jquery_ujs
 //= require activestorage
 //= require turbolinks
@@ -124,6 +125,68 @@ var highlight_date_elements = function(check_in_date, end_date)
     {
       current_element.classList.remove("check_out_date_highlight")
     }
+  }
+}
+
+var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
+{
+  var slideDuration = 500  
+  var number_of_people = document.getElementById(selector_id).value;
+  number_of_people     = number_of_people.replace("people", "");
+  number_of_people     = number_of_people.replace("person", "");  
+  var arrival_date     = document.getElementById(arrival_date_id).value;
+  var departure_date   = document.getElementById(departure_date_id).value;
+  var price_estimate_field = document.getElementById("price_estimate")
+  
+  if(arrival_date.replace(/\s/g,"") != "" && departure_date.replace(/\s/g,"") != "")
+  {
+    $.ajax({
+      type: "GET", 
+      url: "/price_estimation",
+      data: 
+      {
+        number_of_people: number_of_people,
+        arrival_date:     arrival_date,
+        departure_date:   departure_date,
+        authenticity_token: window._token
+      },
+      success: function(data, textStatus, jqXHR) 
+      {
+        var highlight_cost = function(init_delay)
+        {
+          var original_size = $("#price_estimate").find("span").css('font-size')
+          var original_colour = $("#price_estimate").find("span").css('color')
+          $("#price_estimate").find("span").delay(init_delay).animate({
+            fontSize: "16px",
+            color: "#f48c42"
+          }, 100,"linear",function()
+          {
+            $("#price_estimate").find("span").delay(500).animate({
+              fontSize: original_size,
+              color: original_colour
+            }, 250, "linear") 
+          })
+        }
+        if (price_estimate_field == null)
+        {
+          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration, queue: false }).css('display', 'none').slideDown(slideDuration);          
+        }
+        else
+        {
+          highlight_cost(0)
+        }
+
+      },
+      error: function(jqXHR, textStatus, errorThrown)
+      {
+        
+      }
+    })
+  } 
+  else
+  {
+    $("#price_estimate").stop(true, true).fadeOut({ duration: slideDuration, queue: false }).slideUp(slideDuration);
+    //document.getElementById("price_estimate_wrapper").innerHTML = "";
   }
 }
 

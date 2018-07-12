@@ -3,3 +3,4 @@ $("#check_out_button_wrapper").html("<%= escape_javascript(render partial: 'book
 $("#reservation_calendar").html("<%= escape_javascript(render partial: 'check_in_calendar') %>");
 set_form_value('booking_arrival_date','')
 set_form_value('booking_departure_date','')
+estimate_price('booking_number_of_people','booking_arrival_date','booking_departure_date')

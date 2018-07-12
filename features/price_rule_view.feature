@@ -16,13 +16,13 @@ Feature: Price Rule View
   
   Scenario: View a list of price rules
     Given the following price rules exist:
-      | name                        | value | period_type | min_people | max_people | start_date | end_date | min_stay_duration | max_stay_duration | description                                               |
-      | Base Rate                   | 185   | per_night   | 1          | 2          |            |          | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
-      | Addition People             | 30    | per_night   | 3          |            |            |          |                   |                   | Additonal people are charged at $30 per night.            |
-      | Easter                      | 205   | per_night   | 1          | 2          | 19-4       | 22-4     |                   |                   | Stays at the easter period are charged at $205 per night. | 
-      | Cleaning                    | 10    | fixed       |            |            |            |          |                   |                   | A fixed $10 charge applies for cleaning.                  |
-      | 7 night stay                | 170   | per_night   | 1          | 2          |            |          | 7                 | 7                 | Stays for 7 nights are charged at $170 per night.         | 
-      | stays longer than 7 nights  | 165   | per_night   | 1          | 2          |            |          | 8                 |                   | Stays for 8 or more nights are charged at $165 per night. |  
+      | name                        | value | period_type | rate_type  | min_people | max_people | start_date | end_date | min_stay_duration | max_stay_duration | description                                               |
+      | Base Rate                   | 185   | per_night   | all_geusts | 1          | 2          |            |          | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
+      | Addition People             | 30    | per_night   | per_person | 3          |            |            |          |                   |                   | Additonal people are charged at $30 per night.            |
+      | Easter                      | 205   | per_night   | all_guests | 1          | 2          | 19-4       | 22-4     |                   |                   | Stays at the easter period are charged at $205 per night. | 
+      | Cleaning                    | 10    | fixed       | all_guests |            |            |            |          |                   |                   | A fixed $10 charge applies for cleaning.                  |
+      | 7 night stay                | 170   | per_night   | all_guests | 1          | 2          |            |          | 7                 | 7                 | Stays for 7 nights are charged at $170 per night.         | 
+      | stays longer than 7 nights  | 165   | per_night   | all_guests | 1          | 2          |            |          | 8                 |                   | Stays for 8 or more nights are charged at $165 per night. |  
     Given I am on the administration price manager page
     Then I should see "Current Price Rules"
     And I should see the following:
@@ -36,11 +36,11 @@ Feature: Price Rule View
   
   Scenario: View a price rule
     Given the following price rules exist:
-      | id | name                        | value | period_type | min_people | max_people | start_date | end_date  | min_stay_duration | max_stay_duration | description                                               |
-      | 20 | Base Rate                   | 185   | per_night   | 1          | 2          | 10-2-2018  | 14-2-2018 | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
+      | id | name                        | value | rate_type  | period_type | min_people | max_people | start_date | end_date  | min_stay_duration | max_stay_duration | description                                               |
+      | 20 | Base Rate                   | 185   | all_guests | per_night   | 1          | 2          | 10-2-2018  | 14-2-2018 | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
     And I am on the administration price manager page
     And I follow "view_price_rule_20"
     Then I should see the following:
-      | name                        | value | period_type | min_people     | max_people     | start_date | end_date   | min_stay_duration     | max_stay_duration     | description |
-      | "Base Rate" Details         | Value | Period Type | Minimum People | Maximum People | Start Date | End Date   | Minimum Stay Duration | Maximum Stay Duration | Description |
-      | Base Rate                   | 185   | per_night   | 1              | 2              | 10-2-2018  | 14-2-2018  | 2                     | 6                     | A base rate of $185 per night applies for 1 to 2 people.  |    
+      | name                        | value | period_type | rate_type   | min_people     | max_people     | start_date | end_date   | min_stay_duration     | max_stay_duration     | description |
+      | "Base Rate" Details         | Value | Period Type | Rate Type   | Minimum People | Maximum People | Start Date | End Date   | Minimum Stay Duration | Maximum Stay Duration | Description |
+      | Base Rate                   | 185   | per_night   | all_guests  | 1              | 2              | 10-2-2018  | 14-2-2018  | 2                     | 6                     | A base rate of $185 per night applies for 1 to 2 people.  |    

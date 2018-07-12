@@ -135,6 +135,7 @@ class BookingController < ApplicationController
         end
         
         if @form_errors.empty? && @booking.save
+            @booking.update(cost: PriceRule.calculate_price(@booking[:number_of_people], customer_params[:arrival_date], customer_params[:departure_date]))
             flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
             BookingMailer.booking_confirmation_email(@booking).deliver_later
             notify_all_admins(@booking)
@@ -191,13 +192,6 @@ class BookingController < ApplicationController
     def assign_current_date
         current_date = Date.today
         @start_date = Date.new(current_date.year, current_date.month, 1)        
-    end
-    
-    def extract_number_of_people(number_of_guests)
-        return nil if number_of_guests.nil?
-        number_of_guests.slice! "people"
-        number_of_guests.slice! "person"
-        return number_of_guests
     end
     
     def blocked_dates(selector, calendar_params)

@@ -1,5 +1,5 @@
 class PriceRuleController < ApplicationController
-    before_action :redirect_unless_logged_in
+    before_action :redirect_unless_logged_in, except: [:estimate_price]
     
     def show
         find_or_redirect
@@ -52,6 +52,15 @@ class PriceRuleController < ApplicationController
         end
     end
     
+    def estimate_price
+        price = PriceRule.calculate_price(params[:number_of_people].to_i, params[:arrival_date], params[:departure_date])
+        @price = "$#{price} (AUD)"
+        
+        respond_to do | format |
+            format.js
+        end
+    end
+    
     private
     
     def find_or_redirect
@@ -65,6 +74,6 @@ class PriceRuleController < ApplicationController
     
     def price_rule_params
         params.require(:price_rule).permit(:name, :value, :period_type, :min_people, :max_people, :min_stay_duration, :max_stay_duration, 
-        :description, :start_date, :end_date)
+        :description, :start_date, :end_date, :rate_type)
     end
 end

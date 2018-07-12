@@ -72,13 +72,14 @@
 
 .price_manager_text_field_wrapper
 {
-    width: 150px;
+    width: 200px;
 }
 
 .price_manager_text_field
 {
+    height: 25px;
     text-align: left;
-    width: 150px;
+    width: 200px;
 }
 
 #price_rule_save_button
@@ -111,4 +112,9 @@
     width: 100px;
     text-align: center;
     margin: auto;
+}
+
+#price_estimate span
+{
+    font-weight: 600;
 }

@@ -513,6 +513,17 @@ RSpec.describe BookingController, type: :controller do
                 post :create_customer_booking, params: {booking: @valid_params}
                 expect(assigns(:form_errors)).to eq({})
             end
+            
+            it "calculates the cost of the booking when it is submitted" do
+                @rule_1 = FactoryBot.create(:price_rule, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+                  description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
+                @rule_2 = FactoryBot.create(:price_rule, name: "Additonal People", 
+                  value: 30, period_type: "per_night", min_people: 3, 
+                  description: "Additonal people are charged at $30 per night.", rate_type: "per_person")                
+                post :create_customer_booking, params: {booking: @valid_params}
+                booking_result = Booking.find_by(name: @valid_params[:name])
+                expect(booking_result.cost).to eq(1225)
+            end
         end
         
         describe "invalid params" do
