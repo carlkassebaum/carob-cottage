@@ -159,17 +159,17 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
         }
         else
         {
-          var original_size = $("#price_estimate").css('font-size')
-          var original_colour = $("#price_estimate").css('color')
-          $("#price_estimate").animate({
+          var original_size = $("#price_estimate").find("span").css('font-size')
+          var original_colour = $("#price_estimate").find("span").css('color')
+          $("#price_estimate").find("span").animate({
             fontSize: "16px",
             color: "#f48c42"
           }, 100,"linear",function()
           {
-            $("#price_estimate").animate({
+            $("#price_estimate").find("span").delay(500).animate({
               fontSize: original_size,
               color: original_colour
-            }, 400, "linear") 
+            }, 250, "linear") 
           })          
         }
 
