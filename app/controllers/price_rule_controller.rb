@@ -53,7 +53,8 @@ class PriceRuleController < ApplicationController
     end
     
     def estimate_price
-        @price = "$100"
+        price = PriceRule.calculate_price(params[:number_of_people].to_i, params[:arrival_date], params[:departure_date])
+        @price = "$#{price} (AUD)"
         
         respond_to do | format |
             format.js

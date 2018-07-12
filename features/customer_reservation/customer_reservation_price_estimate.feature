@@ -6,7 +6,7 @@ Feature: Price Estimation
     Background: 
         Given the following price rules exist:
         | id | name                        | value | period_type | rate_type  | min_people | max_people | start_date | end_date | min_stay_duration | max_stay_duration | description                                               |
-        | 20 | Base Rate                   | 185   | per_night   | all_geusts | 1          | 2          |            |          | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
+        | 20 | Base Rate                   | 185   | per_night   | all_guests | 1          | 2          |            |          | 2                 | 6                 | A base rate of $185 per night applies for 1 to 2 people.  |
         | 21 | Addition People             | 30    | per_night   | per_person | 3          |            |            |          |                   |                   | Additonal people are charged at $30 per night.            |    
     
     @javascript

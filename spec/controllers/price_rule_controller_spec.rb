@@ -365,4 +365,29 @@ RSpec.describe PriceRuleController, type: :controller do
             end
         end    
     end
+    
+    describe "estimate_price" do
+        it "assigns @price to the price matching the parameters" do
+            @rule_1 = FactoryBot.create(:price_rule, name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
+              description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
+            @rule_2 = FactoryBot.create(:price_rule, name: "Additonal People", 
+              value: 30, period_type: "per_night", min_people: 3, 
+              description: "Additonal people are charged at $30 per night.", rate_type: "per_person")
+            @rule_3 = FactoryBot.create(:price_rule, name: "Easter", value: 205, period_type: "per_night", min_people: 1, max_people: 2, start_date: "19-4-2018", end_date: "22-4-2018",
+              description: "Stays during the Easter period are charged at $205 per night.", rate_type: "all_guests")
+            @rule_4 = FactoryBot.create(:price_rule, name: "Cleaning", value: 10, period_type: "fixed",
+              description: "A cleaning fee of $10 is charged", rate_type: "all_guests")
+            @rule_5 = FactoryBot.create(:price_rule, name: "7 night stay", value: 170, period_type: "per_night", min_people: 1, max_people: 2,
+              min_stay_duration: 7, max_stay_duration: 7, description: "Stays for 7 nights are charged at $170 per night.", rate_type: "all_guests")
+            @rule_6 = FactoryBot.create(:price_rule, name: "Stays longer than 7 nights", value: 165, period_type: "per_night", min_people: 1, max_people: 2,
+              min_stay_duration: 8, description: "Stays for 8 or more nights are charged at $165 per night.", rate_type: "all_guests")
+            @rule_7 = FactoryBot.create(:price_rule, name: "Additonal People Easter",  start_date: "19-4-2018", end_date: "23-4-2018",
+              value: 45, period_type: "per_night", min_people: 3, 
+              description: "Additonal people are charged at $45 per night over easter.", rate_type: "per_person")            
+            
+            get :estimate_price, xhr: true , params: { number_of_people: "4", arrival_date: "2018-04-19", departure_date: "2018-04-24"}
+            
+            expect(assigns(:price)).to eq("$1465 (AUD)")
+        end
+    end
 end
