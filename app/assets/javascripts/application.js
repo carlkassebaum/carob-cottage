@@ -152,16 +152,11 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
       },
       success: function(data, textStatus, jqXHR) 
       {
-        
-        if (price_estimate_field == null)
-        {
-          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration*2, queue: false }).css('display', 'none').slideDown(slideDuration);          
-        }
-        else
+        var highlight_cost = function(init_delay)
         {
           var original_size = $("#price_estimate").find("span").css('font-size')
           var original_colour = $("#price_estimate").find("span").css('color')
-          $("#price_estimate").find("span").animate({
+          $("#price_estimate").find("span").delay(init_delay).animate({
             fontSize: "16px",
             color: "#f48c42"
           }, 100,"linear",function()
@@ -170,7 +165,15 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
               fontSize: original_size,
               color: original_colour
             }, 250, "linear") 
-          })          
+          })
+        }
+        if (price_estimate_field == null)
+        {
+          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration, queue: false }).css('display', 'none').slideDown(slideDuration));          
+        }
+        else
+        {
+          highlight_cost(0)
         }
 
       },
