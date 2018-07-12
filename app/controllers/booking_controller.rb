@@ -135,6 +135,7 @@ class BookingController < ApplicationController
         end
         
         if @form_errors.empty? && @booking.save
+            @booking.update(cost: PriceRule.calculate_price(@booking[:number_of_people], customer_params[:arrival_date], customer_params[:departure_date]))
             flash[:sucess] = "Your reservation request has been placed! You will receive a confirmation email shortly."
             BookingMailer.booking_confirmation_email(@booking).deliver_later
             notify_all_admins(@booking)
