@@ -130,11 +130,13 @@ var highlight_date_elements = function(check_in_date, end_date)
 
 var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
 {
+  var slideDuration = 500  
   var number_of_people = document.getElementById(selector_id).value;
   number_of_people     = number_of_people.replace("people", "");
   number_of_people     = number_of_people.replace("person", "");  
   var arrival_date     = document.getElementById(arrival_date_id).value;
   var departure_date   = document.getElementById(departure_date_id).value;
+  var price_estimate_field = document.getElementById("price_estimate")
   
   if(arrival_date.replace(/\s/g,"") != "" && departure_date.replace(/\s/g,"") != "")
   {
@@ -150,54 +152,27 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
       },
       success: function(data, textStatus, jqXHR) 
       {
-        var original_font_size    = $("#price_estimate").css('font-size');
-        var original_width        = $("#price_estimate").css('width');
-        var original_margin_left  = $("#price_estimate").css('margin-left');
-        var original_border_style = $("#price_estimate").css('border-bottom-style');
-        var original_border_width = $("#price_estimate").css('border-bottom-width');
-        var original_border_color = $("#price_estimate").css('border-bottom-color');        
         
-        $( "#price_estimate" ).animate(
-          {
-            width: "560px",
-            marginLeft: "-15px",
-            fontSize: "18px",
-
-            borderTopLeftRadius: 5, 
-            borderTopRightRadius: 5, 
-            borderBottomLeftRadius: 5, 
-            borderBottomRightRadius: 5,
-
-            borderBottomColor: "#ffd391",
-            borderBottomWidth: '2px',
-            borderRightStyle: "solid",
-            borderRightColor: "#ffd391",
-            borderRightWidth: '2px',
-            borderTopStyle: "solid",
-            borderTopColor: "#ffd391",
-            borderTopWidth: '2px',
-            borderLeftStyle: "solid",
-            borderLeftColor: "#ffd391",
-            borderLeftWidth: '2px'            
-            
-          }, 
-        300, "linear", function()
+        if (price_estimate_field == null)
         {
-        $( "#price_estimate" ).animate(
+          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration*2, queue: false }).css('display', 'none').slideDown(slideDuration);          
+        }
+        else
+        {
+          var original_size = $("#price_estimate").css('font-size')
+          var original_colour = $("#price_estimate").css('color')
+          $("#price_estimate").animate({
+            fontSize: "16px",
+            color: "#f48c42"
+          }, 100,"linear",function()
           {
-            borderBottomColor: original_border_color,
-            borderBottomStyle: original_border_style,
-            borderBottomWidth: original_border_width,
-            borderBottomLeftRadius: 0, 
-            borderBottomRightRadius: 0,            
-            borderTopStyle: "hidden",
-            borderLeftStyle: "hidden",
-            borderRightStyle: "hidden",            
-            width: original_width,
-            marginLeft: original_margin_left,
-            fontSize: original_font_size
-          },1000, "linear")
-        });        
+            $("#price_estimate").animate({
+              fontSize: original_size,
+              color: original_colour
+            }, 400, "linear") 
+          })          
+        }
+
       },
       error: function(jqXHR, textStatus, errorThrown)
       {
@@ -207,7 +182,6 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
   } 
   else
   {
-    var slideDuration = 500
     $("#price_estimate").stop(true, true).fadeOut({ duration: slideDuration, queue: false }).slideUp(slideDuration);
     //document.getElementById("price_estimate_wrapper").innerHTML = "";
   }
