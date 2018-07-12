@@ -193,13 +193,6 @@ class BookingController < ApplicationController
         @start_date = Date.new(current_date.year, current_date.month, 1)        
     end
     
-    def extract_number_of_people(number_of_guests)
-        return nil if number_of_guests.nil?
-        number_of_guests.slice! "people"
-        number_of_guests.slice! "person"
-        return number_of_guests
-    end
-    
     def blocked_dates(selector, calendar_params)
         start_date = calendar_params[:start_date]
         month = start_date..((start_date + 1.month).yesterday)

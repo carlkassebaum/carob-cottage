@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery 
+//= require jquery-ui
 //= require jquery_ujs
 //= require activestorage
 //= require turbolinks
@@ -124,6 +125,91 @@ var highlight_date_elements = function(check_in_date, end_date)
     {
       current_element.classList.remove("check_out_date_highlight")
     }
+  }
+}
+
+var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
+{
+  var number_of_people = document.getElementById(selector_id).value;
+  number_of_people     = number_of_people.replace("people", "");
+  number_of_people     = number_of_people.replace("person", "");  
+  var arrival_date     = document.getElementById(arrival_date_id).value;
+  var departure_date   = document.getElementById(departure_date_id).value;
+  
+  if(arrival_date.replace(/\s/g,"") != "" && departure_date.replace(/\s/g,"") != "")
+  {
+    $.ajax({
+      type: "GET", 
+      url: "/price_estimation",
+      data: 
+      {
+        number_of_people: number_of_people,
+        arrival_date:     arrival_date,
+        departure_date:   departure_date,
+        authenticity_token: window._token
+      },
+      success: function(data, textStatus, jqXHR) 
+      {
+        var original_font_size    = $("#price_estimate").css('font-size');
+        var original_width        = $("#price_estimate").css('width');
+        var original_margin_left  = $("#price_estimate").css('margin-left');
+        var original_border_style = $("#price_estimate").css('border-bottom-style');
+        var original_border_width = $("#price_estimate").css('border-bottom-width');
+        var original_border_color = $("#price_estimate").css('border-bottom-color');        
+        
+        $( "#price_estimate" ).animate(
+          {
+            width: "560px",
+            marginLeft: "-15px",
+            fontSize: "18px",
+
+            borderTopLeftRadius: 5, 
+            borderTopRightRadius: 5, 
+            borderBottomLeftRadius: 5, 
+            borderBottomRightRadius: 5,
+
+            borderBottomColor: "#ffd391",
+            borderBottomWidth: '2px',
+            borderRightStyle: "solid",
+            borderRightColor: "#ffd391",
+            borderRightWidth: '2px',
+            borderTopStyle: "solid",
+            borderTopColor: "#ffd391",
+            borderTopWidth: '2px',
+            borderLeftStyle: "solid",
+            borderLeftColor: "#ffd391",
+            borderLeftWidth: '2px'            
+            
+          }, 
+        300, "linear", function()
+        {
+        $( "#price_estimate" ).animate(
+          {
+            borderBottomColor: original_border_color,
+            borderBottomStyle: original_border_style,
+            borderBottomWidth: original_border_width,
+            borderBottomLeftRadius: 0, 
+            borderBottomRightRadius: 0,            
+            borderTopStyle: "hidden",
+            borderLeftStyle: "hidden",
+            borderRightStyle: "hidden",            
+            width: original_width,
+            marginLeft: original_margin_left,
+            fontSize: original_font_size
+          },1000, "linear")
+        });        
+      },
+      error: function(jqXHR, textStatus, errorThrown)
+      {
+        
+      }
+    })
+  } 
+  else
+  {
+    var slideDuration = 500
+    $("#price_estimate").stop(true, true).fadeOut({ duration: slideDuration, queue: false }).slideUp(slideDuration);
+    //document.getElementById("price_estimate_wrapper").innerHTML = "";
   }
 }
 

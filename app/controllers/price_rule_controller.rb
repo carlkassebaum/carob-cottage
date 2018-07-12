@@ -1,5 +1,5 @@
 class PriceRuleController < ApplicationController
-    before_action :redirect_unless_logged_in
+    before_action :redirect_unless_logged_in, except: [:estimate_price]
     
     def show
         find_or_redirect
@@ -49,6 +49,14 @@ class PriceRuleController < ApplicationController
         else
             flash[:alert] = "Invalid attribute(s) given. No new rules have been created."
             render 'new'
+        end
+    end
+    
+    def estimate_price
+        @price = "$100"
+        
+        respond_to do | format |
+            format.js
         end
     end
     

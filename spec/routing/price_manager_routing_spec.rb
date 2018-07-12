@@ -18,4 +18,8 @@ RSpec.describe PriceRuleController, type: :routing do
     it 'routes delete /price_rule/id to PriceRule#destroy' do
         expect(delete: "/price_rule/1").to route_to( controller: "price_rule", action: "destroy", id: "1")          
     end
+    
+    it 'routes get /price_estimation to PriceRule#estimate_price' do
+        expect(get: "/price_estimation").to route_to( controller: "price_rule", action: "estimate_price")            
+    end
 end
