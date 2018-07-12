@@ -169,7 +169,7 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
         }
         if (price_estimate_field == null)
         {
-          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration, queue: false }).css('display', 'none').slideDown(slideDuration));          
+          $("#price_estimate").stop(true, true).fadeIn({ duration: slideDuration, queue: false }).css('display', 'none').slideDown(slideDuration);          
         }
         else
         {
