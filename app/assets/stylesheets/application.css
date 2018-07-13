@@ -20,6 +20,7 @@ body, html
     height: 100%;
     width:  100%;
     font-family: system-ui, sans-serif, arial;
+    overflow-x: auto;    
 }
 
 .button 
@@ -73,4 +74,44 @@ body, html
     height: auto;
 }
 
+
+#customer_navigation_bar
+{
+    position: absolute;
+    width: 100%;
+    background-color: #005a77;
+    height: 45px;
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;     
+    box-shadow: 0 0 20px black;    
+}
+
+.customer_navigation_bar_button
+{
+    text-decoration: none;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #fefefe;
+    font-size: 22px;
+    padding-top: 6px;
+    display: inline-block;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;    
+}
+
+#customer_navigation_bar_padding_left
+{
+    display: inline-block;
+    width: 10px;
+    
+}
+
+.customer_nav_bar_selected, .customer_navigation_bar_button:hover
+{
+    color: #cccccc;
+}
 
