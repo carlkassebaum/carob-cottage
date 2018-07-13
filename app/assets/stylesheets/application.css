@@ -20,6 +20,7 @@ body, html
     height: 100%;
     width:  100%;
     font-family: system-ui, sans-serif, arial;
+    overflow-x: auto;    
 }
 
 .button 
@@ -92,15 +93,14 @@ body, html
     padding-left: 20px;
     padding-right: 20px;
     color: #fefefe;
-    font-size: 23px;
-    padding-top: 5px;
+    font-size: 22px;
+    padding-top: 6px;
     display: inline-block;
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  /* ...and now for the proper property */
-  transition:.5s;    
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;    
 }
 
 #customer_navigation_bar_padding_left
