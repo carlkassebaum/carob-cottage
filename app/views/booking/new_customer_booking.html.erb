@@ -1,3 +1,5 @@
+<%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Reservation"} %>
+
 <div class="form_wrapper">
     <div class="form_body">
         <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>

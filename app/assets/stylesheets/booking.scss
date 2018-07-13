@@ -303,7 +303,7 @@ table.center
     display: flex;
     flex-direction: row;
     width: 600px;
-    height: 100%;
+    min-height: 100%;
     background-color: $form_background-color; 
     -moz-box-shadow: 0 0 20px black;
     -webkit-box-shadow: 0 0 20px black;     
@@ -312,7 +312,8 @@ table.center
 
 .form_body
 {
-    margin-top: 30px;
+    margin-top: 65px;
+    margin-bottom: 30px;
     overflow: hidden;
     text-align: center;
     padding-left: 40px;
@@ -321,10 +322,12 @@ table.center
 
 #reservation_page
 {
+    font-family: 'IBM Plex Sans Condensed';
     background-image: url(asset-path('carob_cottage_scenary/reservation_background.jpg'));
     background-size:  cover;     
     background-repeat: no-repeat;
     background-position: center bottom;
+    background-attachment: fixed;    
 }
 
 .customer_form
