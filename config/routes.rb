@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   post '/reservation' => "booking#create_customer_booking"
   
   get '/price_estimation' => "price_rule#estimate_price"
+  
+  get '/' => "static_pages#home"
 end

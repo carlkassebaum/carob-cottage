@@ -83,7 +83,8 @@ body, html
     height: 45px;
     -moz-box-shadow: 0 0 20px black;
     -webkit-box-shadow: 0 0 20px black;     
-    box-shadow: 0 0 20px black;    
+    box-shadow: 0 0 20px black; 
+    z-index: 10;
 }
 
 .customer_navigation_bar_button
