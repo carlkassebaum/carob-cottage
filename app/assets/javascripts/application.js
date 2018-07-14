@@ -186,7 +186,6 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
   else
   {
     $("#price_estimate").stop(true, true).fadeOut({ duration: slideDuration, queue: false }).slideUp(slideDuration);
-    //document.getElementById("price_estimate_wrapper").innerHTML = "";
   }
 }
 
@@ -194,3 +193,5 @@ $(document).one('click','body *',function()
 {
     $(".customer_form_error").fadeOut()  
 });
+
+

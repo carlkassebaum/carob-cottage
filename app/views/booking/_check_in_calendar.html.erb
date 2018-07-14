@@ -1,4 +1,5 @@
 <div id="calendar">
+    <div id="selected_triangle_check_in" class="triangle-up selected_triangle"></div>    
     <%= render partial: "booking/date_buttons/month_calendar_header" %>
     <%= month_calendar start_date: @start_date do |date| %>
         <td class="customer_calendar_day">
