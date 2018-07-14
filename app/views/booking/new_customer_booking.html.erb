@@ -5,24 +5,23 @@
         <%= form_for @booking, :url => { :action => "create_customer_booking" } do |f| %>
             <%= f.hidden_field :arrival_date %>
             <%= f.hidden_field :departure_date %>
-            <table class="center">
-                <tr>
-                    <td id="check_in_button_wrapper" ><%= render partial: "booking/date_buttons/new_buttons/check_in"  %></td>
-                    <td id="check_out_button_wrapper"><%= render partial: "booking/date_buttons/new_buttons/check_out" %></td>
-                    <td><%= f.select :number_of_people, @guest_selector, {}, 
+            <div class="center">
+                
+                    <div class="check_field" id="check_in_button_wrapper" ><%= render partial: "booking/date_buttons/new_buttons/check_in"  %></div>
+                    <div class="check_field" id="check_out_button_wrapper"><%= render partial: "booking/date_buttons/new_buttons/check_out" %></div>
+                    <div class="check_field"><%= f.select :number_of_people, @guest_selector, {}, 
                     {
                         onChange: "estimate_price('booking_number_of_people','booking_arrival_date','booking_departure_date')", 
                         id: "booking_number_of_people", 
                         class: "customer_form"
                     }
-                    %></td>
-                </tr>
-                <tr>
+                    %></div>
+                
                     <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:arrival_date]} %>   
                     <%= render partial: "booking/reservation_form_errors/date_error", locals: {attribute: @form_errors[:departure_date]} %>  
-                    <td></td>
-                </tr>
-            </table>
+                    <div></div>
+                
+            </div>
             <div id="reservation_calendar">
             </div>     
             <%= f.text_field   :name, id: "booking_name", class: "customer_form w3-input", placeholder: "Name" %>
