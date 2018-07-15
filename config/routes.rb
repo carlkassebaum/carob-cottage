@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get '/price_estimation' => "price_rule#estimate_price"
   
   get '/' => "static_pages#home"
+  
+  get '/about_the_area' => "static_pages#location"
 end

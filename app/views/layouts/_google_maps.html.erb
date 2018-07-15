@@ -1,0 +1,200 @@
+<div id="map"></div>
+
+<script>
+   var types = ["amusement_park", "aquarium","art_gallery","bakery","bar","bicycle_store",
+          "book_store", "bowling_alley","cafe", "church", "food", "florist", "meal_delivery",
+          "library", "meal_takeaway", "museum", "park", "restuarant","shopping_mall",
+          "locality"]
+          
+    var excluded_types = ["lodging", "accounting", "airport", "bank", "beauty_salon", 
+    "bus_station", "car_dealer", "car_repair", "car_wash", "convenience_store",
+    "dentist", "department_store", "doctor", "electrician", "electronics_store",
+    "embassy","fire_station","funeral_home","furniture_store","gas_station","gym",
+    "hardware_store", "home_goods_store","hospital","insurance_agency","laundry",
+    "Lawyer","lawyer","locksmith","moving_company","painter","parking","pet_store","pharmacy",
+    "plumber","physiotherapist","post_office","real_estate_agency","roofing_contractor",
+    "school","storage","taxi_stand","veterinary_care","general_contractor","health","police"]
+    
+    var excluded_names = ["Tanunda Treatment Plant", "Seppelts View Cabins","Burge Vineyard Services",
+    "Lyndoch Valley Family Centre", "Bardell Excavations","GRAETZ Irrigation","A&G Engineering PTY LTD",
+    "Lyndoch Motors (Angaston Branch)", "Stainless Engineering & Maintenance PTY LTD (SEAM)",
+    "Girl Guides SA Barossa Valley","Girl Guides SA Barossa Valley","Tanunda Lutheran Home Inc.","Nitschke Chaff And Freight",
+    "Angaston Power Station","With Love and Lace Melanie","With Love and Lace Melanie","Barossa Valley Secretarial Services",
+    "Barossa Data Recovery","Scott Goldsmith Photography","U-Haul Trailer Hire","Pampered Pets Salon Greenock","CCL Label","Coates Hire",
+    "Ink Obsession","Burge Vineyard Services","Barossa Out of School Hours Care","Kylie Heath - Remedial Massage Therapist","Browns & Associates Drafting Services",
+    "WFI","AP John & Sons","Tanunda Newsagency","Tanunda Cricket Club"]
+
+    var map;
+    var key_locations = [];
+    var markers = [];
+    
+    function initMap() 
+    {
+        var map_center    = {lat: -34.495272, lng: 138.937203};        
+        var carob_cottage = {lat: -34.478891, lng: 138.939503};
+        var lyndoch       = {lat: -34.603138, lng: 138.884730};
+        var seppeltsfield = {lat: -34.489716, lng: 138.918751};
+        var seigesdorf    = {lat: -34.505392, lng: 139.008830};
+        var tanunda       = {lat: -34.520487, lng: 138.964588}; 
+        var nuriootpa     = {lat: -34.473691, lng: 138.995488};
+        var rowland_flat  = {lat: -34.571451, lng: 138.934331};
+        var bethany       = {lat: -34.546399, lng: 138.986339};
+        var greenock      = {lat: -34.457509, lng: 138.927212};
+        var stonewell     = {lat: -34.500307, lng: 138.956021};
+        
+        var home_icon = 
+        {
+          url: "assets/map_icons/home_icon.png", // url
+          scaledSize: new google.maps.Size(50, 75), // scaled size
+          origin: new google.maps.Point(0, 0), // origin
+          anchor: new google.maps.Point(25, 75) // anchor
+        };
+        
+        var myStyles =[
+            {
+                featureType: "poi",
+                elementType: "labels",
+                stylers: 
+                [
+                    { visibility: "off" }
+                ]
+            }
+        ];
+        
+        map = new google.maps.Map(document.getElementById('map'), 
+        {
+            zoom:   13, 
+            center: map_center,
+            styles: myStyles
+        });
+        // The marker, positioned at Uluru
+
+       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+          parking: {
+            icon: iconBase + 'parking_lot_maps.png'
+          },
+          library: {
+            icon: iconBase + 'library_maps.png'
+          },
+          info: {
+            icon: iconBase + 'info-i_maps.png'
+          }
+        };
+        
+        var features = [
+          {
+            position: new google.maps.LatLng(-34.478891, 138.939503),
+            type: 'home'
+          }
+        ];     
+        
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: home_icon,
+            map: map
+          });
+        }); 
+        
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        getNearbyPlaces(service, carob_cottage, 1000);
+        getNearbyPlaces(service, lyndoch, 1000);
+        getNearbyPlaces(service, seppeltsfield, 2000);
+        getNearbyPlaces(service, seigesdorf, 2000);
+        getNearbyPlaces(service, tanunda,    1000);
+        getNearbyPlaces(service, nuriootpa,  1000);
+        getNearbyPlaces(service, rowland_flat, 3000);
+        getNearbyPlaces(service, bethany, 2000);
+        getNearbyPlaces(service, greenock, 2000);   
+        getNearbyPlaces(service, stonewell, 3000);           
+    }
+    
+    function getNearbyPlaces(service, location, radius)
+    {
+        service.nearbySearch({
+          location: location,
+          radius: radius
+        }, callback);         
+    }
+    
+    function callback(results, status, pagination) 
+    {
+        var town_icon = 
+        {
+          url: "assets/map_icons/town_icon.png", // url
+          scaledSize: new google.maps.Size(30, 45), // scaled size
+          origin: new google.maps.Point(0, 0), // origin
+          anchor: new google.maps.Point(15, 45) // anchor
+        };
+
+        var food_icon = 
+        {
+          url: "assets/map_icons/food_icon.png", // url
+          scaledSize: new google.maps.Size(30, 45), // scaled size
+          origin: new google.maps.Point(0, 0), // origin
+          anchor: new google.maps.Point(15, 45) // anchor
+        };  
+        
+        var wine_icon = 
+        {
+          url: "assets/map_icons/wine_icon.png", // url
+          scaledSize: new google.maps.Size(30, 45), // scaled size
+          origin: new google.maps.Point(0, 0), // origin
+          anchor: new google.maps.Point(15, 45) // anchor
+        };      
+      
+        if (status === google.maps.places.PlacesServiceStatus.OK)
+        {
+            for (var i = 0; i < results.length; i++)
+            {
+              excluded = false              
+              for(var j = 0; j < results[i].types.length; j++)
+              {
+                if(excluded_types.includes(results[i].types[j]) || excluded_names.includes(results[i].name))
+                {
+                  excluded = true 
+                  break;
+                }
+              }
+              if(!excluded)
+              {
+                var icon = "";
+                if (results[i].types.includes("locality")) icon = town_icon;
+                if (results[i].types.includes("food"))     icon = food_icon;
+                if (results[i].name.includes("Wine") || results[i].name.includes("wine")) icon = wine_icon;
+                if (results[i].types.includes("bar")) icon = wine_icon;
+                createMarker(results[i], icon);
+              }
+            }
+
+            getNextPage = pagination.hasNextPage && function() { pagination.nextPage(); };
+            if (getNextPage) getNextPage();
+            var markerCluster = new MarkerClusterer(map, markers,
+              {imagePath: 'assets/cluster/m'});
+        }
+    }
+    
+    function createMarker(place, icon) 
+    {
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: icon,
+          position: place.geometry.location
+        });
+        
+        if(!place.types.includes("locality")) 
+          markers.push(marker)
+
+        google.maps.event.addListener(marker, 'click', function() 
+        {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+    }
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9G7LeGrtJ88Vlxj1WylMfLxS2lN1qwAw&libraries=places&callback=initMap">
+</script>
