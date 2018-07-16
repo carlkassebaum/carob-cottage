@@ -6,4 +6,8 @@ class StaticPagesController < ApplicationController
     def location
         @body_id = "location"
     end
+    
+    def gallery
+        @body_id = "gallery"
+    end
 end

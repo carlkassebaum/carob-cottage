@@ -1,0 +1,75 @@
+<%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Gallery"} %>
+<div class="nav_bar_filler"></div>
+
+<div class="gallery_body">
+  <div class="gallery_slider w3-display-container ">
+    <%= render partial: "static_pages/gallery/front_house"    %>
+    <%= render partial: "static_pages/gallery/front_lounge"   %>
+    <%= render partial: "static_pages/gallery/dining_area"    %>
+    <%= render partial: "static_pages/gallery/kitchen"        %>
+    <%= render partial: "static_pages/gallery/lounge_room"    %>
+    <%= render partial: "static_pages/gallery/master_bedroom" %>
+    <%= render partial: "static_pages/gallery/double_room"    %> 
+    <%= render partial: "static_pages/gallery/single_room"    %>
+    <%= render partial: "static_pages/gallery/bathroom"       %>
+    <%= render partial: "static_pages/gallery/back_of_house"  %>
+    <%= render partial: "static_pages/gallery/back_yard_table"%>
+    <%= render partial: "static_pages/gallery/side_of_house"  %>
+    <%= render partial: "static_pages/gallery/side_yard"      %>
+    
+    <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+      <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+      <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(6)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(7)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(8)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(9)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(10)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(11)"></span>
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(12)"></span>  
+      <span class="image_selector w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(13)"></span>
+    </div>
+  </div>
+</div>  
+
+<script>
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) 
+  {
+    showDivs(slideIndex += n);
+  }
+
+  function currentDiv(n) 
+  {
+    showDivs(slideIndex = n);
+  }  
+
+  function showDivs(n) 
+  {
+    var i;
+    var x = document.getElementsByClassName("gallery_image_wrapper");
+    var dots = document.getElementsByClassName("image_selector");    
+    if (n > x.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) 
+    {
+      if(x[i].style.display != "none") {  
+        $(x[i]).fadeOut(400, function() { $(x[slideIndex-1]).fadeIn(400) })
+      }
+      else { x[i].style.display = "none"; }
+    }
+    for (i = 0; i < dots.length; i++) {
+       dots[i].className = dots[i].className.replace(" w3-white", "");
+    }
+    dots[slideIndex-1].className += " w3-white";    
+  }
+  
+  
+</script>

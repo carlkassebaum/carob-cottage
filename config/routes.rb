@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   get '/' => "static_pages#home"
   
   get '/about_the_area' => "static_pages#location"
+  
+  get 'gallery' => "static_pages#gallery"
 end

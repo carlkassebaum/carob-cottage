@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$home_background_color: #3a3a3a;
+$home_background_color: #2b2b2b;
 
 #home
 {
@@ -43,6 +43,121 @@ $home_background_color: #3a3a3a;
 
 #map
 {
-    width: 100%;
+    width:  100%;
     height: 600px;
 }
+
+.gallery_body
+{
+    background-color: $home_background_color;     
+    width: 100%;
+    min-width: 800px;
+    max-width: 1500px;
+    height: calc(100% - 45px); 
+}
+
+.gallery_slider
+{
+    float: left;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: calc(100% - 100px);
+    height: 100%;
+    min-height: 500px;
+    max-height: 1000px;
+}
+
+.gallery_image_wrapper
+{
+    width: 100%;
+    height: 100%;
+}
+
+#image_selector_wrapper
+{
+    width:      100%;
+    text-align: center;   
+    position:   relative;
+    margin-top: -30px;
+}
+
+.image_selector
+{
+    height: 15px;
+    z-index: 10000;
+}
+
+#back_of_house
+{
+    background-image: url(asset-path('gallery/back_of_house.jpg'));    
+}
+
+#back_yard_table
+{
+    background-image: url(asset-path('gallery/back_yard_table.jpg'));    
+}
+
+#bathroom
+{
+    background-image: url(asset-path('gallery/bathroom.jpg'));    
+}
+
+#dining_area
+{
+    background-image: url(asset-path('gallery/dining_area.jpg'));    
+}
+
+#double_room
+{
+    background-image: url(asset-path('gallery/double_room.jpg'));    
+}
+
+#front_house
+{
+    background-image: url(asset-path('gallery/front_house.jpg'));    
+}
+
+#front_lounge
+{
+    background-image: url(asset-path('gallery/front_lounge.jpg'));    
+}
+
+#kitchen
+{
+    background-image: url(asset-path('gallery/kitchen.jpg'));    
+}
+
+#lounge_room
+{
+    background-image: url(asset-path('gallery/lounge_room.jpg'));    
+}
+
+#master_bedroom
+{
+    background-image: url(asset-path('gallery/master_bedroom.jpg'));    
+}
+
+#side_of_house
+{
+    background-image: url(asset-path('gallery/side_of_house.jpg'));    
+}
+
+#side_yard
+{
+    background-image: url(asset-path('gallery/side_yard.jpg'));    
+}
+
+#single_room
+{
+    background-image: url(asset-path('gallery/single_room.jpg'));    
+}
+
+.gallery_image
+{
+    background-size: cover;     
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+}
+
