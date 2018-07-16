@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
     def gallery
         @body_id = "gallery"
     end
+    
+    def terms_and_conditions
+        @body_id = "terms_and_conditions"
+    end
 end

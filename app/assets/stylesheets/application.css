@@ -76,10 +76,10 @@ body, html
 
 #customer_navigation_bar
 {
+    text-align: center;
     position: absolute;
     width: 100%;
     background-color: #005a77;
-    height: 45px;
     -moz-box-shadow: 0 0 20px black;
     -webkit-box-shadow: 0 0 20px black;     
     box-shadow: 0 0 20px black; 
@@ -88,8 +88,8 @@ body, html
 
 .customer_navigation_bar_button
 {
+    height: 45px;
     text-decoration: none;
-    height: 100%;
     padding-left: 20px;
     padding-right: 20px;
     color: #fefefe;
@@ -115,8 +115,45 @@ body, html
     color: #cccccc;
 }
 
-#home, #location, #gallery
+#home, #location, #gallery, #terms_and_conditions
 {
     font-family: 'IBM Plex Sans Condensed';
 }
 
+#footer
+{
+    border-top: 1px solid #aaaaaa;
+    width: 100%;
+    height: 25px;
+    background-color: #2b2b2b;
+}
+
+.footer_button
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    float: right;
+    color: #fefefe;
+    text-decoration: none;
+}
+
+.no_underline
+{
+    text-decoration: none;
+}
+
+#fb_logo
+{
+    width:  19px;
+    height: auto;
+    margin-top: -3px;
+}
+
+.nav_bar_seperator
+{
+    position: relative;
+    display: inline;
+    border-left: 1px solid #4680a3;
+    height: 30px;
+}
