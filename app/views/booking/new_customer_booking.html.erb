@@ -54,7 +54,7 @@
             </div>
             <table id="booking_agreement_wrapper">
                 <tr>
-                    <td><input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the terms and conditions </td>                   
+                    <td><input type="checkbox" id="booking_agreement" name="terms_and_conditions_agreement" onclick="invert_button_enabled('place_reservation_button','booking_agreement')"> I agree to the <%= link_to("terms and conditions", terms_and_conditions_path, target: :_blank)  %></td>                   
                 </tr>
             </table>
             <%= f.submit "Place Reservation", class: "form_button", id: "place_reservation_button", disabled: true %>
@@ -62,3 +62,5 @@
         <% end %>
     </div>
 </div>
+
+<%= render partial: "layouts/footer" %>
