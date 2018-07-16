@@ -164,12 +164,21 @@ $home_background_color: #2b2b2b;
 #terms_and_conditions
 {
     font-family: 'IBM Plex Sans Condensed';
-    background-image: url(asset-path('carob_cottage_scenary/seat.jpg'));
+    background-image: url(asset-path('carob_cottage_scenary/vine.jpg'));
     background-size:  auto 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center right;    
-    
+}
+
+#contact_us
+{
+    font-family: 'IBM Plex Sans Condensed';
+    background-image: url(asset-path('carob_cottage_scenary/bike.jpg'));
+    background-size:  auto 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center right;      
 }
 
 #ts_and_cs_body
@@ -199,4 +208,51 @@ $home_background_color: #2b2b2b;
 {
     width:  10px;
     height: 10px;
+}
+
+.customer_message
+{
+    height: 200px;
+}
+
+#send_message_button
+{
+    text-align: center;
+    height: 40px;
+}
+
+#send_message_button_wrapper
+{
+    margin-top: 15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact_us_heading
+{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.customer_field
+{
+    background-color: #fdfdfd;
+}
+
+.contact_us_body
+{
+    text-align: center;
+}
+
+#cottage_details
+{
+    width: 30%;
+    padding-left: 20px;
+}
+
+.contact_us_wrapper
+{
+    padding-top: 70px;
 }
