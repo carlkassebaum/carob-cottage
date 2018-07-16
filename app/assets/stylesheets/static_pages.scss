@@ -161,3 +161,36 @@ $home_background_color: #2b2b2b;
     height: 100%;
 }
 
+#terms_and_conditions
+{
+    font-family: 'IBM Plex Sans Condensed';
+    background-image: url(asset-path('carob_cottage_scenary/seat.jpg'));
+    background-size:  auto 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center right;    
+    
+}
+
+#ts_and_cs_body
+{
+    margin-left:      auto;
+    margin-right:     auto;
+    width:            100%;
+    max-width:        1000px;
+    height:           100%;
+    background-color: #fdfdfd;
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;     
+    box-shadow: 0 0 20px black;    
+}
+
+.text_field
+{
+    display: block;
+    padding-top: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    text-justify: inter-word;    
+}

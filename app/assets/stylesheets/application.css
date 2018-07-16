@@ -115,7 +115,7 @@ body, html
     color: #cccccc;
 }
 
-#home, #location, #gallery
+#home, #location, #gallery, #terms_and_conditions
 {
     font-family: 'IBM Plex Sans Condensed';
 }
