@@ -115,3 +115,8 @@ body, html
     color: #cccccc;
 }
 
+#home, #location, #gallery
+{
+    font-family: 'IBM Plex Sans Condensed';
+}
+

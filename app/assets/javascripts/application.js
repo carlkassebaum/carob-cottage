@@ -194,4 +194,3 @@ $(document).one('click','body *',function()
     $(".customer_form_error").fadeOut()  
 });
 
-
