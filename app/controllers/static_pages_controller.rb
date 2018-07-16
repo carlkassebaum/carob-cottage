@@ -22,6 +22,9 @@ class StaticPagesController < ApplicationController
     def contact_us_message
         @body_id = "contact_us"
         flash[:notification] = "Thanks for sending us a message! We'll get back to you as soon as we can :)"
+        Administrator.all do | admin |
+            CustomerMail.customer_email(admin.email_address).deliver_later
+        end
         redirect_to contact_us_path 
     end
 end
