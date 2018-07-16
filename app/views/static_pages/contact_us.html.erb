@@ -1,0 +1,16 @@
+<%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Contact Us"} %>
+<div class="nav_bar_filler"></div>
+
+<div class="form_wrapper text_field">
+    <div id="flash_wrapper">
+        <%= render partial: "layouts/flash", locals: {flash_class: ""} %>    
+    </div>    
+    <%= form_tag contact_us_message_path do %>
+      <%= text_field_tag  :name,          "", class: "w3-input", placeholder: "Name"               %>
+      <%= email_field_tag :email_address, "", class: "w3-input", placeholder: "Email Address"      %>
+      <%= text_area_tag   :message,       "", class: "customer_message w3-input", placeholder: "Message" %>
+      <div id="send_message_button_wrapper">
+          <%= submit_tag "Submit", class: "form_button" %>
+      </div>
+    <% end %>
+</div>

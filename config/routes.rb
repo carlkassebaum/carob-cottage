@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   get 'gallery' => "static_pages#gallery"
   
   get 'terms_and_conditions' => "static_pages#terms_and_conditions"
+  
+  get 'contact_us'           => "static_pages#contact_us"
+  
+  post 'contact_us_message'  => "static_pages#contact_us_message"
 end

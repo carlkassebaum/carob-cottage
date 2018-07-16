@@ -14,4 +14,14 @@ class StaticPagesController < ApplicationController
     def terms_and_conditions
         @body_id = "terms_and_conditions"
     end
+    
+    def contact_us
+        @body_id = "contact_us"
+    end
+    
+    def contact_us_message
+        @body_id = "contact_us"
+        flash[:notification] = "Thanks for sending us a message! We'll get back to you as soon as we can :)"
+        redirect_to contact_us_path 
+    end
 end
