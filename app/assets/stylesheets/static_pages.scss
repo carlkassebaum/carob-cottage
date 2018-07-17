@@ -17,9 +17,15 @@ $home_background_color: #2b2b2b;
     background-color: green;
 }
 
-#video_frame_holder
+#video_frame_holder_wrapper
 {
     height: calc(100% - 45px);
+    width: 100%;
+}
+
+#video_frame_holder
+{
+    height: 100%;
     width: 100%;
 }
 
@@ -468,4 +474,152 @@ $home_background_color: #2b2b2b;
 {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+#home_body
+{
+    background-color: #fefefe;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#general_description
+{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+#ammenities_body h2
+{
+    text-align: center;
+    width: 100%;
+}
+
+.ammenity
+{
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    height: 40px;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-right: 2%;
+    margin-left:  5%;
+    font-size: 18px;
+    display: inline-block;
+    width: 400px;
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#ammenity_wood_fire
+{
+    background-image: url(asset-path('ammenity_icons/wood_fire.png'));
+}
+
+#ammenity_kitchen
+{
+    background-image: url(asset-path('ammenity_icons/kitchen.png'));
+}
+
+#ammenity_linen
+{
+    background-image: url(asset-path('ammenity_icons/linen.png'));
+}
+
+#ammenity_internet
+{
+    background-image: url(asset-path('ammenity_icons/internet.png'));
+}
+
+#ammenity_breakfast
+{
+    background-image: url(asset-path('ammenity_icons/breakfast.png'));
+}
+
+#ammenity_airconditioning
+{
+    background-image: url(asset-path('ammenity_icons/airconditioning.png'));
+}
+
+#ammenity_heater
+{
+    background-image: url(asset-path('ammenity_icons/heater.png'));
+}
+
+#ammenity_bbq
+{
+    background-image: url(asset-path('ammenity_icons/bbq.png'));
+}
+
+#ammenity_laundry
+{
+    background-image: url(asset-path('ammenity_icons/laundry.png'));
+}
+
+#ammenity_bathroom
+{
+    background-image: url(asset-path('ammenity_icons/bathroom.png'));
+}
+
+
+.ammenity_seperator
+{
+    display: block;
+    width: 100%;
+}
+
+#ammenities_general
+{
+    text-align: center;
+}
+
+#ammenities_general div
+{
+    padding-left: 45px;
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    font-size: 20px;
+    margin-right:  10px;
+    margin-bottom: 10px;
+    padding-top:   5px;
+}
+
+#ammenities_body
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 2px solid #aaaaaa;
+    text-align: center;
+}
+
+#house_bed
+{
+    background-image: url(asset-path('house_icons/bed.png'));    
+}
+
+#house_bathroom
+{
+    background-image: url(asset-path('house_icons/bathroom.png'));    
+}
+
+#house_guests
+{
+    background-image: url(asset-path('house_icons/guests.png'));    
+}
+
+#general_description
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 2px solid #aaaaaa;
 }
