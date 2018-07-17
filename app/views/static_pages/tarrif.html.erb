@@ -1,0 +1,28 @@
+<%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Tarrif"} %>
+
+<div id="tarrif_body" class="form_wrapper text_field ">
+    <h2>Our Rates</h2>
+    <ul>
+        <% @price_rules.each do | rule | %>
+            <li>
+                <%= rule.description %>
+            </li>
+        <% end %>        
+    </ul>
+
+    <h2>General Rules</h2>
+    <ul>
+        <li>Not appropriate for children or people with limited mobility. No wheelchair access.</li>
+        <li>Minimum 2 night booking is required for Friday and Saturday.</li>
+        <li>Minimum 3 night booking for Easter weekend and during Vintage Festival.</li>
+        <li>Only the queen bedroom will be made available when 1 couple only is staying. Please notify me at time of booking if you are 2 singles. </li>
+        <li>Check in time 2:00PM</li>
+        <li>Check out time 10:00AM</li>
+        <li>No smoking indoors.</li>
+        <li>Strictly no pets.</li>
+        <li>Please ensure that you have read the <%= link_to "Terms and Conditions", terms_and_conditions_path %> before proceeding with your enquiry.</li>      
+    </ul>   
+    
+</div>
+
+<%= render partial: "layouts/footer" %>

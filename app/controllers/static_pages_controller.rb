@@ -31,4 +31,9 @@ class StaticPagesController < ApplicationController
     def about
         @body_id = "about"        
     end
+    
+    def tarrif
+        @body_id = "tarrif"
+        @price_rules = PriceRule.all
+    end
 end
