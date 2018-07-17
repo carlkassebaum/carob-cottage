@@ -180,6 +180,17 @@ $home_background_color: #2b2b2b;
     background-position: center right;      
 }
 
+#tarrif
+{
+    font-family: 'IBM Plex Sans Condensed';
+    background-image: url(asset-path('carob_cottage_scenary/tarrif.jpg'));
+    background-size:  auto 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center right;      
+}
+
+
 
 #home, #location, #gallery, #terms_and_conditions, #contact_us, #about
 {
@@ -447,3 +458,14 @@ $home_background_color: #2b2b2b;
     text-align: center;
 }
 
+
+#tarrif_body h2
+{
+    text-align: center;
+}
+
+#tarrif_body div
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
