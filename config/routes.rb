@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   get 'contact_us'           => "static_pages#contact_us"
   
   post 'contact_us_message'  => "static_pages#contact_us_message"
+  
+  get 'about'                => "static_pages#about"
 end

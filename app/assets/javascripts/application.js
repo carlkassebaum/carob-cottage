@@ -189,6 +189,13 @@ var estimate_price = function(selector_id,arrival_date_id,departure_date_id)
   }
 }
 
+var scroll_to = function(element)
+{
+  $([document.documentElement, document.body]).animate({
+        scrollTop: $(element).offset().top
+  }, 1500);
+}
+
 $(document).one('click','body *',function()
 {
     $(".customer_form_error").fadeOut()  

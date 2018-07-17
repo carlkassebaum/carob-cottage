@@ -115,11 +115,6 @@ body, html
     color: #cccccc;
 }
 
-#home, #location, #gallery, #terms_and_conditions
-{
-    font-family: 'IBM Plex Sans Condensed';
-}
-
 #footer
 {
     border-top: 1px solid #aaaaaa;

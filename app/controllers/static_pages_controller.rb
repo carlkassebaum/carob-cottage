@@ -27,4 +27,8 @@ class StaticPagesController < ApplicationController
         end
         redirect_to contact_us_path 
     end
+    
+    def about
+        @body_id = "about"        
+    end
 end
