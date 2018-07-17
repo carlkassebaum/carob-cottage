@@ -1,10 +1,78 @@
 <%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Carob Cottage"} %>
 <div class="nav_bar_filler"></div>
 
-<div>
+<div id="video_frame_holder_wrapper">
     <video id="video_frame_holder">
         <source src="https://drive.google.com/uc?authuser=0&id=1hUmGKdjeJ8C5f4dFvTn7vddXN5ZbM427&export=download" type="video/mp4">
     </video>
+</div>
+
+<div class="downArrow bounce" onclick="scroll_to('#home_body')">
+  <img width="40" height="40" alt="" src="assets/navigation_arrows/down_arrow.png" />
+</div>
+
+
+<div id="home_body">
+    <div id="general_description">
+        <div>    
+            A stay at Carob Cottage places you amongst a relaxing and private vineyard setting right in the heart of the Barossa. 
+            You'll call Marananga home and be close to all the major towns and wineries of the Barossa.
+            <%= link_to "Check out the area", about_the_area_path %> to find out the convinience Carob Cottage provides!
+        </div>
+        <div>
+            Carob Cottage is perfect for all seasons, featuring a wood fire place plus reverse cycle air conditioning. Photos of the cottage are provided in the <%= link_to "gallery", gallery_path %> . 
+        </div>
+        <div>
+            It comfortably accomodates <i>5</i> adults in <i>3</i> bedrooms located in the stand-alone home, including a queen, double and single bed.  
+        </div>
+    </div>
+    <div id="ammenities_general">
+        <div id="house_guests">
+            Up to 5 guests
+        </div>        
+        <div id="house_bed">
+            3 bedrooms
+        </div>
+        <div id="house_bathroom">
+            1 bathroom
+        </div>
+    </div>
+    <div id="ammenities_body">
+        <div id="ammenity_wood_fire" class="ammenity">
+            Slow combustion log fire
+        </div>
+        <div id="ammenity_kitchen" class="ammenity">
+            Fully equiped kitchen
+        </div>
+        <div class="ammenity_seperator"></div>
+        <div id="ammenity_linen" class="ammenity">
+            All linen provided
+        </div>
+        <div id="ammenity_internet" class="ammenity">
+            Unlimited wireless internet
+        </div>
+        <div class="ammenity_seperator"></div>
+        <div id="ammenity_breakfast" class="ammenity">
+            Light breakfast provided for the first morning
+        </div>
+        <div id="ammenity_airconditioning" class="ammenity">
+            Reverse-cycle air-conditioning
+        </div>
+        <div class="ammenity_seperator"></div>
+        <div id="ammenity_heater" class="ammenity">
+            Heaters in all bedrooms and the front lounge 
+        </div>
+        <div id="ammenity_bbq" class="ammenity">
+            Outdoor dining area with BBQ
+        </div>
+        <div class="ammenity_seperator"></div>        
+        <div id="ammenity_laundry" class="ammenity">
+            Fully equiped laundry 
+        </div>
+        <div id="ammenity_bathroom" class="ammenity">
+            Full sized bath and seperate shower 
+        </div>        
+    </div>
 </div>
 
 <!--<div id="video_frame_holder"></div>-->
