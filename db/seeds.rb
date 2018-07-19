@@ -9,7 +9,7 @@ case Rails.env
 when "development"
     FactoryBot.create(  :administrator,
                         name: "bob",
-                        email_address: "bob@outlook.com",
+                        email_address: "bob@junk_domain.com",
                         password: "foo_bar",
                         password_confirmation: "foo_bar")
     
@@ -31,11 +31,12 @@ when "development"
     PriceRule.create(name: "Stays longer than 7 nights", value: 165, period_type: "per_night", min_people: 1, max_people: 2,
         min_stay_duration: 8, description: "Stays for 8 or more nights are charged at $165 per night.", rate_type: "all_guests")    
 when "production"
+
     FactoryBot.create(  :administrator,
-                        name: "bob",
-                        email_address: "bob@outlook.com",
-                        password: "foo_bar",
-                        password_confirmation: "foo_bar")    
+                        name: "Dianne Kassebaum",
+                        email_address: ENV['MAILER_EMAIL'],
+                        password: ENV['MAILER_PASSWORD'],
+                        password_confirmation: ENV['MAILER_PASSWORD'])    
     
     PriceRule.create(name: "Base Rate", value: 185, period_type: "per_night", min_people: 1, max_people: 2, min_stay_duration: 2, max_stay_duration: 6, 
         description: "A base rate of $185 per night applies for 1 to 2 people.", rate_type: "all_guests")
