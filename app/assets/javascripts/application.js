@@ -201,3 +201,32 @@ $(document).one('click','body *',function()
     $(".customer_form_error").fadeOut()  
 });
 
+var slideIndex = 1;
+var timer;
+
+function fill()
+{
+  var nav_bar    = document.getElementById("customer_navigation_bar");
+  var nav_fillers = document.getElementsByClassName("nav_bar_filler");
+  var side_bar_fillers = document.getElementsByClassName("side_bar_filler");
+  if(nav_fillers != null && nav_fillers.length > 0)
+    for(var i = 0; i < nav_fillers.length; i++)
+      nav_fillers[i].style.height = nav_bar.offsetHeight.toString() + "px";    
+  if (side_bar_fillers != null && side_bar_fillers.length > 0)
+    for(var i = 0; i < side_bar_fillers.length; i++)
+      side_bar_fillers[i].style.height = (nav_bar.offsetHeight.toString() - 45) + "px";    
+}
+
+$(document).ready(function() 
+{  
+  if (window.location.pathname == "/")
+  {
+    var gallery = document.getElementById("home_gallery_body");
+    gallery.style.display = "none";
+  }
+});
+
+$(window).resize(function () 
+{ 
+  fill(); 
+});

@@ -3,19 +3,19 @@
 
 <div class="gallery_body">
   <div class="gallery_slider w3-display-container ">
-    <%= render partial: "static_pages/gallery/front_house"    %>
-    <%= render partial: "static_pages/gallery/front_lounge"   %>
-    <%= render partial: "static_pages/gallery/dining_area"    %>
-    <%= render partial: "static_pages/gallery/kitchen"        %>
-    <%= render partial: "static_pages/gallery/lounge_room"    %>
-    <%= render partial: "static_pages/gallery/master_bedroom" %>
-    <%= render partial: "static_pages/gallery/double_room"    %> 
-    <%= render partial: "static_pages/gallery/single_room"    %>
-    <%= render partial: "static_pages/gallery/bathroom"       %>
-    <%= render partial: "static_pages/gallery/back_of_house"  %>
-    <%= render partial: "static_pages/gallery/back_yard_table"%>
-    <%= render partial: "static_pages/gallery/side_of_house"  %>
-    <%= render partial: "static_pages/gallery/side_yard"      %>
+    <%= render partial: "static_pages/gallery/front_house"    , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/front_lounge"   , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/dining_area"    , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/kitchen"        , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/lounge_room"    , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/master_bedroom" , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/double_room"    , locals: {show_label: true}  %> 
+    <%= render partial: "static_pages/gallery/single_room"    , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/bathroom"       , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/back_of_house"  , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/back_yard_table", locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/side_of_house"  , locals: {show_label: true}  %>
+    <%= render partial: "static_pages/gallery/side_yard"      , locals: {show_label: true}  %>
     
     <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
       <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
@@ -40,8 +40,14 @@
 <%= render partial: "layouts/footer" %>
 
 <script>
+  if(timer != null) { clearInterval(timer); }
   var slideIndex = 1;
-  showDivs(slideIndex);
+  var x = document.getElementsByClassName("gallery_image_wrapper");
+  for (i = 0; i < x.length; i++) x[i].style.display = "none"
+  first_image = document.getElementsByClassName("gallery_image_wrapper")[0];
+  $(first_image).fadeIn(500);  
+  document.getElementsByClassName("image_selector")[0].className += " w3-white"; 
+  timer = setInterval(function(){plusDivs(1)}, 5000);
 
   function plusDivs(n) 
   {
@@ -55,6 +61,7 @@
 
   function showDivs(n) 
   {
+    clearInterval(timer)
     var i;
     var x = document.getElementsByClassName("gallery_image_wrapper");
     var dots = document.getElementsByClassName("image_selector");    
@@ -71,5 +78,6 @@
        dots[i].className = dots[i].className.replace(" w3-white", "");
     }
     dots[slideIndex-1].className += " w3-white"; 
+    timer = setInterval(function(){plusDivs(1)}, 5000);    
   }
 </script>
