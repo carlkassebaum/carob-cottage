@@ -23,8 +23,6 @@ Rails.application.routes.draw do
   
   get '/' => "static_pages#home"
   
-  get '/about_the_area' => "static_pages#location"
-  
   get 'gallery' => "static_pages#gallery"
   
   get 'terms_and_conditions' => "static_pages#terms_and_conditions"

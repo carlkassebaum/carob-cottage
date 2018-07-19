@@ -201,3 +201,14 @@ $(document).one('click','body *',function()
     $(".customer_form_error").fadeOut()  
 });
 
+var slideIndex = 1;
+var timer;
+
+$(document).ready(function() 
+{  
+  if (window.location.pathname == "/")
+  {
+    var gallery = document.getElementById("home_gallery_body");
+    gallery.style.display = "none";
+  }
+});
