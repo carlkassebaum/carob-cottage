@@ -32,8 +32,7 @@ when "development"
         min_stay_duration: 8, description: "Stays for 8 or more nights are charged at $165 per night.", rate_type: "all_guests")    
 when "production"
 
-    FactoryBot.create(  :administrator,
-                        name: "Dianne Kassebaum",
+    Administrator.create(name: "Dianne Kassebaum",
                         email_address: ENV['MAILER_EMAIL'],
                         password: ENV['MAILER_PASSWORD'],
                         password_confirmation: ENV['MAILER_PASSWORD'])    
