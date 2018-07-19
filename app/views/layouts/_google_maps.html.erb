@@ -111,7 +111,7 @@
     {
         var town_icon = 
         {
-          url: "assets/map_icons/town_icon.png", // url
+          url: "<%= asset_path('map_icons/town_icon.png') %>",
           scaledSize: new google.maps.Size(40, 60), // scaled size
           origin: new google.maps.Point(0, 0), // origin
           anchor: new google.maps.Point(20, 60) // anchor
@@ -119,7 +119,7 @@
 
         var food_icon = 
         {
-          url: "assets/map_icons/food_icon.png", // url
+          url: "<%= asset_path('map_icons/food_icon.png') %>",
           scaledSize: new google.maps.Size(30, 45), // scaled size
           origin: new google.maps.Point(0, 0), // origin
           anchor: new google.maps.Point(15, 45) // anchor
@@ -127,7 +127,7 @@
         
         var wine_icon = 
         {
-          url: "assets/map_icons/wine_icon.png", // url
+          url: "<%= asset_path('map_icons/wine_icon.png') %>",
           scaledSize: new google.maps.Size(30, 45), // scaled size
           origin: new google.maps.Point(0, 0), // origin
           anchor: new google.maps.Point(15, 45) // anchor

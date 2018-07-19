@@ -29,6 +29,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.assets.compile = true
   config.action_mailer.raise_delivery_errors = false
   
   # Store uploaded files on the local file system (see config/storage.yml for options)
