@@ -9,9 +9,9 @@
             <td>
                 <%= link_to administration_booking_manager_path(year: @calendar_year-1), id: "previous_year" do %>
                     <img class="navigation_arrow" 
-                    src="/assets/navigation_arrows/arrow_left.png" 
-                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_left_highlight.png')"
-                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_left.png')" 
+                    src="<%= asset_path('navigation_arrows/arrow_left.png') %>" 
+                    onmouseover="change_image(this, '<%= asset_path('navigation_arrows/arrow_left_highlight.png') %>')"
+                    onmouseout ="change_image(this, '<%= asset_path('navigation_arrows/arrow_left.png') %>')" 
                     />                
                 <% end %>
             </td>
@@ -23,9 +23,9 @@
             <td>
                 <%= link_to administration_booking_manager_path(year: @calendar_year+1), id: "next_year" do %>                
                     <img class="navigation_arrow" 
-                    src="/assets/navigation_arrows/arrow_right.png" 
-                    onmouseover="change_image(this, '/assets/navigation_arrows/arrow_right_highlight.png')"
-                    onmouseout ="change_image(this, '/assets/navigation_arrows/arrow_right.png')" 
+                    src="<%= asset_path('navigation_arrows/arrow_right.png') %>" 
+                    onmouseover="change_image(this, '<%= asset_path('navigation_arrows/arrow_right_highlight.png') %>')"
+                    onmouseout ="change_image(this, '<%= asset_path('navigation_arrows/arrow_right.png') %>')" 
                     /> 
                 <% end %>
             </td>            

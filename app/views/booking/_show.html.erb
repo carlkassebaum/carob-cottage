@@ -1,4 +1,4 @@
-<img id="close_button" src="/assets/close_button.png" onclick="delete_parent_contents('individual_booking_inner_wrapper')"/>
+<img id="close_button" src="<%= asset_path('close_button.png') %>" onclick="delete_parent_contents('individual_booking_inner_wrapper')"/>
 <%= button_to "Edit", edit_booking_path(id: @booking.id), method: :get, id: "edit_booking_button",  class: "booking_button button ", remote: true %>
 <button id="delete_booking_button" class="booking_button button" onclick="change_visibility('delete_wrapper','visible')">Delete</button>
 <div id="individual_booking_title"><%= title %></div>
