@@ -23,88 +23,68 @@
     "Barossa Data Recovery","Scott Goldsmith Photography","U-Haul Trailer Hire","Pampered Pets Salon Greenock","CCL Label","Coates Hire",
     "Ink Obsession","Burge Vineyard Services","Barossa Out of School Hours Care","Kylie Heath - Remedial Massage Therapist","Browns & Associates Drafting Services",
     "WFI","AP John & Sons","Tanunda Newsagency","Tanunda Cricket Club"]
-
+    
+    var info_windows = [];
     var map;
     var key_locations = [];
     var markers = [];
+    var service = null;
     
     function initMap() 
     {
-        var map_center    = {lat: -34.491272, lng: 138.960203};        
+        var map_center    = {lat: -34.481251, lng: 138.938603};        
         var carob_cottage = {lat: -34.478891, lng: 138.939503};
-        var lyndoch       = {lat: -34.603138, lng: 138.884730};
-        var seppeltsfield = {lat: -34.489716, lng: 138.918751};
-        var seigesdorf    = {lat: -34.505392, lng: 139.008830};
-        var tanunda       = {lat: -34.520487, lng: 138.964588}; 
-        var nuriootpa     = {lat: -34.473691, lng: 138.995488};
-        var rowland_flat  = {lat: -34.571451, lng: 138.934331};
-        var bethany       = {lat: -34.546399, lng: 138.986339};
-        var greenock      = {lat: -34.457509, lng: 138.927212};
-        var stonewell     = {lat: -34.500307, lng: 138.956021};
-        var angaston      = {lat: -34.501315, lng: 139.046052};
         
         var home_icon = 
         {
           url: "assets/map_icons/home_icon.png", // url
           scaledSize: new google.maps.Size(50, 75), // scaled size
-          origin: new google.maps.Point(0, 0), // origin
-          anchor: new google.maps.Point(25, 75) // anchor
+          origin:     new google.maps.Point(0, 0), // origin
+          anchor:     new google.maps.Point(25, 75) // anchor
         };
         
         var myStyles =[
             {
                 featureType: "poi",
-                elementType: "labels",
-                stylers: 
-                [
-                    { visibility: "off" }
-                ]
+                elementType: "labels"
             }
         ];
         
         map = new google.maps.Map(document.getElementById('map'), 
         {
-            zoom:   13, 
+            zoom:   15, 
             center: map_center,
             styles: myStyles
         });
       
-       var contentString = '<h4 id="firstHeading" class="firstHeading">Carob Cottage</h4>'
-        
+        var contentString = '<h4 id="firstHeading" class="firstHeading">Carob Cottage</h4>'
+        contentString +=    '<p>' + "145 Nitschke Road Marananga" + '</p>'
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         });
+        info_windows.push(infowindow)
+        
         var home_marker = new google.maps.Marker({
-            position: new google.maps.LatLng(-34.478891, 138.939503),
+            position: new google.maps.LatLng(carob_cottage["lat"], carob_cottage["lng"]),
             icon: home_icon,
             map: map
           })
-          
-        
-        infowindow.open(map, home_marker);        
-                  
+        home_marker.addListener('click', function() {
+          close_infowindows();
+          infowindow.open(map, home_marker);
+        });            
 
-        infowindow = new google.maps.InfoWindow();
-        var service = new google.maps.places.PlacesService(map);
-        getNearbyPlaces(service, carob_cottage, 1500);
-        getNearbyPlaces(service, lyndoch, 1000);
-        getNearbyPlaces(service, seppeltsfield, 2000);
-        getNearbyPlaces(service, seigesdorf, 2000);
-        getNearbyPlaces(service, tanunda,    1000);
-        getNearbyPlaces(service, nuriootpa,  1000);
-        getNearbyPlaces(service, rowland_flat, 3000);
-        getNearbyPlaces(service, bethany, 2000);
-        getNearbyPlaces(service, greenock, 2000);   
-        getNearbyPlaces(service, stonewell, 3000);      
-        getNearbyPlaces(service, angaston, 1000);        
+        infowindow.open(map, home_marker);
+        service = new google.maps.places.PlacesService(map);
+        getNearbyPlaces(carob_cottage, 2500);
     }
     
-    function getNearbyPlaces(service, location, radius)
+    function getNearbyPlaces(location, radius)
     {
         service.nearbySearch({
           location: location,
           radius: radius
-        }, callback);         
+        }, callback);
     }
     
     function callback(results, status, pagination) 
@@ -120,24 +100,24 @@
         var food_icon = 
         {
           url: "<%= asset_path('map_icons/food_icon.png') %>",
-          scaledSize: new google.maps.Size(30, 45), // scaled size
-          origin: new google.maps.Point(0, 0), // origin
-          anchor: new google.maps.Point(15, 45) // anchor
+          scaledSize: new google.maps.Size(20, 30), // scaled size
+          origin: new google.maps.Point   (0,  0), // origin
+          anchor: new google.maps.Point   (10, 30) // anchor
         };  
         
         var wine_icon = 
         {
           url: "<%= asset_path('map_icons/wine_icon.png') %>",
-          scaledSize: new google.maps.Size(30, 45), // scaled size
-          origin: new google.maps.Point(0, 0), // origin
-          anchor: new google.maps.Point(15, 45) // anchor
-        };      
+          scaledSize: new google.maps.Size(20, 30),
+          origin: new google.maps.Point   (0,  0), 
+          anchor: new google.maps.Point   (10, 30)
+        };
       
         if (status === google.maps.places.PlacesServiceStatus.OK)
         {
             for (var i = 0; i < results.length; i++)
             {
-              excluded = false              
+              excluded = false        
               for(var j = 0; j < results[i].types.length; j++)
               {
                 if(excluded_types.includes(results[i].types[j]) || excluded_names.includes(results[i].name))
@@ -152,37 +132,64 @@
                 if (results[i].types.includes("locality")) icon = town_icon;
                 if (results[i].types.includes("food"))     icon = food_icon;
                 if (results[i].name.includes("Wine") || results[i].name.includes("wine")) icon = wine_icon;
-                if (results[i].types.includes("bar")) icon = wine_icon;
+                if (results[i].types.includes("bar"))      icon = wine_icon;
                 createMarker(results[i], icon);
               }
             }
 
             getNextPage = pagination.hasNextPage && function() { pagination.nextPage(); };
             if (getNextPage) getNextPage();
-            var markerCluster = new MarkerClusterer(map, markers,
-              {imagePath: 'assets/cluster/m'});
         }
+    }
+    
+    function close_infowindows()
+    {
+      for(var i = 0; i < info_windows.length; i++)
+        info_windows[i].close();
+    }
+    
+    function getDetails(place, callback)
+    {
+        var request = { placeId: place["place_id"] };
+        service.getDetails(request, function(result, status) 
+        {
+          callback(result)
+        });
     }
     
     function createMarker(place, icon) 
     {
+      if (place.geometry.location != null)
+      {
         var marker = new google.maps.Marker({
           map: map,
           icon: icon,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.DROP
         });
-        
-        if(!place.types.includes("locality")) 
-          markers.push(marker)
-
-        google.maps.event.addListener(marker, 'click', function() 
+        var contentString = '<h6 class="firstHeading">' + place["name"] + '</h6>'
+        marker.addListener('click', function() 
         {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
+          getDetails(place, function(place_info)
+          {
+            console.log(place_info)
+            place_website = place_info["website"]
+            if(place_info["adr_address"] != null)
+              contentString += place_info["adr_address"]
+            if(place_website != null)
+              contentString += "<br><a href='" + place_website + "' target='_blank'>" + place_website + "<a/>"
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+            info_windows.push(infowindow);
+            close_infowindows();
+            infowindow.open(map, marker);
+          });
+
         });
+      }
     }
 </script>
 
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9G7LeGrtJ88Vlxj1WylMfLxS2lN1qwAw&libraries=places&callback=initMap">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9G7LeGrtJ88Vlxj1WylMfLxS2lN1qwAw&libraries=places&callback=initMap">
 </script>
