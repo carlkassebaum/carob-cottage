@@ -27,20 +27,21 @@ $home_background_color: #2b2b2b;
 #extern_wrapper
 {
     margin-top: -5px;
-    position: relative;
-    width: 100%;
-    height:   calc(100% - 40px);
-    overflow: hidden;
-    z-index: 0;
+    position:   relative;
+    width:      100%;
+    height:     calc(100% - 40px);
+    overflow:   hidden;
+    z-index:    0;
     background-color: black;
 }
 
 #video_frame_holder_wrapper 
 {
-    position: relative;
+    position:       relative;
     padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
-    overflow: hidden;
+    padding-top:    25px;
+    overflow:       hidden;
+    vertical-align: middle;
 }
 
 #video_frame_holder_wrapper iframe 
@@ -51,6 +52,7 @@ $home_background_color: #2b2b2b;
     width: 100%;
     height: calc(100vw/1.77777);
     z-index: -10;
+    vertical-align: middle;
 }
 
 #map
