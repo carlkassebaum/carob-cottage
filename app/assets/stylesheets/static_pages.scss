@@ -26,33 +26,13 @@ $home_background_color: #2b2b2b;
 
 #extern_wrapper
 {
-    margin-top: -5px;
-    position:   relative;
+    vertical-align: middle;
     width:      100%;
-    height:     calc(100% - 40px);
+    height:     auto;
+    max-height: calc(100% - 45px);
     overflow:   hidden;
     z-index:    0;
-    background-color: black;
-}
-
-#video_frame_holder_wrapper 
-{
-    position:       relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top:    25px;
-    overflow:       hidden;
-    vertical-align: middle;
-}
-
-#video_frame_holder_wrapper iframe 
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100vw/1.77777);
-    z-index: -10;
-    vertical-align: middle;
+    background-color: $home_background-color;
 }
 
 #map
@@ -761,4 +741,29 @@ $home_background_color: #2b2b2b;
     width:            100%;
     background-color: $home_background_color;     
     height:           calc(100% - 45px); 
+}
+
+#background_video 
+{
+    position:   relative;
+    right:      0;
+    bottom:     0;
+    min-width:  100%; 
+    min-height: 100%;
+    width:      100%;
+}
+
+.carob_cottage
+{
+    position:         relative;
+    font-family:      Serif;
+    margin-top:       0px;
+    padding-top:      2px;
+    padding-bottom:   2px;
+    color:            #fefefe;
+    background-color: #840d0d;
+    font-size:        48px;
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;     
+    box-shadow: 0 0 20px black;        
 }

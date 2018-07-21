@@ -56,8 +56,8 @@
             center: map_center,
             styles: myStyles
         });
-      
-        var contentString = '<h4 id="firstHeading" class="firstHeading">Carob Cottage</h4>'
+        
+        contentString = '<h4 id="firstHeading" class="firstHeading">Carob Cottage</h4>'
         contentString +=    '<p>' + "145 Nitschke Road Marananga" + '</p>'
         var infowindow = new google.maps.InfoWindow({
           content: contentString
@@ -167,11 +167,12 @@
           position: place.geometry.location,
           animation: google.maps.Animation.DROP
         });
-        var contentString = '<h6 class="firstHeading">' + place["name"] + '</h6>'
+    
         marker.addListener('click', function() 
         {
           getDetails(place, function(place_info)
           {
+            contentString = '<h6 class="firstHeading">' + place_info["name"] + '</h6>'
             console.log(place_info)
             place_website = place_info["website"]
             if(place_info["adr_address"] != null)

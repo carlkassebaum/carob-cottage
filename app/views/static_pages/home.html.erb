@@ -2,12 +2,11 @@
 <div class="nav_bar_filler"></div>
 
 <div id="extern_wrapper">
-    <div id="video_frame_holder_wrapper">
-        <div id="video_frame_holder"></div>
-    </div>
+    <video autoplay muted onended="showImages()" id="background_video">
+      <source src="<%= asset_path("videos/DJI_0447Trim.mp4") %>" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
 </div>
-
-<%= render partial: "layouts/youtube_video", locals: {div_id: "video_frame_holder", video_id: 'M7lc1UVf-VE'} %>
 
 <div id="home_gallery_body">
   <div class="gallery_slider w3-display-container ">
@@ -24,7 +23,7 @@
 </div>
 
 <div class="down_arrow_wrapper">
-    <div class="downArrow bounce" id="scroll_arrow" onclick="scroll_to('.home_body')">
+    <div class="downArrow bounce" id="scroll_arrow" onclick="scroll_to('.carob_cottage')">
         <img width="40" height="40" alt="" src="<%= asset_path('navigation_arrows/down_arrow.png') %>" />
     </div>    
 </div>
@@ -77,6 +76,7 @@
   }
 </script>
 
+<h1 class="carob_cottage">Carob Cottage</h1>
 
 <div class="home_body">
     <div class="general_description">
