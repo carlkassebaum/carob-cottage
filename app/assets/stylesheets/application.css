@@ -152,3 +152,19 @@ body, html
     border-left: 1px solid #4680a3;
     height: 30px;
 }
+
+#intro_title
+{
+    font-family: serif;
+    color: #fefefe;
+    font-size: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: rgba(0,0,0,0.5);
+    width: 500px;
+    margin-left:  auto;
+    margin-right: auto;
+    border: 1px solid #fefefe;
+    border-top: 0;
+    font-weight: 600px;
+}

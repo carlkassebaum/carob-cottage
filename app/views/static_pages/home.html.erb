@@ -3,8 +3,8 @@
 
 <div id="extern_wrapper">
     <video autoplay muted onended="showImages()" id="background_video">
-      <source src="<%= asset_path("videos/DJI_0447Trim.mp4") %>" type="video/mp4">
-      Your browser does not support HTML5 video.
+      <source src="<%= asset_path("videos/Intro.mp4") %>" type="video/mp4">
+          Your browser does not support HTML5 video.
     </video>
 </div>
 
@@ -47,6 +47,7 @@
       body.style.display = "block";
       first_image = document.getElementsByClassName("gallery_image_wrapper")[0];
       $(first_image).fadeIn(800);
+      $("#intro_title").delay(5000).fadeOut(400)
       timer = setInterval(function(){plusDivs(1)}, 5000);          
   }
   

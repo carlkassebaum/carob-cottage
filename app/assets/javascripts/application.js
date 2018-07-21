@@ -223,6 +223,7 @@ $(document).ready(function()
   {
     var gallery = document.getElementById("home_gallery_body");
     gallery.style.display = "none";
+    if (!supportsVideo()) { showImages(); }
   }
 });
 
@@ -230,3 +231,13 @@ $(window).resize(function ()
 { 
   fill(); 
 });
+
+function supportsVideo()
+{
+   var v = document.createElement('video');
+   if(v.canPlayType && v.canPlayType('video/mp4').replace(/no/, '')) 
+   {
+       return true;
+   }
+   return false;
+} 
