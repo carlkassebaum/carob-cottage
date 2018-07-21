@@ -32,7 +32,7 @@ $home_background_color: #2b2b2b;
     max-height: calc(100% - 45px);
     overflow:   hidden;
     z-index:    0;
-    background-color: $home_background-color;
+    background-color: black;
 }
 
 #map
@@ -739,12 +739,13 @@ $home_background_color: #2b2b2b;
 {
     position:         relative;
     width:            100%;
-    background-color: $home_background_color;     
+    background-color: black;     
     height:           calc(100% - 45px); 
 }
 
 #background_video 
 {
+    display:    none;
     position:   relative;
     right:      0;
     bottom:     0;

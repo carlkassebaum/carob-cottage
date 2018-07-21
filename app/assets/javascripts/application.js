@@ -223,7 +223,10 @@ $(document).ready(function()
   {
     var gallery = document.getElementById("home_gallery_body");
     gallery.style.display = "none";
-    if (!supportsVideo()) { showImages(); }
+    if (!supportsVideo()) 
+      showImages(); 
+    else
+      $("#background_video").fadeIn(400);
   }
 });
 
