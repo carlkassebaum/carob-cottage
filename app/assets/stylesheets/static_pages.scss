@@ -6,6 +6,7 @@ $home_background_color: #2b2b2b;
 
 #home
 {
+    text-align: center;
     background-color: #fefefe;
 }
 
@@ -637,16 +638,11 @@ $home_background_color: #2b2b2b;
 
 #general_description
 {
-    padding-left: 20px;
+    padding-left:  20px;
     padding-right: 20px;
-    font-size: 18px;
-    text-align: center;
+    font-size:     18px;
+    text-align:    center;
     border-bottom: 2px solid #aaaaaa;
-}
-
-#four_photos
-{
-    text-align: center;
 }
 
 #make_reservation, #view_gallery, #home_history, #home_contact_us
@@ -654,13 +650,15 @@ $home_background_color: #2b2b2b;
     background-size:     cover;     
     background-repeat:   no-repeat;
     background-position: center center;
-    width: 50%;
-    height: 300px;
-    display:inline-block;
-    min-width: 500px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    width:               50%;
+    height:              50%;
+    display:             inline-block;
+    max-width:           100%;
+    min-width:           400px;
+    min-height:          250px;
+    max-height:          100%;
+    margin-left:         auto;
+    margin-right:        auto;
 }
 
 #make_reservation
@@ -701,7 +699,7 @@ $home_background_color: #2b2b2b;
 .home_button_wrapper
 {
     width: 200px;
-    margin-top: 80px;
+    margin-top: 12.5%;
     vertical-align: center;
     margin-left:  auto;
     margin-right: auto;
