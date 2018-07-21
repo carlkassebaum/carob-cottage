@@ -637,7 +637,6 @@ $home_background_color: #2b2b2b;
     height:              50%;
     display:             inline-block;
     max-width:           100%;
-    min-width:           400px;
     min-height:          250px;
     max-height:          100%;
     margin-left:         auto;
@@ -739,8 +738,8 @@ $home_background_color: #2b2b2b;
 {
     position:         relative;
     width:            100%;
-    background-color: black;     
-    height:           calc(100% - 45px); 
+    background-color: black;
+    max-height:           calc(100% - 45px); 
 }
 
 #background_video 
