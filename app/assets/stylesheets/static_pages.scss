@@ -745,6 +745,10 @@ $home_background_color: #2b2b2b;
 
 #background_video 
 {
+    background-image:    url(asset-path('loading_video.gif'));
+    background-repeat:   no-repeat;
+    background-size:     168px 108px;
+    background-position: center;
     display:    none;
     position:   relative;
     right:      0;
