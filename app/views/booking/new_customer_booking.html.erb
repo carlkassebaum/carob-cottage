@@ -1,3 +1,5 @@
+<% content_for :title, "Reservation | Carob Cottage" %>
+
 <%= render partial: "layouts/customer_navigation_bar", locals: {current_page: "Reservation"} %>
 <div class="side_bar_filler"></div>
 
@@ -23,8 +25,7 @@
                     <div></div>
                 
             </div>
-            <div id="reservation_calendar">
-            </div>     
+            <div id="reservation_calendar"></div>     
             <%= f.text_field   :name, id: "booking_name", class: "customer_form w3-input", placeholder: "Name" %>
             <%= render partial: "booking/reservation_form_errors/form_error", locals: {attribute: @form_errors[:name] } %>
             <%= f.text_field   :contact_number, id: "booking_contact_number", class: "customer_form w3-input", placeholder: "Contact Number" %>
@@ -59,7 +60,6 @@
                 </tr>
             </table>
             <%= f.submit "Place Reservation", class: "form_button", id: "place_reservation_button", disabled: true %>
-            </table>            
         <% end %>
     </div>
 </div>

@@ -33,6 +33,6 @@ Rails.application.routes.draw do
   
   get 'about'                => "static_pages#about"
   
-  get "tarrif"               => "static_pages#tarrif"
+  get "tarriff"              => "static_pages#tarrif"
 
 end
