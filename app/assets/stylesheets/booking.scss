@@ -5,7 +5,7 @@
 $full_calendar_border_colour: #e5e5e5;
 $reserved_colour            : #ffddaa;
 $booked_colour              : #d162c6;
-$reserved_end_colour        : #dbdbdb;
+$reserved_end_colour        : #e8ba76;
 $booked_end_colour          : #af50a6;
 $light_blue                 : #aedfef;
 
@@ -97,14 +97,14 @@ $form_error                 : #ef9f00;
 
 .full_cal_arrive_booked
 {
-    border-right: 1px solid $booked_end_colour;      
-    background: linear-gradient(to right, white, white , $booked_colour, $booked_colour);
+    border-left: 2px solid $booked_end_colour;
+    background-color: $booked_colour;
 }
 
 .full_cal_depart_booked
 {
-    border-left: 1px solid $booked_end_colour;    
-    background: linear-gradient(to left, white, white , $booked_colour, $booked_colour);
+    border-right: 2px solid $booked_end_colour;    
+    background-color: $booked_colour;
 }
 
 .full_cal_stay_reserved
@@ -114,14 +114,14 @@ $form_error                 : #ef9f00;
 
 .full_cal_arrive_reserved
 {
-    border-right: 2px solid $reserved_end_colour;    
-    background: linear-gradient(to right, white, white , $reserved_colour, $reserved_colour);
+    border-left: 2px solid $reserved_end_colour;   
+    background-color: $reserved_colour;
 }
 
 .full_cal_depart_reserved
 {
-    border-left: 2px solid $reserved_end_colour;
-    background: linear-gradient(to left, white, white , $reserved_colour, $reserved_colour);
+    border-right: 2px solid $reserved_end_colour;
+    background-color: $reserved_colour;
 }
 
 table.center 
