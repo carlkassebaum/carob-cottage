@@ -217,19 +217,6 @@ function fill()
       side_bar_fillers[i].style.height = (nav_bar.offsetHeight.toString() - 45) + "px";    
 }
 
-$(document).ready(function() 
-{  
-  if (window.location.pathname == "/")
-  {
-    var gallery = document.getElementById("home_gallery_body");
-    gallery.style.display = "none";
-    if (!supportsVideo()) 
-      showImages(); 
-    else
-      $("#background_video").fadeIn(400);
-  }
-});
-
 $(window).resize(function () 
 { 
   fill(); 

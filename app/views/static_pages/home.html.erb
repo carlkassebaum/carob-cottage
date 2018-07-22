@@ -37,6 +37,15 @@
       timer = null;
       showImages();
   }
+  else
+  {
+    var gallery = document.getElementById("home_gallery_body");
+    gallery.style.display = "none";
+    if (!supportsVideo()) 
+      showImages(); 
+    else
+      $("#background_video").fadeIn(400);      
+  }
 
   function showImages()
   {
